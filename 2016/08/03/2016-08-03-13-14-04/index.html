@@ -1,0 +1,662 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##第一部分
+1.先说说iOS 应用程序5个状态：
+停止运行-应用程序已经终止，或者还未启动。
+不活动-应用程序处于前台但不再接收事件（例如，用户在app处于活动时锁住了设备）。
+活动-app处于“使用中”的状态。
+后台-app不再屏幕上显示，但它仍然执行代码。
+挂起-app仍然驻留内存但不再执行代码。
+按下Home键时，app从活动状态转入后台，绝大部分app通常在几秒内就从后台变成了挂起。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发：后台运行以及保持程序在后台长时间运行">
+<meta property="og:url" content="http://yoursite.com/2016/08/03/2016-08-03-13-14-04/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="##第一部分
+1.先说说iOS 应用程序5个状态：
+停止运行-应用程序已经终止，或者还未启动。
+不活动-应用程序处于前台但不再接收事件（例如，用户在app处于活动时锁住了设备）。
+活动-app处于“使用中”的状态。
+后台-app不再屏幕上显示，但它仍然执行代码。
+挂起-app仍然驻留内存但不再执行代码。
+按下Home键时，app从活动状态转入后台，绝大部分app通常在几秒内就从后台变成了挂起。">
+<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发：后台运行以及保持程序在后台长时间运行">
+<meta name="twitter:description" content="##第一部分
+1.先说说iOS 应用程序5个状态：
+停止运行-应用程序已经终止，或者还未启动。
+不活动-应用程序处于前台但不再接收事件（例如，用户在app处于活动时锁住了设备）。
+活动-app处于“使用中”的状态。
+后台-app不再屏幕上显示，但它仍然执行代码。
+挂起-app仍然驻留内存但不再执行代码。
+按下Home键时，app从活动状态转入后台，绝大部分app通常在几秒内就从后台变成了挂起。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/03/2016-08-03-13-14-04/"/>
+
+  <title> iOS开发：后台运行以及保持程序在后台长时间运行 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS开发：后台运行以及保持程序在后台长时间运行
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-03T13:14:08+08:00" content="2016-08-03">
+              2016-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/后台/" itemprop="url" rel="index">
+                    <span itemprop="name">后台</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>##第一部分</p>
+<p>1.先说说iOS 应用程序5个状态：</p>
+<p>停止运行-应用程序已经终止，或者还未启动。</p>
+<p>不活动-应用程序处于前台但不再接收事件（例如，用户在app处于活动时锁住了设备）。</p>
+<p>活动-app处于“使用中”的状态。</p>
+<p>后台-app不再屏幕上显示，但它仍然执行代码。</p>
+<p>挂起-app仍然驻留内存但不再执行代码。</p>
+<p>按下Home键时，app从活动状态转入后台，绝大部分app通常在几秒内就从后台变成了挂起。</p>
+<p>在内存吃紧的时候，iphone会首先关闭那些挂起的app。</p>
+<p>从 iOS 4 开始，应用就可以在退到后台后，继续运行一小段时间（10 分钟）；</p>
+<p>2.还可以把自己声明为需要在后台运行，就能不限时地运行了。</p>
+<p>不过限制为播放音乐、使用 GPS 、voip、。 值得一提的是，有的应用为了达到后台不限时运行的目的，在后台播放无声的音乐（审核不一定会被发现）。</p>
+<p>iOS 5 开始又多了一种类型：下载报刊杂志。</p>
+<p>然后 iOS 7 则可以下载各种玩意和定时抓取。</p>
+<p>iOS 7 需要注意的区别：iOS 7 以前，应用进入后台继续运行时，如果用户锁屏了，那么 iOS 会等待应用运行完，才进入睡眠状态。而在 iOS 7 上，系统会很快进入睡眠状态，那些后台应用也就暂停了。如果收到事件被唤醒（例如定时事件、推送、位置更新等），后台应用才能继续运行一会。因为处理过程变成了断断续续的，因此下载时也要使用 NSURLSession 来处理（即下文中的 Background Transfer Service）。</p>
+<ol>
+<li>在我看来，苹果限制 app在后台运行，是为了更有效的利用硬件使用当前的app，不然，过多的app驻留后台，对手机资源占用是一大问题。</li>
+</ol>
+<p>二. ios7以后提供的后台接口模式</p>
+<p>1、Background Audio，这是后台的音频，这个很早之前便有，也是iOS设备中用得最多的后台应用，调用这个接口可以实现后台的音乐播放。</p>
+<p>2、Location Services，这是后台的定位，系统会拥有统一页面进行管理。</p>
+<p>3、VoIP，后台语音服务，类似Skype通话应用需要调用，可进行后台的语音通话。</p>
+<p>4、Newsstand，报刊杂志后台自动下载更新，其能够自动实时更新。</p>
+<p>5、Background Task  Completion，这个接口早在iOS4时候便拥有，其可以供任意类型的APP使用，不过在旧系统中，这个接口的后台限制运行时间仅为10分钟，意味着当应用退至后台，其后台运行仅能持续10分钟便会转至休眠状态。iOS 7中对这个接口作出了改变，原来的为连续10分钟，即不论你这10分钟内用户是否关闭屏幕进入休眠状态，应用仍然会在后台等待10分钟完结后推出，而新的改进为假如遇到关闭屏幕休眠的情况，这后台运行的10分钟便会跟随一同休眠，剩余的后台时间将会留待用户再一次唤醒设备才计算。这样后台运行的时间仍然为10分钟，但并不连续，这样做的优点为省电。</p>
+<p>如现在有一些词典应用带有后台复制选词功能，实际上其是利用了这个接口，如果用户开启词典后并推出，即使屏幕关闭，但词典仍然在后台运行，电量消耗还是比较大的，在iOS 7上，这个问题可以得到解决。</p>
+<p>6、 Remote Notification，这是本次较大的一个改进接口，以往聊天类应用接受推送后点进去需要再收一次信息，这情况在QQ、微信等应用上最为明显。不过拥有了这个接口后，这情况将不复存在，以后推送将能够直接启动后台任务。值得注意的是remote notification支持silent notification（静默推送），这样dropbox这类同步应用可以在后台以最节能的模式实时静默同步了，类似布卡漫画这种也可以推送正在追的漫画的新章节并在后台静默下载，待到下载好再给用户发送一个本地推送，用户点开即看无需再联网。</p>
+<p>7、Background Transfer Service，后台上传下载。iOS最接近传统多任务的后台接口，可供任意类型的app调用，无时间限制。应用场景包括后台上传和下载数据，这使得游戏后台更新数据包，后台上传视频等等都成为可能，但是正如其名字，它只能用于处理上传下载这种传输类的任务，类似后台剪切板监控这种它就无能为力了。</p>
+<p>iOS 7新增的background fetch，这个后台接口在苹果WWDC 2013上有提及，其会根据用户行为自动调整达到效率最优的后台模式，能够处理不是很有时效性的信息获取。例如一些社交、新闻类的应用的后台信息更新，iOS系统便会根据应用启动频率、时间和当前网络和电量的状况来智能分配每个应用的后台获取频率和启动时长。</p>
+<p>三 .  当前社交项目，如何使用ios后台</p>
+<p>1.当前项目特点：</p>
+<p>a. 在保存长连接的情况下，用户一直在线，才能即时接收到消息；</p>
+<p>b. 在初始化连接的时候，需要做很多处理，如果经常连接，必然很耗电， 所以尽力在后台的时候，不是时常断开后又连接；</p>
+<ol>
+<li>通过以上分析，改选用何种方式来保存app后台运行</li>
+</ol>
+<p>voip不行；</p>
+<p>静音播放，不清楚这种方式，是否可以通过审核；</p>
+<p>vpns推送，可取的方式，（具体方法： 用户在登录后，发送一个设备的tokenid； 在发送消息时，平台根据对方是离线还是在线，来判断要不要发推送消息）</p>
+<p>3.background fetch在该项目中的应用</p>
+<p>由于该app在初始化时，需要耗点时间，最好的方式就是通过  后台获取  来处理该工作，这样能保证用户的流畅体验。</p>
+<p>##第二部分：保持程序在后台长时间运行</p>
+<p>iOS为了让设备尽量省电，减少不必要的开销，保持系统流畅，因而对后台机制采用墓碑式的“假后台”。除了系统官方极少数程序可以真后台，一般开发者开发出来的应用程序后台受到以下限制：</p>
+<blockquote>
+<p>1.用户按Home之后，App转入后台进行运行，此时拥有180s后台时间（iOS7）或者600s（iOS6）运行时间可以处理后台操作<br>2.当180S或者600S时间过去之后，可以告知系统未完成任务，需要申请继续完成，系统批准申请之后，可以继续运行，但总时间不会超过10分钟。<br>3.当10分钟时间到之后，无论怎么向系统申请继续后台，系统会强制挂起App，挂起所有后台操作、线程，直到用户再次点击App之后才会继续运行。</p>
+</blockquote>
+<p>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic,unsafe_unretained)UIBackgroundTaskIdentifier backgroundTaskIdentifier;</div><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;   </div><div class="line">    [self timerMethod:nil];</div><div class="line">    self.backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void)&#123;</div><div class="line">        [self endBackgroundTask];</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.</div><div class="line">    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)timerMethod:(NSTimer *)paramSender &#123;</div><div class="line">    NSTimeInterval backgroundTimeRemaining = [[UIApplication sharedApplication] backgroundTimeRemaining];</div><div class="line">    if (backgroundTimeRemaining == DBL_MAX)&#123;</div><div class="line">        NSLog(@&quot;Background Time Remaining = Undetermined&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">        //        [self performSelectorInBackground:@selector(updateFmdb) withObject:nil];</div><div class="line">        NSLog(@&quot;Background Time Remaining = %.02f Seconds&quot;, backgroundTimeRemaining);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)endBackgroundTask &#123;</div><div class="line">    dispatch_queue_t mainQueue = dispatch_get_main_queue();</div><div class="line">    __weak AppDelegate *weakSelf = self;</div><div class="line">    dispatch_async(mainQueue, ^(void) &#123;</div><div class="line">        AppDelegate *strongSelf = weakSelf;</div><div class="line">        if (strongSelf != nil)&#123;</div><div class="line">            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskIdentifier];</div><div class="line">            strongSelf.backgroundTaskIdentifier = UIBackgroundTaskInvalid;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然iOS为了特殊应用也保留了一些可以实现“真后台”的方法，摘取比较常用的：</p>
+<p>1.VOIP</p>
+<p>2.定位服务</p>
+<p>3.后台下载</p>
+<p>4.在后台一直播放无声音乐（容易受到电话或者其他程序影响，所以暂未考虑）<br>步骤：<br>a.在plish文件中加入背景播放的支持。<br>加入项：Required background modes。并设置为：audio<br>b.初始化一个AVAudioPlayer音频，并且无限制的播放下去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">    [super viewDidLoad];</div><div class="line"></div><div class="line">   </div><div class="line"></div><div class="line">    dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</div><div class="line"></div><div class="line">  dispatch_async(dispatchQueue, ^(void) &#123;</div><div class="line"></div><div class="line">    NSError *audioSessionError = nil;</div><div class="line"></div><div class="line">    AVAudioSession *audioSession = [AVAudioSession sharedInstance];</div><div class="line"></div><div class="line">    if ([audioSession setCategory:AVAudioSessionCategoryPlayback error:&amp;audioSessionError])&#123;</div><div class="line"></div><div class="line">            NSLog(@&quot;Successfully set the audio session.&quot;);</div><div class="line"></div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">            NSLog(@&quot;Could not set the audio session&quot;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">    NSBundle *mainBundle = [NSBundle mainBundle];</div><div class="line"></div><div class="line">    NSString *filePath = [mainBundle pathForResource:@&quot;mySong&quot; ofType:@&quot;mp3&quot;];</div><div class="line"></div><div class="line">    NSData *fileData = [NSData dataWithContentsOfFile:filePath];</div><div class="line"></div><div class="line">    NSError *error = nil;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData error:&amp;error];</div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">    if (self.audioPlayer != nil)&#123;</div><div class="line"></div><div class="line">      self.audioPlayer.delegate = self;</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">      [self.audioPlayer setNumberOfLoops:-1];</div><div class="line"></div><div class="line">       if ([self.audioPlayer prepareToPlay] &amp;&amp; [self.audioPlayer play])&#123;</div><div class="line"></div><div class="line">                 NSLog(@&quot;Successfully started playing...&quot;);</div><div class="line"></div><div class="line">       &#125; else &#123;</div><div class="line"></div><div class="line">         NSLog(@&quot;Failed to play.&quot;);</div><div class="line"></div><div class="line">       &#125;</div><div class="line"></div><div class="line">     &#125; else &#123;</div><div class="line"></div><div class="line">            </div><div class="line"></div><div class="line">     &#125;</div><div class="line"></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>5.更多<br>其中VOIP需要绑定一个Socket链接并申明给系统，系统将会在后台接管这个连接，一旦远端数据过来，你的App将会被唤醒10s（或者更少）的时间来处理数据，超过时间或者处理完毕，程序继续休眠。</p>
+<p>后台现在是iOS7引入的新API，网上实现的代码比较少，博主也没有细心去找。</p>
+<p>由于博主要做的App需要在后台一直运行，每隔一段时间给服务器主动发送消息来保持帐号登陆状态，因而必须确保App不被系统墓碑限制。</p>
+<p>博主最先尝试了很多方法，包括朋友发来的一个Demo，每180s后台时间过期就销毁自己然后再创建一个后台任务，但是实际测试只有10分钟时间。最后因为考虑到VOIP对服务端改动太大，时间又太紧，所以选择了定位服务的方法来保持后台。</p>
+<p>要启动定位服务：</p>
+<p>a.需要引入头文件：<code>#import</code></p>
+<p>b.在<code>AppDelegate.m</code>中定义<code>CLLocationManager * locationManager;</code>作为全局变量方便控制</p>
+<p>c.在程序启动初期对定位服务进行初始化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">locationManager = [[CLLocationManager alloc] init];</div><div class="line"></div><div class="line">locationManager.delegate =self;//or whatever class you have for managing location</div></pre></td></tr></table></figure></p>
+<p>d.在程序转入后台的时候，启动定位服务</p>
+<blockquote>
+<p>[locationManager startUpdatingLocation];(第一次运行这个方法的时候，如果之前用户没有使用过App，则会弹出是否允许位置服务，关于用户是否允许，后面代码中有判断）</p>
+</blockquote>
+<p>这样在定位服务可用的时候，程序会不断刷新后台时间，实际测试，发现后台180s时间不断被刷新，达到长久后台的目的。</p>
+<p>但是这样使用也有一些问题，在部分机器上面，定位服务即使打开也可能不能刷新后台时间，需要完全结束程序再运行。稳定性不知道是因为代码原因还是系统某些机制原因。</p>
+<p><br><br>6.企业部署</p>
+<p>你可以将任何app声明为上述5种类型以获得无限的后台运行时间，但当你提交app到App Store时，苹果会审查你的app，一旦发现你“滥用”了后台API，你的app将被拒绝。<br>当然，对于企业开发而言，不存在“滥用”的问题——企业app可以通过OTA部署，不经过苹果商店审查。<br>在企业部署中，你可以将一个app声明为VoIP，但这个程序根本和VoIP无关，我们的目的只是为了让iOS给我们无限后台执行的权限。声明过程是在app的Info.plist文件中加入以下key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;UIBackgroundModes&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">&lt;string&gt;voip&lt;/string&gt;</div><div class="line">&lt;/array&gt;</div></pre></td></tr></table></figure></p>
+<p>我测试了以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">- (void)backgroundHandler &#123;</div><div class="line">    NSLog(@&quot;### --&gt;backgroundinghandler&quot;);</div><div class="line">    UIApplication*    app = [UIApplicationsharedApplication];</div><div class="line">    bgTask = [app beginBackgroundTaskWithExpirationHandler:^&#123;</div><div class="line">       [app endBackgroundTask:bgTask];</div><div class="line">        bgTask = UIBackgroundTaskInvalid;</div><div class="line">    &#125;];</div><div class="line"></div><div class="line">    // Start the long-running task</div><div class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">        while (1) &#123;</div><div class="line">            NSLog(@&quot;counter:%ld&quot;, counter++);</div><div class="line">            sleep(1);</div><div class="line">       &#125;  </div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application</div><div class="line"></div><div class="line">&#123;</div><div class="line">    BOOL backgroundAccepted = [[UIApplicationsharedApplication] setKeepAliveTimeout:600 handler:^&#123; [selfbackgroundHandler]; &#125;];</div><div class="line"></div><div class="line">    if (backgroundAccepted)</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        NSLog(@&quot;backgrounding accepted&quot;);</div><div class="line">    &#125;</div><div class="line">    [selfbackgroundHandler];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过测试，我获得了“无限的”后台执行时间。我不知道你认为“无限”到底是多长时间，但在这个例子中，后台任务至少运行了55个小时以上，一直到我失去耐心停止测试。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/03/2016-08-03-08-44-16/" rel="next" title="xcode 插件组 Alcatraz 的安装方法">
+                <i class="fa fa-chevron-left"></i> xcode 插件组 Alcatraz 的安装方法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/04/2016-08-04-16-36-46/" rel="prev" title="block 和 delegate 在 property 中的属性设置">
+                block 和 delegate 在 property 中的属性设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="孙小子" />
+          <p class="site-author-name" itemprop="name">孙小子</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孙小子</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

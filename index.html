@@ -172,7 +172,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -235,8 +235,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/25/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/" itemprop="url">
+                  iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值
                 </a>
               
             
@@ -248,9 +248,9 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-25T10:33:01+08:00" content="2016-08-25">
-              2016-08-25
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-24T17:05:20+08:00" content="2016-08-24">
+              2016-08-24
             </time>
           </span>
 
@@ -279,15 +279,24 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <a id="more"></a>
+<p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, <strong>func</strong>, <strong>LINE</strong>, obj);</p>
+<p>其中<strong>func</strong>和<strong>LINE</strong>都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br><strong>func</strong>    打印当前函数或方法，c字符串<br><strong>LINE</strong>    打印当前行号，整数<br><strong>FILE</strong>    打印当前文件路径，c字符串<br><strong>PRETTY_FUNCTION</strong>    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
+<p>Q：如何打印一个类名，消息名，当前堆栈信息？</p>
+<p>A：你可以使用以下方法在运行时动态获取这些信息。<br>代码    说明<br>NSStringFromSelector(SEL)    获取selector的名字<br>NSStringFromSelector(_cmd)    获取当前方法名<br>NSStringFromClass([object class])    获取object的类名<br>NSThread callStackSymbols]    获取当前线程的栈，是一个NSArry，包含堆栈中所有函数名。</p>
+<p>Q：如何将日志打印到一个文件</p>
+<p>A：可以使用freopen函数重定向标准输出和标准出错文件。因为printf函数会向标准输出（stdout）打印，而NSLog函数会向标准出错（stderr）打印。重新定向标准输出（stdout）和标准出错（stderr）到一个文件将会使他们打印日志到一个文件中。</p>
+<p>freopen(“/tmp/log.txt”, “a+”, stdout);<br>freopen(“/tmp/log.txt”, “a+”, stderr);</p>
+<p>#define NSLog(FORMAT, …) {/</p>
+<p>NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];/</p>
+<p>[dateFormatter setDateStyle:NSDateFormatterMediumStyle];/</p>
+<p>[dateFormatter setTimeStyle:NSDateFormatterShortStyle];/</p>
+<p>[dateFormatter setDateFormat:@”HH:mm:ss:SSSSSS”]; /</p>
+<p>NSString *str = [dateFormatter stringFromDate:[NSDate date]];/</p>
+<p>[dateFormatter release];/</p>
+<p>fprintf(stderr,”[–%s–]<em>[–%s–]</em>[–%s:%d–]/n”,[str UTF8String], [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String],[[[NSString stringWithUTF8String:<strong>FILE</strong>] lastPathComponent] UTF8String], <strong>LINE</strong>);/</p>
+<p>}</p>
+<p>原文地址：<a href="http://www.cnblogs.com/ThankForYou/archive/2012/09/12/2681739.html" target="_blank" rel="external">http://www.cnblogs.com/ThankForYou/archive/2012/09/12/2681739.html</a></p>
 
           
         
@@ -337,7 +346,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/22/2016-08-22-16-44-11/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/22/使用Xcode查找项目中的中文字符串/" itemprop="url">
                   使用Xcode查找项目中的中文字符串
                 </a>
               
@@ -350,7 +359,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-22T16:44:14+08:00" content="2016-08-22">
               2016-08-22
             </time>
@@ -362,7 +371,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/查找中文字符串/" itemprop="url" rel="index">
@@ -408,8 +417,8 @@
 <p>self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);</p>
 </blockquote>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/22/2016-08-22-16-44-11/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2016/08/22/使用Xcode查找项目中的中文字符串/#more" rel="contents">
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -459,7 +468,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/22/2016-08-22-09-10-33/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/22/利用弱引用在block中使用self/" itemprop="url">
                   利用弱引用在block中使用self
                 </a>
               
@@ -472,7 +481,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-22T09:10:33+08:00" content="2016-08-22">
               2016-08-22
             </time>
@@ -564,7 +573,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/18/2016-08-18-11-59-21/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/18/webViewJavascriptBridge使用方法/" itemprop="url">
                   webViewJavascriptBridge使用方法
                 </a>
               
@@ -577,7 +586,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-18T11:59:30+08:00" content="2016-08-18">
               2016-08-18
             </time>
@@ -589,7 +598,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/webViewJavascriptBridge/" itemprop="url" rel="index">
@@ -696,7 +705,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/15/2016-08-15-15-05-56/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/15/自动缩1倍图脚本/" itemprop="url">
                   自动缩1倍图脚本
                 </a>
               
@@ -709,7 +718,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-15T15:06:02+08:00" content="2016-08-15">
               2016-08-15
             </time>
@@ -721,7 +730,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/自动-图片/" itemprop="url" rel="index">
@@ -818,7 +827,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/10/2016-08-10-09-13-35/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/10/MLeaksFinder：精准 iOS 内存泄露检测工具/" itemprop="url">
                   MLeaksFinder：精准 iOS 内存泄露检测工具
                 </a>
               
@@ -831,7 +840,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-10T09:13:45+08:00" content="2016-08-10">
               2016-08-10
             </time>
@@ -843,7 +852,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/MLeaksFinder/" itemprop="url" rel="index">
@@ -892,8 +901,8 @@
 </blockquote>
 <p>其中 Leaked memory 和 Abandoned memory 都属于应该释放而没释放的内存，都是内存泄露，而 Leaks 工具只负责检测 Leaked memory，而不管 Abandoned memory。在 MRC 时代 Leaked memory 很常见，因为很容易忘了调用 release，但在 ARC 时代更常见的内存泄露是循环引用导致的 Abandoned memory，Leaks 工具查不出这类内存泄露，应用有限。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/10/2016-08-10-09-13-35/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2016/08/10/MLeaksFinder：精准 iOS 内存泄露检测工具/#more" rel="contents">
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -943,7 +952,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/04/2016-08-04-16-36-46/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/04/block 和 delegate 在 property 中的属性设置/" itemprop="url">
                   block 和 delegate 在 property 中的属性设置
                 </a>
               
@@ -956,7 +965,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-04T16:36:48+08:00" content="2016-08-04">
               2016-08-04
             </time>
@@ -968,7 +977,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/block-delegate/" itemprop="url" rel="index">
@@ -1064,7 +1073,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/03/2016-08-03-13-14-04/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/03/iOS开发：后台运行以及保持程序在后台长时间运行/" itemprop="url">
                   iOS开发：后台运行以及保持程序在后台长时间运行
                 </a>
               
@@ -1077,7 +1086,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-03T13:14:08+08:00" content="2016-08-03">
               2016-08-03
             </time>
@@ -1089,7 +1098,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/后台/" itemprop="url" rel="index">
@@ -1246,7 +1255,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/03/2016-08-03-08-44-16/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/03/xcode 插件组 Alcatraz 的安装方法/" itemprop="url">
                   xcode 插件组 Alcatraz 的安装方法
                 </a>
               
@@ -1259,7 +1268,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-08-03T08:44:16+08:00" content="2016-08-03">
               2016-08-03
             </time>
@@ -1271,7 +1280,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Alcatraz/" itemprop="url" rel="index">
@@ -1374,7 +1383,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/29/2016-07-29-15-29-00/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/29/protobuf的初级使用/" itemprop="url">
                   protobuf的初级使用
                 </a>
               
@@ -1387,7 +1396,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-07-29T15:29:03+08:00" content="2016-07-29">
               2016-07-29
             </time>
@@ -1399,7 +1408,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">in</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/protobuf/" itemprop="url" rel="index">
@@ -1539,7 +1548,7 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
@@ -1547,11 +1556,18 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-name">Kategorien</span>
               
             </div>
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -1593,7 +1609,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

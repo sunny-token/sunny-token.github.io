@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.
-
-因为当block存储在property,NSArray或者其他数据结构中的时候，copy和strong是有很大的区别的,简单来说,你应该使用copy.当block第一次被创建的时候,它是被创建在栈上的,如果你调用block的时候,它已经被释放了,那么你就会得到一个很严重的bug &amp;lt; E">
+<meta name="description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="block 和 delegate 在 property 中的属性设置">
 <meta property="og:url" content="http://yoursite.com/2016/08/04/block 和 delegate 在 property 中的属性设置/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.
-
-因为当block存储在property,NSArray或者其他数据结构中的时候，copy和strong是有很大的区别的,简单来说,你应该使用copy.当block第一次被创建的时候,它是被创建在栈上的,如果你调用block的时候,它已经被释放了,那么你就会得到一个很严重的bug &amp;lt; E">
-<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+<meta property="og:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
+<meta property="og:updated_time" content="2016-08-25T06:42:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="block 和 delegate 在 property 中的属性设置">
-<meta name="twitter:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.
-
-因为当block存储在property,NSArray或者其他数据结构中的时候，copy和strong是有很大的区别的,简单来说,你应该使用copy.当block第一次被创建的时候,它是被创建在栈上的,如果你调用block的时候,它已经被释放了,那么你就会得到一个很严重的bug &amp;lt; E">
+<meta name="twitter:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
 
 
 
@@ -112,7 +106,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -125,7 +119,7 @@
   <title> block 和 delegate 在 property 中的属性设置 | Blog之HelloWord! </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -180,7 +174,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -190,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -200,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -253,7 +247,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-08-04T16:36:48+08:00" content="2016-08-04">
               2016-08-04
             </time>
@@ -265,11 +259,11 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/block-delegate/" itemprop="url" rel="index">
-                    <span itemprop="name">block delegate</span>
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -301,8 +295,8 @@
       
 
       
-        <a id="more"></a>
-<p>##block<br><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？<br><br>答案是:<code>copy</code>.<br></p>
+        <p>##block<br><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？<br><br>答案是:<code>copy</code>.<br></p>
+<a id="more"></a>
 <blockquote>
 <p>因为当<code>block</code>存储在<code>property</code>,<code>NSArray</code>或者其他数据结构中的时候，<code>copy</code>和<code>strong</code>是有很大的区别的,简单来说,你应该使用<code>copy</code>.当<code>block</code>第一次被创建的时候,它是被创建在栈上的,如果你调用<code>block</code>的时候,它已经被释放了,那么你就会得到一个很严重的<br>bug &lt; EXC_BAD_ACCESS&gt;.<br><br>如果你用了<code>strong</code>(相当于<code>retain</code>)去创建<code>block</code>,其实它什么都没发生,它还是在栈上的.<br><br>如果你使用了<code>copy</code>属性去创建<code>block</code>,它将会被创建在堆上,那么你去使用的话,就不会出现 crash .<br>并且如果你要把<code>block</code>保存在<code>NSMutableArrays</code>中，请一定要使用<code>copy</code>而不是<code>strong</code>或<code>retain</code>.</p>
 </blockquote>
@@ -394,10 +388,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -414,15 +408,15 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -430,8 +424,8 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -459,7 +453,7 @@
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -486,11 +480,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

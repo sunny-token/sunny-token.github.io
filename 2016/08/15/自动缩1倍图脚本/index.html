@@ -86,20 +86,20 @@
 
 <meta name="description" content="##依赖环境Ruby脚本，依赖于ImageMagick库
 ##安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装I">
+然后安装Im">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动缩1倍图脚本">
 <meta property="og:url" content="http://yoursite.com/2016/08/15/自动缩1倍图脚本/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="##依赖环境Ruby脚本，依赖于ImageMagick库
 ##安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装I">
-<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+然后安装Im">
+<meta property="og:updated_time" content="2016-08-25T06:42:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动缩1倍图脚本">
 <meta name="twitter:description" content="##依赖环境Ruby脚本，依赖于ImageMagick库
 ##安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装I">
+然后安装Im">
 
 
 
@@ -112,7 +112,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -125,7 +125,7 @@
   <title> 自动缩1倍图脚本 | Blog之HelloWord! </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -180,7 +180,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -190,7 +190,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -253,7 +253,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-08-15T15:06:02+08:00" content="2016-08-15">
               2016-08-15
             </time>
@@ -265,11 +265,23 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/自动-图片/" itemprop="url" rel="index">
-                    <span itemprop="name">自动 图片</span>
+                  <a href="/categories/脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">脚本</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/脚本/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -301,11 +313,11 @@
       
 
       
-        <a id="more"></a>
-<p>##依赖环境<br>Ruby脚本，依赖于ImageMagick库</p>
+        <p>##依赖环境<br>Ruby脚本，依赖于ImageMagick库</p>
 <p>##安装ImageMagick<br>这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</div></pre></td></tr></table></figure></p>
 <p>然后安装ImageMagick<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install imagemagick</div></pre></td></tr></table></figure></p>
 <p>##安装mini_magick<br>这是一个ruby gem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install mini_magick</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>如果安装太慢，可以考虑换一下gem源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem sources -r https://rubygems.org/</div><div class="line">gem sources -a https://ruby.taobao.org/</div></pre></td></tr></table></figure></p>
 <p>##脚本<br>脚本内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">require &apos;mini_magick&apos;</div><div class="line">dir = &apos;2倍&apos;</div><div class="line">Dir.glob(&quot;#&#123;dir&#125;/**/*.png&quot;).each do |f|</div><div class="line">    ext = File.extname(f)</div><div class="line">     </div><div class="line">    newFilename = &quot;#&#123;File.dirname(f)&#125;/#&#123;File.basename(f, ext)&#125;@2x#&#123;ext&#125;&quot;</div><div class="line">    File.rename(f, newFilename)</div><div class="line"> </div><div class="line">    puts newFilename</div><div class="line">    puts f</div><div class="line"> </div><div class="line">    image = MiniMagick::Image.open(newFilename)</div><div class="line">    ds = image.dimensions</div><div class="line">    image.resize &quot;#&#123;ds[0]/2&#125;x#&#123;ds[1]/2&#125;&quot;</div><div class="line">    image.write f</div><div class="line">end</div></pre></td></tr></table></figure></p>
 <p>需要调整的是第二行的变量，指定目录的名字</p>
@@ -395,10 +407,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -415,15 +427,15 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -431,8 +443,8 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -460,7 +472,7 @@
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -487,11 +499,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

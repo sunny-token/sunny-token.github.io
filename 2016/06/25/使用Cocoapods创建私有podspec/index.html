@@ -87,8 +87,7 @@
 <meta name="description" content="整体先说明一下创建一个私有的podspec包括如下那么几个步骤：
 
 安装cocoapods（这个步骤省略，网上搜，一大堆）。cocoapod安装
-创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件
-打开TZImagePickController.podspecvim，sublime等等,">
+创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Cocoapods创建私有podspec">
 <meta property="og:url" content="http://yoursite.com/2016/06/25/使用Cocoapods创建私有podspec/index.html">
@@ -96,16 +95,14 @@
 <meta property="og:description" content="整体先说明一下创建一个私有的podspec包括如下那么几个步骤：
 
 安装cocoapods（这个步骤省略，网上搜，一大堆）。cocoapod安装
-创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件
-打开TZImagePickController.podspecvim，sublime等等,">
-<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件">
+<meta property="og:updated_time" content="2016-08-25T06:41:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Cocoapods创建私有podspec">
 <meta name="twitter:description" content="整体先说明一下创建一个私有的podspec包括如下那么几个步骤：
 
 安装cocoapods（这个步骤省略，网上搜，一大堆）。cocoapod安装
-创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件
-打开TZImagePickController.podspecvim，sublime等等,">
+创建Pod所对应的podspec文件。运行: pod spec create TZImagePickController.podspec , 创建好spec文件">
 
 
 
@@ -118,7 +115,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -131,7 +128,7 @@
   <title> 使用Cocoapods创建私有podspec | Blog之HelloWord! </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -186,7 +183,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -196,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -206,7 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -259,7 +256,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-06-25T16:43:44+08:00" content="2016-06-25">
               2016-06-25
             </time>
@@ -271,11 +268,11 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/cocoapods/" itemprop="url" rel="index">
-                    <span itemprop="name">cocoapods</span>
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -307,11 +304,13 @@
       
 
       
-        <a id="more"></a>
-<p>整体先说明一下创建一个私有的podspec包括如下那么几个步骤：</p>
+        <p>整体先说明一下创建一个私有的podspec包括如下那么几个步骤：</p>
 <ul>
 <li>安装cocoapods（这个步骤省略，网上搜，一大堆）。<a href="http://www.jianshu.com/p/6e5c0f78200a" target="_blank" rel="external">cocoapod安装</a></li>
 <li>创建Pod所对应的podspec文件。<br>运行: pod spec create TZImagePickController.podspec , 创建好spec文件</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>打开TZImagePickController.podspec<br>vim，sublime等等,删除注释，留下自己需要的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">Pod::Spec.new do |s|</div><div class="line">s.name = &quot;PodTestLibrary&quot; #名称</div><div class="line">s.version = &quot;0.1.0&quot; #版本号</div><div class="line">s.summary = &quot;Just Testing.&quot; #简短介绍，下面是详细介绍</div><div class="line">s.description = &lt;&lt;-DESC</div><div class="line">Testing Private Podspec.</div><div class="line"></div><div class="line">* Markdown format.</div><div class="line">* Don&apos;t worry about the indent, we strip it!</div><div class="line">DESC</div><div class="line">s.homepage = &quot;https://coding.net/u/wtlucky/p/podTestLibrary&quot; #主页,这里要填写可以访问到的地址，不然验证不通过</div><div class="line">s.screenshots = &quot;www.example.com/screenshots_1&quot;, &quot;www.example.com/screenshots_2&quot; #截图</div><div class="line">s.license = &apos;MIT&apos; #开源协议</div><div class="line">s.author = &#123; &quot;wtlucky&quot; =&gt; &quot;wtlucky@foxmail.com&quot; &#125; #作者信息</div><div class="line">s.source = &#123; :git =&gt; &quot;https://coding.net/wtlucky/podTestLibrary.git&quot;, :tag =&gt; &quot;0.1.0&quot; &#125; #项目地址，这里不支持ssh的地址，验证不通过，只支持HTTP和HTTPS，最好使用HTTPS</div><div class="line">s.social_media_url = &apos;https://twitter.com/&apos; #多媒体介绍地址</div><div class="line"></div><div class="line">s.platform = :ios, &apos;7.0&apos; #支持的平台及版本</div><div class="line">s.requires_arc = true #是否使用ARC，如果指定具体文件，则具体的问题使用ARC</div><div class="line"></div><div class="line">s.source_files = &apos;Pod/Classes/**/*&apos; #代码源文件地址，**/*表示Classes目录及其子目录下所有文件，如果有多个目录下则用逗号分开，如果需要在项目中分组显示，这里也要做相应的设置</div><div class="line">s.resource_bundles = &#123;</div><div class="line">&apos;PodTestLibrary&apos; =&gt; [&apos;Pod/Assets/*.png&apos;]</div><div class="line">&#125; #资源文件地址</div><div class="line"></div><div class="line">s.public_header_files = &apos;Pod/Classes/**/*.h&apos; #公开头文件地址</div><div class="line">s.frameworks = &apos;UIKit&apos; #所需的framework，多个用逗号隔开</div><div class="line">s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos; #依赖关系，该项目所依赖的其他库，如果有多个需要填写多个s.dependency</div><div class="line">end</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -404,10 +403,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -424,15 +423,15 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -440,8 +439,8 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -469,7 +468,7 @@
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -496,11 +495,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

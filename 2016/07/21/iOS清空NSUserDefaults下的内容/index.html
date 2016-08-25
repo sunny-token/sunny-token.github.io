@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="原文链接
-1234567891011121314151617181920212223//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];//方法二- (void)r">
+<meta name="description" content="1234567891011121314151617181920212223242526//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];&amp;lt;!--more--&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS清空NSUserDefaults下的内容">
 <meta property="og:url" content="http://yoursite.com/2016/07/21/iOS清空NSUserDefaults下的内容/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="原文链接
-1234567891011121314151617181920212223//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];//方法二- (void)r">
-<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+<meta property="og:description" content="1234567891011121314151617181920212223242526//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];&amp;lt;!--more--&amp;">
+<meta property="og:updated_time" content="2016-08-25T06:34:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS清空NSUserDefaults下的内容">
-<meta name="twitter:description" content="原文链接
-1234567891011121314151617181920212223//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];//方法二- (void)r">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];&amp;lt;!--more--&amp;">
 
 
 
@@ -109,7 +106,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -122,7 +119,7 @@
   <title> iOS清空NSUserDefaults下的内容 | Blog之HelloWord! </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -177,7 +174,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -187,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -197,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -250,7 +247,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-21T10:45:35+08:00" content="2016-07-21">
               2016-07-21
             </time>
@@ -262,11 +259,11 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/NSUserDefaults/" itemprop="url" rel="index">
-                    <span itemprop="name">NSUserDefaults</span>
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -298,9 +295,9 @@
       
 
       
-        <a id="more"></a>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//方法一</div><div class="line"></div><div class="line">NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];</div><div class="line"></div><div class="line">[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];</div><div class="line"></div><div class="line"></div><div class="line">&lt;!--more--&gt;</div><div class="line"></div><div class="line">//方法二</div><div class="line"></div><div class="line">- (void)resetDefaults &#123;</div><div class="line"></div><div class="line">NSUserDefaults* defs = [NSUserDefaultsstandardUserDefaults];</div><div class="line"></div><div class="line">NSDictionary* dict = [defsdictionaryRepresentation];</div><div class="line"></div><div class="line">for(idkeyindict) &#123;</div><div class="line"></div><div class="line">[defsremoveObjectForKey:key];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">[defssynchronize];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><a href="http://www.jianshu.com/p/9cb6ea37f46c" target="_blank" rel="external">原文链接</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//方法一</div><div class="line"></div><div class="line">NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];</div><div class="line"></div><div class="line">[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];</div><div class="line"></div><div class="line">//方法二</div><div class="line"></div><div class="line">- (void)resetDefaults &#123;</div><div class="line"></div><div class="line">NSUserDefaults* defs = [NSUserDefaultsstandardUserDefaults];</div><div class="line"></div><div class="line">NSDictionary* dict = [defsdictionaryRepresentation];</div><div class="line"></div><div class="line">for(idkeyindict) &#123;</div><div class="line"></div><div class="line">[defsremoveObjectForKey:key];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">[defssynchronize];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -384,10 +381,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -404,15 +401,15 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -420,8 +417,8 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -449,7 +446,7 @@
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -476,11 +473,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

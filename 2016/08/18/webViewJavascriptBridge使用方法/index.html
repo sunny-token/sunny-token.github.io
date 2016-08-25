@@ -86,20 +86,20 @@
 
 <meta name="description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webViewJavascriptBridge使用方法">
 <meta property="og:url" content="http://yoursite.com/2016/08/18/webViewJavascriptBridge使用方法/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较">
-<meta property="og:updated_time" content="2016-08-25T02:24:05.000Z">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
+<meta property="og:updated_time" content="2016-08-25T06:40:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webViewJavascriptBridge使用方法">
 <meta name="twitter:description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
 
 
 
@@ -112,7 +112,7 @@ b.js 是否可以直接调用Native的method？不行。
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -125,7 +125,7 @@ b.js 是否可以直接调用Native的method？不行。
   <title> webViewJavascriptBridge使用方法 | Blog之HelloWord! </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -180,7 +180,7 @@ b.js 是否可以直接调用Native的method？不行。
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -190,7 +190,7 @@ b.js 是否可以直接调用Native的method？不行。
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -200,7 +200,7 @@ b.js 是否可以直接调用Native的method？不行。
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -253,7 +253,7 @@ b.js 是否可以直接调用Native的method？不行。
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-08-18T11:59:30+08:00" content="2016-08-18">
               2016-08-18
             </time>
@@ -265,11 +265,11 @@ b.js 是否可以直接调用Native的method？不行。
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/webViewJavascriptBridge/" itemprop="url" rel="index">
-                    <span itemprop="name">webViewJavascriptBridge</span>
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -301,10 +301,9 @@ b.js 是否可以直接调用Native的method？不行。
       
 
       
-        <a id="more"></a>
-<p>##首先有两个问题：<br>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
+        <p>##首先有两个问题：<br>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
 <p>b.js 是否可以直接调用Native的method？<br><br>不行。</p>
-<p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。</p>
+<p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。<br><a id="more"></a></p>
 <p>##原理分析：</p>
 <p>js不能调用 Native的方法，所以，需要利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的<code>shouldStartLoadWithRequest</code>函数去捕获处理请求，处理完最后，如果js还想获取一些返回参数的话，同样让oc去通过<code>stringByEvaluatingJavaScriptFromString</code>调用刚js传过来的回调js函数就行，顺道把参数也一起传了。</p>
 <p>##使用步骤</p>
@@ -405,10 +404,10 @@ b.js 是否可以直接调用Native的method？不行。
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -425,15 +424,15 @@ b.js 是否可以直接调用Native的method？不行。
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -441,8 +440,8 @@ b.js 是否可以直接调用Native的method？不行。
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -470,7 +469,7 @@ b.js 是否可以直接调用Native的method？不行。
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -497,11 +496,11 @@ b.js 是否可以直接调用Native的method？不行。
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

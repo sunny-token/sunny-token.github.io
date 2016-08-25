@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+<meta name="description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webViewJavascriptBridge使用方法">
 <meta property="og:url" content="http://yoursite.com/2016/08/18/webViewJavascriptBridge使用方法/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+<meta property="og:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
-<meta property="og:updated_time" content="2016-08-25T06:40:14.000Z">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
+<meta property="og:updated_time" content="2016-08-25T07:26:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webViewJavascriptBridge使用方法">
-<meta name="twitter:description" content="##首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+<meta name="twitter:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
 b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好">
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
 
 
 
@@ -301,13 +301,11 @@ b.js 是否可以直接调用Native的method？不行。
       
 
       
-        <p>##首先有两个问题：<br>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
+        <h2 id="首先有两个问题："><a href="#首先有两个问题：" class="headerlink" title="首先有两个问题："></a>首先有两个问题：</h2><p>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
 <p>b.js 是否可以直接调用Native的method？<br><br>不行。</p>
 <p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。<br><a id="more"></a></p>
-<p>##原理分析：</p>
-<p>js不能调用 Native的方法，所以，需要利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的<code>shouldStartLoadWithRequest</code>函数去捕获处理请求，处理完最后，如果js还想获取一些返回参数的话，同样让oc去通过<code>stringByEvaluatingJavaScriptFromString</code>调用刚js传过来的回调js函数就行，顺道把参数也一起传了。</p>
-<p>##使用步骤</p>
-<ol>
+<h2 id="原理分析："><a href="#原理分析：" class="headerlink" title="原理分析："></a>原理分析：</h2><p>js不能调用 Native的方法，所以，需要利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的<code>shouldStartLoadWithRequest</code>函数去捕获处理请求，处理完最后，如果js还想获取一些返回参数的话，同样让oc去通过<code>stringByEvaluatingJavaScriptFromString</code>调用刚js传过来的回调js函数就行，顺道把参数也一起传了。</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
 <li>增加下面的代码到你的 Podfile，然后运行pod install 进行安装<br><code>pod &#39;WebViewJavascriptBridge&#39;, &#39;~&gt; 5.0&#39;</code></li>
 <li>导入头文件，并增加属性<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &quot;WebViewJavascriptBridge.h&quot;</div><div class="line">...</div><div class="line">@property WebViewJavascriptBridge* bridge;</div></pre></td></tr></table></figure>
 </li>
@@ -469,7 +467,7 @@ b.js 是否可以直接调用Native的method？不行。
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先有两个问题："><span class="nav-number">1.</span> <span class="nav-text">首先有两个问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析："><span class="nav-number">2.</span> <span class="nav-text">原理分析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤"><span class="nav-number">3.</span> <span class="nav-text">使用步骤</span></a></li></ol></div>
             
           </div>
         </section>

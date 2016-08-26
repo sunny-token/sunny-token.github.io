@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, func, LINE, obj);
-其中func和LINE都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明func    打印当前函数或方法，c字符串LINE    打印当前行号，整数FILE">
+<meta name="description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
+其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值">
 <meta property="og:url" content="http://yoursite.com/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, func, LINE, obj);
-其中func和LINE都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明func    打印当前函数或方法，c字符串LINE    打印当前行号，整数FILE">
-<meta property="og:updated_time" content="2016-08-25T06:34:58.000Z">
+<meta property="og:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
+其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
+<meta property="og:updated_time" content="2016-08-26T06:46:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值">
-<meta name="twitter:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, func, LINE, obj);
-其中func和LINE都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明func    打印当前函数或方法，c字符串LINE    打印当前行号，整数FILE">
+<meta name="twitter:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
+其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
 
 
 
@@ -279,8 +279,8 @@
       
 
       
-        <p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, <strong>func</strong>, <strong>LINE</strong>, obj);</p>
-<p>其中<strong>func</strong>和<strong>LINE</strong>都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br><strong>func</strong>    打印当前函数或方法，c字符串<br><strong>LINE</strong>    打印当前行号，整数<br><strong>FILE</strong>    打印当前文件路径，c字符串<br><strong>PRETTY_FUNCTION</strong>    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
+        <p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);</p>
+<p>其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br>__func__    打印当前函数或方法，c字符串<br>__LINE__    打印当前行号，整数<br>__FILE__    打印当前文件路径，c字符串<br>__PRETTY<em>FUNCTION\</em>_    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
 <a id="more"></a>
 <p>Q：如何打印一个类名，消息名，当前堆栈信息？</p>
 <p>A：你可以使用以下方法在运行时动态获取这些信息。<br>代码    说明<br>NSStringFromSelector(SEL)    获取selector的名字<br>NSStringFromSelector(_cmd)    获取当前方法名<br>NSStringFromClass([object class])    获取object的类名<br>NSThread callStackSymbols]    获取当前线程的栈，是一个NSArry，包含堆栈中所有函数名。</p>
@@ -294,7 +294,7 @@
 <p>[dateFormatter setDateFormat:@”HH:mm:ss:SSSSSS”]; /</p>
 <p>NSString *str = [dateFormatter stringFromDate:[NSDate date]];/</p>
 <p>[dateFormatter release];/</p>
-<p>fprintf(stderr,”[–%s–]<em>[–%s–]</em>[–%s:%d–]/n”,[str UTF8String], [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String],[[[NSString stringWithUTF8String:<strong>FILE</strong>] lastPathComponent] UTF8String], <strong>LINE</strong>);/</p>
+<p>fprintf(stderr,”[–%s–]<em>[–%s–]</em>[–%s:%d–]/n”,[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA<em>ARGS__] UTF8String],[[[NSString stringWithUTF8String:\</em>_FILE__] lastPathComponent] UTF8String], __LINE__);/</p>
 <p>}</p>
 <p>原文地址：<a href="http://www.cnblogs.com/ThankForYou/archive/2012/09/12/2681739.html" target="_blank" rel="external">http://www.cnblogs.com/ThankForYou/archive/2012/09/12/2681739.html</a></p>
 

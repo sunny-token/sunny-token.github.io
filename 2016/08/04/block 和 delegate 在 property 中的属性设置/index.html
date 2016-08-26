@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
+<meta name="description" content="blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="block 和 delegate 在 property 中的属性设置">
 <meta property="og:url" content="http://yoursite.com/2016/08/04/block 和 delegate 在 property 中的属性设置/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
-<meta property="og:updated_time" content="2016-08-25T06:42:35.000Z">
+<meta property="og:description" content="blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
+<meta property="og:updated_time" content="2016-08-26T06:59:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="block 和 delegate 在 property 中的属性设置">
-<meta name="twitter:description" content="##blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
+<meta name="twitter:description" content="blockblock在property中的属性应该是strong还是copy呢？答案是:copy.">
 
 
 
@@ -295,14 +295,15 @@
       
 
       
-        <p>##block<br><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？<br><br>答案是:<code>copy</code>.<br></p>
+        <h2 id="block"><a href="#block" class="headerlink" title="block"></a>block</h2><p><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？<br><br>答案是:<code>copy</code>.<br></p>
 <a id="more"></a>
 <blockquote>
-<p>因为当<code>block</code>存储在<code>property</code>,<code>NSArray</code>或者其他数据结构中的时候，<code>copy</code>和<code>strong</code>是有很大的区别的,简单来说,你应该使用<code>copy</code>.当<code>block</code>第一次被创建的时候,它是被创建在栈上的,如果你调用<code>block</code>的时候,它已经被释放了,那么你就会得到一个很严重的<br>bug &lt; EXC_BAD_ACCESS&gt;.<br><br>如果你用了<code>strong</code>(相当于<code>retain</code>)去创建<code>block</code>,其实它什么都没发生,它还是在栈上的.<br><br>如果你使用了<code>copy</code>属性去创建<code>block</code>,它将会被创建在堆上,那么你去使用的话,就不会出现 crash .<br>并且如果你要把<code>block</code>保存在<code>NSMutableArrays</code>中，请一定要使用<code>copy</code>而不是<code>strong</code>或<code>retain</code>.</p>
+<p>因为当<code>block</code>存储在<code>property</code>,<code>NSArray</code>或者其他数据结构中的时候，<code>copy</code>和<code>strong</code>是有很大的区别的,简单来说,你应该使用<code>copy</code>.当<code>block</code>第一次被创建的时候,它是被创建在栈上的,如果你调用<code>block</code>的时候,它已经被释放了,那么你就会得到一个很严重的bug &lt; EXC_BAD_ACCESS&gt;.<br>如果你用了<code>strong</code>(相当于<code>retain</code>)去创建<code>block</code>,其实它什么都没发生,它还是在栈上的.<br>如果你使用了<code>copy</code>属性去创建<code>block</code>,它将会被创建在堆上,那么你去使用的话,就不会出现 crash .并且如果你要把<code>block</code>保存在<code>NSMutableArrays</code>中，请一定要使用<code>copy</code>而不是<code>strong</code>或<code>retain</code>.</p>
 </blockquote>
-<p>##delegate<br>@property (nonatomic, assign) id delegate;<br>@property (nonatomic, weak) id delegate;<br>哪个好呢？<br>答案:<code>weak</code>.<br>因为:一般来说,两者的作用是一致的.<br>但是经过测试,声明一个<code>delegate</code>之前一直使用的是<code>assign</code>，今天调试一段代码的时候，发现程序会<code>crash</code>掉，报错<code>EXC_BAD_ACCESS</code>.</p>
+<h2 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) id delegate;</div><div class="line">@property (nonatomic, weak) id delegate;</div></pre></td></tr></table></figure>
+<p>哪个好呢？<br>答案:<code>weak</code>.<br>因为:一般来说,两者的作用是一致的.<br>但是经过测试,声明一个<code>delegate</code>之前一直使用的是<code>assign</code>，今天调试一段代码的时候，发现程序会<code>crash</code>掉，报错<code>EXC_BAD_ACCESS</code>.</p>
 <blockquote>
-<p>@property (nonatomic, assign) id delegate;<br>声明一个delegate，那么即便delegate指向的对象销毁了，delegate中依然会保存之前对象的地址<br>即，delegate成为了一个野指针…<br>@property (nonatomic, weak) id delegate;<br>而使用weak，则不会有上述问题，当delegate指向的对象销毁后，delegate = nil，<br>所以答案就是，使用weak。</p>
+<p><code>@property (nonatomic, assign) id delegate;</code><br>声明一个delegate，那么即便delegate指向的对象销毁了，delegate中依然会保存之前对象的地址<br>即，delegate成为了一个野指针…<br><code>@property (nonatomic, weak) id delegate;</code><br>而使用weak，则不会有上述问题，当delegate指向的对象销毁后，delegate = nil，<br>所以答案就是，使用weak。</p>
 </blockquote>
 
       
@@ -453,7 +454,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#block"><span class="nav-number">1.</span> <span class="nav-text">block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delegate"><span class="nav-number">2.</span> <span class="nav-text">delegate</span></a></li></ol></div>
             
           </div>
         </section>

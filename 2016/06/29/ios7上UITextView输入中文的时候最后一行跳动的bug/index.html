@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="#ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
+<meta name="description" content="Q: ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ios7上UITextView输入中文的时候最后一行跳动的bug">
 <meta property="og:url" content="http://yoursite.com/2016/06/29/ios7上UITextView输入中文的时候最后一行跳动的bug/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="#ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
-<meta property="og:updated_time" content="2016-08-25T06:33:52.000Z">
+<meta property="og:description" content="Q: ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
+<meta property="og:updated_time" content="2016-08-26T07:09:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios7上UITextView输入中文的时候最后一行跳动的bug">
-<meta name="twitter:description" content="#ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
+<meta name="twitter:description" content="Q: ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见">
 
 
 
@@ -295,7 +295,7 @@
       
 
       
-        <p>#ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见</p>
+        <p>Q: ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见</p>
 <a id="more"></a>
 <p>在stackflow里查到大神是这么解决的，直接上代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">-(void)textViewDidChange:(UITextView *)textView &#123;  </div><div class="line">    CGRect line = [textView caretRectForPosition:  </div><div class="line">                   textView.selectedTextRange.start];  </div><div class="line">    CGFloat overflow = line.origin.y + line.size.height  </div><div class="line">    - ( textView.contentOffset.y + textView.bounds.size.height  </div><div class="line">       - textView.contentInset.bottom - textView.contentInset.top );  </div><div class="line">    if ( overflow &gt; 0 ) &#123;  </div><div class="line">        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)  </div><div class="line">        // Scroll caret to visible area  </div><div class="line">        CGPoint offset = textView.contentOffset;  </div><div class="line">        offset.y += overflow + 7; // leave 7 pixels margin  </div><div class="line">        // Cannot animate with setContentOffset:animated: or caret will not appear  </div><div class="line">        [UIView animateWithDuration:.2 animations:^&#123;  </div><div class="line">            [textView setContentOffset:offset];  </div><div class="line">        &#125;];  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>

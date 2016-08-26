@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/07/21/iOS清空NSUserDefaults下的内容/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="1234567891011121314151617181920212223242526//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];&amp;lt;!--more--&amp;">
-<meta property="og:updated_time" content="2016-08-25T06:34:38.000Z">
+<meta property="og:updated_time" content="2016-08-26T07:06:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS清空NSUserDefaults下的内容">
 <meta name="twitter:description" content="1234567891011121314151617181920212223242526//方法一NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];&amp;lt;!--more--&amp;">
@@ -296,7 +296,7 @@
 
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//方法一</div><div class="line"></div><div class="line">NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];</div><div class="line"></div><div class="line">[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];</div><div class="line"></div><div class="line"></div><div class="line">&lt;!--more--&gt;</div><div class="line"></div><div class="line">//方法二</div><div class="line"></div><div class="line">- (void)resetDefaults &#123;</div><div class="line"></div><div class="line">NSUserDefaults* defs = [NSUserDefaultsstandardUserDefaults];</div><div class="line"></div><div class="line">NSDictionary* dict = [defsdictionaryRepresentation];</div><div class="line"></div><div class="line">for(idkeyindict) &#123;</div><div class="line"></div><div class="line">[defsremoveObjectForKey:key];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">[defssynchronize];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="http://www.jianshu.com/p/9cb6ea37f46c" target="_blank" rel="external">原文链接</a></p>
+<p><a href="http://www.jianshu.com/p/9cb6ea37f46c" target="_blank" rel="external">iOS清空NSUserDefaults下的内容</a></p>
 
       
     </div>

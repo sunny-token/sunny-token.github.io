@@ -528,7 +528,10 @@
 
       
         
-          <p>##新建<code>person.h</code>和<code>person.m</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;student.h&quot;</div><div class="line"></div><div class="line">@interface person : NSObject&lt;NSCopying&gt;</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSString *name;</div><div class="line">@property (nonatomic, strong) student *stu;</div><div class="line">@property (nonatomic, strong) NSArray&lt;student *&gt; *stuArr;</div><div class="line"></div><div class="line">@end</div><div class="line">--------------------------------------------------------</div><div class="line">#import &quot;person.h&quot;</div><div class="line">@implementation person</div><div class="line">- (id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    person *newClazz = [[self class] allocWithZone:zone];</div><div class="line">    newClazz.name = self.name;</div><div class="line">    newClazz.stu = [self.stu copy];</div><div class="line">    newClazz.stuArr = [self.stuArr mutableCopy];</div><div class="line">    return newClazz;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+          <ul>
+<li>新建<code>person.h</code>和<code>person.m</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;student.h&quot;</div><div class="line"></div><div class="line">@interface person : NSObject&lt;NSCopying&gt;</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSString *name;</div><div class="line">@property (nonatomic, strong) student *stu;</div><div class="line">@property (nonatomic, strong) NSArray&lt;student *&gt; *stuArr;</div><div class="line"></div><div class="line">@end</div><div class="line">--------------------------------------------------------</div><div class="line">#import &quot;person.h&quot;</div><div class="line">@implementation person</div><div class="line">- (id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    person *newClazz = [[self class] allocWithZone:zone];</div><div class="line">    newClazz.name = self.name;</div><div class="line">    newClazz.stu = [self.stu copy];</div><div class="line">    newClazz.stuArr = [self.stuArr mutableCopy];</div><div class="line">    return newClazz;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+</li>
+</ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/26/NSArray的深拷贝以及NSArray元素的深拷贝研究/#more" rel="contents">
               阅读全文 &raquo;
@@ -645,7 +648,7 @@
         
           
             <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//方法一</div><div class="line"></div><div class="line">NSString*appDomain = [[NSBundlemainBundle]bundleIdentifier];</div><div class="line"></div><div class="line">[[NSUserDefaultsstandardUserDefaults]removePersistentDomainForName:appDomain];</div><div class="line"></div><div class="line"></div><div class="line">&lt;!--more--&gt;</div><div class="line"></div><div class="line">//方法二</div><div class="line"></div><div class="line">- (void)resetDefaults &#123;</div><div class="line"></div><div class="line">NSUserDefaults* defs = [NSUserDefaultsstandardUserDefaults];</div><div class="line"></div><div class="line">NSDictionary* dict = [defsdictionaryRepresentation];</div><div class="line"></div><div class="line">for(idkeyindict) &#123;</div><div class="line"></div><div class="line">[defsremoveObjectForKey:key];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">[defssynchronize];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="http://www.jianshu.com/p/9cb6ea37f46c" target="_blank" rel="external">原文链接</a></p>
+<p><a href="http://www.jianshu.com/p/9cb6ea37f46c" target="_blank" rel="external">iOS清空NSUserDefaults下的内容</a></p>
 
           
         
@@ -758,7 +761,7 @@
       
         
           <p></br></p>
-<h2 id="1-时间戳-gt-需要展示的日期"><a href="#1-时间戳-gt-需要展示的日期" class="headerlink" title="1. 时间戳 -&gt; 需要展示的日期"></a>1. 时间戳 -&gt; 需要展示的日期</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *uploadTime =@&quot;1466738834000&quot;;//时间戳</div><div class="line">      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.</div><div class="line">      NSString *formatter = @&quot;yyyy-MM-dd eeee HH:mm&quot;;</div><div class="line">      NSDate *publishDate = [NSDate dateWithTimeIntervalSince1970:timestamp];//转换NSDate</div><div class="line">      NSString *day = [publishDate formattedDateWithFormat:formatter];//此方法是 DateTools 里面的方法     </div><div class="line">      NSLog(@&quot;%@&quot;, day);                         </div><div class="line">      //day: 2016-07-15 星期五 09:24:25</div></pre></td></tr></table></figure>
+<h2 id="时间戳-gt-需要展示的日期"><a href="#时间戳-gt-需要展示的日期" class="headerlink" title="时间戳 -&gt; 需要展示的日期"></a>时间戳 -&gt; 需要展示的日期</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *uploadTime =@&quot;1466738834000&quot;;//时间戳</div><div class="line">      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.</div><div class="line">      NSString *formatter = @&quot;yyyy-MM-dd eeee HH:mm&quot;;</div><div class="line">      NSDate *publishDate = [NSDate dateWithTimeIntervalSince1970:timestamp];//转换NSDate</div><div class="line">      NSString *day = [publishDate formattedDateWithFormat:formatter];//此方法是 DateTools 里面的方法     </div><div class="line">      NSLog(@&quot;%@&quot;, day);                         </div><div class="line">      //day: 2016-07-15 星期五 09:24:25</div></pre></td></tr></table></figure>
 <p>DateTools 是一个很好用的处理时间日期的库。<br>下载 <a href="http://www.ios122.com/tag/datetools/">DateTools</a></p>
 <blockquote>
 <p>也可以使用cocoapods下载，pod ‘DateTools’, ‘~&gt; 1.7.0’</p>
@@ -991,8 +994,7 @@
 
       
         
-          <p>##今天在安装SDAutoLayout的时候出现各种错误，所以在此记录一下:</p>
-<ul>
+          <h2 id="今天在安装SDAutoLayout的时候出现各种错误，所以在此记录一下"><a href="#今天在安装SDAutoLayout的时候出现各种错误，所以在此记录一下" class="headerlink" title="今天在安装SDAutoLayout的时候出现各种错误，所以在此记录一下:"></a>今天在安装SDAutoLayout的时候出现各种错误，所以在此记录一下:</h2><ul>
 <li>增加’pod ‘SDAutoLayout’, \’~&gt; 2.1.2\’’出错<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[!] Unable to satisfy the following requirements:</div><div class="line"></div><div class="line">- `SDAutoLayout (~&gt; 2.1.2)` required by `Podfile`</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -1110,7 +1112,7 @@
 
       
         
-          <p>#ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见</p>
+          <p>Q: ios7上UITextView输入中文的时候最后一行跳动的bug，导致最后一行在输入的时候会看不见</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/29/ios7上UITextView输入中文的时候最后一行跳动的bug/#more" rel="contents">
               阅读全文 &raquo;

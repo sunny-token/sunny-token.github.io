@@ -278,7 +278,7 @@
 
       
         
-          <p>##前言<br>第三方库是现在的程序员离不开的东西 不光是APP开发 基本上所有的商业项目 都会或多或少的使用到第三方库<br>Github上Star&gt;100的开源库数量如下</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>第三方库是现在的程序员离不开的东西 不光是APP开发 基本上所有的商业项目 都会或多或少的使用到第三方库<br>Github上Star&gt;100的开源库数量如下</p>
 <p>可以看到JS以绝对的优势排名第一 一定程度上也说明了JS在这几年为什么发展得这么迅速 不会点JS都不好意思说自己是码农 不过现在JS圈的造轮子浪潮也是愈演愈烈了 自己不写个框架都不好意思打招呼</p>
 <p>OC排名第四 相信这个排名还会上升 Swift暂时还挤不进前十 不过超过OC 也是指日可待(毕竟亲儿子)</p>
 <p>Xcode基本是Mac/iOS程序员的必备工具(AppCode我没用过 不知道有多少人用?) 但是能说有多好用..这就仁者见仁了(跟Visual Studio是没得比了) 不过在用了插件以后 倒也能让生产力提升一大截</p>
@@ -378,8 +378,8 @@
 
       
         
-          <p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, <strong>func</strong>, <strong>LINE</strong>, obj);</p>
-<p>其中<strong>func</strong>和<strong>LINE</strong>都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br><strong>func</strong>    打印当前函数或方法，c字符串<br><strong>LINE</strong>    打印当前行号，整数<br><strong>FILE</strong>    打印当前文件路径，c字符串<br><strong>PRETTY_FUNCTION</strong>    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
+          <p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);</p>
+<p>其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br>__func__    打印当前函数或方法，c字符串<br>__LINE__    打印当前行号，整数<br>__FILE__    打印当前文件路径，c字符串<br>__PRETTY<em>FUNCTION\</em>_    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/#more" rel="contents">
               阅读全文 &raquo;
@@ -618,8 +618,7 @@
         
           <p>在block 使用日益频繁的现在，我们经常会使用<code>__block</code>,<code>__weak</code>。<br>但是每次写</p>
 <blockquote>
-<p> <strong>weak typeof(self)weakself = self;
-</strong>block NSInteger xx = 0;</p>
+<p> __weak typeof(self)weakself = self;<br>__block NSInteger xx = 0;</p>
 </blockquote>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/22/利用弱引用在block中使用self/#more" rel="contents">
@@ -864,10 +863,10 @@
 
       
         
-          <p>##依赖环境<br>Ruby脚本，依赖于ImageMagick库</p>
-<p>##安装ImageMagick<br>这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</div></pre></td></tr></table></figure></p>
+          <h2 id="依赖环境"><a href="#依赖环境" class="headerlink" title="依赖环境"></a>依赖环境</h2><p>Ruby脚本，依赖于ImageMagick库</p>
+<h2 id="安装ImageMagick"><a href="#安装ImageMagick" class="headerlink" title="安装ImageMagick"></a>安装ImageMagick</h2><p>这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</div></pre></td></tr></table></figure></p>
 <p>然后安装ImageMagick<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install imagemagick</div></pre></td></tr></table></figure></p>
-<p>##安装mini_magick<br>这是一个ruby gem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install mini_magick</div></pre></td></tr></table></figure></p>
+<h2 id="安装mini-magick"><a href="#安装mini-magick" class="headerlink" title="安装mini_magick"></a>安装mini_magick</h2><p>这是一个ruby gem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install mini_magick</div></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/15/自动缩1倍图脚本/#more" rel="contents">
               阅读全文 &raquo;
@@ -982,9 +981,8 @@
 
       
         
-          <p>##背景<br>平常我们都会用 Instrument 的 Leaks / Allocations 或其他一些开源库进行内存泄露的排查，但它们都存在各种问题和不便，我们逐个来看这些工具的使用和存在的问题。</p>
-<p>##Leaks</p>
-<p>先看看 Leaks，从苹果的开发者文档里可以看到，一个 app 的内存分三类：</p>
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>平常我们都会用 Instrument 的 Leaks / Allocations 或其他一些开源库进行内存泄露的排查，但它们都存在各种问题和不便，我们逐个来看这些工具的使用和存在的问题。</p>
+<h2 id="Leaks"><a href="#Leaks" class="headerlink" title="Leaks"></a>Leaks</h2><p>先看看 Leaks，从苹果的开发者文档里可以看到，一个 app 的内存分三类：</p>
 <blockquote>
 <ol>
 <li>Leaked memory: Memory unreferenced by your application that cannot<br>be used again or freed (also detectable by using the Leaks<br>instrument).</li>
@@ -1107,7 +1105,7 @@
 
       
         
-          <p>##block<br><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？</br><br>答案是:<code>copy</code>.</br></p>
+          <h2 id="block"><a href="#block" class="headerlink" title="block"></a>block</h2><p><code>block</code>在<code>property</code>中的属性应该是<code>strong</code>还是<code>copy</code>呢？</br><br>答案是:<code>copy</code>.</br></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/04/block 和 delegate 在 property 中的属性设置/#more" rel="contents">
               阅读全文 &raquo;
@@ -1222,8 +1220,7 @@
 
       
         
-          <p>##第一部分</p>
-<p>1.先说说iOS 应用程序5个状态：</p>
+          <h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>1.先说说iOS 应用程序5个状态：</p>
 <p>停止运行-应用程序已经终止，或者还未启动。</p>
 <p>不活动-应用程序处于前台但不再接收事件（例如，用户在app处于活动时锁住了设备）。</p>
 <p>活动-app处于“使用中”的状态。</p>
@@ -1347,14 +1344,14 @@
       
         
           
-            <p>#<a href="https://github.com/alcatraz/Alcatraz" target="_blank" rel="external">Alcatraz</a><br><code>Alcatraz</code>是一个为 <code>xcode7+</code> 管理开源代码的工具，可以为 <code>xcode</code> 自动查找安装插件，模板和主题颜色，不需要手动拷贝文件。</p>
-<p>##安装<br>打开 <code>Terminal</code> 复制以下链接：</p>
+            <h1 id="Alcatraz"><a href="#Alcatraz" class="headerlink" title="Alcatraz"></a><a href="https://github.com/alcatraz/Alcatraz" target="_blank" rel="external">Alcatraz</a></h1><p><code>Alcatraz</code>是一个为 <code>xcode7+</code> 管理开源代码的工具，可以为 <code>xcode</code> 自动查找安装插件，模板和主题颜色，不需要手动拷贝文件。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>打开 <code>Terminal</code> 复制以下链接：</p>
 <blockquote>
 <p>curl -fsSL <a href="https://raw.github.com/alcatraz/Alcatraz/master/Scripts/install.sh" target="_blank" rel="external">https://raw.github.com/alcatraz/Alcatraz/master/Scripts/install.sh</a> | sh</p>
 </blockquote>
 <p>或者可以手动下载 zip 包然后在 xcode 中编译，<code>Alcatraz</code> 需要在 <code>Preferences &gt; Downloads</code> 中安装 <code>Xcode Command Line Tools</code>.</p>
-<p>##使用<br>从 <code>window</code> 窗口选择 <code>Package Manager</code> ，你就可以安装或卸载你所需要的插件。安装好的插件会在每次 <code>Alcatraz</code> 启动后检查更新.<br><img src="https://camo.githubusercontent.com/70505dece9a75af5ca4715fff66271127f7d5b78/687474703a2f2f616c63617472617a2e696f2f696d616765732f6d656e754032782e706e67" alt="此处输入图片的描述"></p>
-<p>##卸载<br>打开 <code>Terminal</code> 复制以下链接：</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>从 <code>window</code> 窗口选择 <code>Package Manager</code> ，你就可以安装或卸载你所需要的插件。安装好的插件会在每次 <code>Alcatraz</code> 启动后检查更新.<br><img src="https://camo.githubusercontent.com/70505dece9a75af5ca4715fff66271127f7d5b78/687474703a2f2f616c63617472617a2e696f2f696d616765732f6d656e754032782e706e67" alt="此处输入图片的描述"></p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>打开 <code>Terminal</code> 复制以下链接：</p>
 <blockquote>
 <p>rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin</p>
 </blockquote>

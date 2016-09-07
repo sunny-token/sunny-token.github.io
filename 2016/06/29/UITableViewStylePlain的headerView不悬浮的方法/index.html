@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="当滑动uitableview的时候 header(footer)view 会黏在屏幕的上方（或下方）。有办法去掉或定制否？ 
 解决方法：123456789//去掉UItableview headerview黏性(sticky)- (void)scrollViewDidScroll:(UIScrollView *)scrollView &amp;#123;    CGFloat sectionHeaderH">
-<meta property="og:updated_time" content="2016-08-25T06:40:07.000Z">
+<meta property="og:updated_time" content="2016-09-07T01:11:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UITableViewStylePlain的headerView不悬浮的方法">
 <meta name="twitter:description" content="当滑动uitableview的时候 header(footer)view 会黏在屏幕的上方（或下方）。有办法去掉或定制否？ 
@@ -306,7 +306,7 @@
       
         <p>当滑动<code>uitableview</code>的时候 header(footer)view 会黏在屏幕的上方（或下方）。<br>有办法去掉或定制否？ </p>
 <p>解决方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//去掉UItableview headerview黏性(sticky)</div><div class="line">- (void)scrollViewDidScroll:(UIScrollView *)scrollView &#123;</div><div class="line">    CGFloat sectionHeaderHeight = 40;</div><div class="line">    if (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=0) &#123;</div><div class="line">        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);</div><div class="line">    &#125; else if (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</div><div class="line">        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><a href="http://www.cocoachina.com/bbs/read.php?tid=122045&amp;page=1#696409" target="_blank" rel="external">如何去掉UItableview header(footer)view黏性(sticky)?</a></p>
+<p>转载 :<a href="http://www.cocoachina.com/bbs/read.php?tid=122045&amp;page=1#696409" target="_blank" rel="external">如何去掉UItableview header(footer)view黏性(sticky)?</a></p>
 
       
     </div>

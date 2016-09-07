@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/13/NSInternalInconsistencyException/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="在做要用到Core Data 相关的项目，突然出现错误“NSInternalInconsistencyException’, reason: ‘This NSPersistentStoreCoordinator has no persistent stores.  It cannot perform a save operation.’”">
-<meta property="og:updated_time" content="2016-08-25T06:38:17.000Z">
+<meta property="og:updated_time" content="2016-09-07T01:11:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSInternalInconsistencyException">
 <meta name="twitter:description" content="在做要用到Core Data 相关的项目，突然出现错误“NSInternalInconsistencyException’, reason: ‘This NSPersistentStoreCoordinator has no persistent stores.  It cannot perform a save operation.’”">
@@ -305,7 +305,7 @@
 <p>最后还是在stockover找到答案：<br><a href="http://stackoverflow.com/questions/1091228/i-keep-on-getting-save-operation-failure-after-any-change-on-my-xcode-data-mod" target="_blank" rel="external">http://stackoverflow.com/questions/1091228/i-keep-on-getting-save-operation-failure-after-any-change-on-my-xcode-data-mod</a></p>
 <p>“If you are only getting this error in the Simulator then you have changed your data model and it hasn’t deleted the sqlite file that you were previously using.<br>So go to: ~/Library/Application Support/iPhone Simulator/User/Applications/<br>Then look through the HEX-named folders until you see your app. Open the Documents directory and delete the sqlite file. The error should go away.”</p>
 <p>可能是你改变coredata的属性项之后再运行的话在模拟器中会出现这个问题。找上面说的，找到mac下的模拟器中的程序路径，然后删掉其sqlite文件再运行就好了！！！</p>
-<p>转载：<a href="http://www.cnblogs.com/mybkn/archive/2012/09/03/2669412.html" target="_blank" rel="external">http://www.cnblogs.com/mybkn/archive/2012/09/03/2669412.html</a></p>
+<p>转载：<a href="http://www.cnblogs.com/mybkn/archive/2012/09/03/2669412.html" target="_blank" rel="external">NSInternalInconsistencyException</a></p>
 
       
     </div>

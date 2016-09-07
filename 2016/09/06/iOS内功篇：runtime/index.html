@@ -1,0 +1,599 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言本来打算写一篇关于runtime的学习总结，无奈长篇大论不是我的风格，就像写申论一样痛苦，加之网上关于tuntime的文章多如牛毛，应该也够童子们学习的了，今天就随便聊聊我的理解吧。
+runtime是什么对于初学者，runtime如尼斯湖水怪一样，只存在于传说中，对于开发者，runtime是做好iOS开发，或是深刻掌握Objective C所必需理解的东西。大公司面试都喜欢问：你对runtim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS内功篇：runtime">
+<meta property="og:url" content="http://yoursite.com/2016/09/06/iOS内功篇：runtime/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="前言本来打算写一篇关于runtime的学习总结，无奈长篇大论不是我的风格，就像写申论一样痛苦，加之网上关于tuntime的文章多如牛毛，应该也够童子们学习的了，今天就随便聊聊我的理解吧。
+runtime是什么对于初学者，runtime如尼斯湖水怪一样，只存在于传说中，对于开发者，runtime是做好iOS开发，或是深刻掌握Objective C所必需理解的东西。大公司面试都喜欢问：你对runtim">
+<meta property="og:updated_time" content="2016-09-07T01:05:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS内功篇：runtime">
+<meta name="twitter:description" content="前言本来打算写一篇关于runtime的学习总结，无奈长篇大论不是我的风格，就像写申论一样痛苦，加之网上关于tuntime的文章多如牛毛，应该也够童子们学习的了，今天就随便聊聊我的理解吧。
+runtime是什么对于初学者，runtime如尼斯湖水怪一样，只存在于传说中，对于开发者，runtime是做好iOS开发，或是深刻掌握Objective C所必需理解的东西。大公司面试都喜欢问：你对runtim">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/06/iOS内功篇：runtime/"/>
+
+  <title> iOS内功篇：runtime | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS内功篇：runtime
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T14:33:15+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本来打算写一篇关于runtime的学习总结，无奈长篇大论不是我的风格，就像写申论一样痛苦，加之网上关于tuntime的文章多如牛毛，应该也够童子们学习的了，今天就随便聊聊我的理解吧。</p>
+<h2 id="runtime是什么"><a href="#runtime是什么" class="headerlink" title="runtime是什么"></a>runtime是什么</h2><p>对于初学者，runtime如尼斯湖水怪一样，只存在于传说中，对于开发者，runtime是做好iOS开发，或是深刻掌握Objective C所必需理解的东西。大公司面试都喜欢问：你对runtime熟悉吗？并不是runtime在开发中经常用到，我认为它是OC最核心的部分，只有掌握好它，你才能理解其底层的原理，而不是做一个只会造轮子的码农。要练成盖世神功，需先奠定自身深厚的内功，而tuntime就是iOS开发中的内功。</p>
+<p>那么runtime到底是什么鬼？<br><a id="more"></a></p>
+<blockquote>
+<p>runtime是一个c和汇编写的动态库(感谢Lision的指正)，它就像一个小小的系统，将OC和C紧密关联，这个系统主要做两件事 ：<br>1、封装C语言的结构体和函数，让开发者在运行时创建、检查或者修改类、对象和方法等等。<br>2、传递消息，找出方法的最终执行代码。</p>
+</blockquote>
+<p>听起来蛮抽象的，我们来点通俗的吧？没问题～～<br>我们先写一句OC的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[zhangsan walkTheDog];</div></pre></td></tr></table></figure></p>
+<p>那么在运行时runtime会将它转化成C语言的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_msgSend(zhangsan, @selector(walkTheDog));</div></pre></td></tr></table></figure></p>
+<p>这个方法就是发送消息的方法，类似这样的方法runtime提供了很多，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount ); // 获取属性列表</div><div class="line">Method * class_copyMethodList ( Class cls, unsigned int *outCount );            // 获取所有方法的数组</div><div class="line">BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );       // 添加方法</div></pre></td></tr></table></figure></p>
+<p>那么我们可以利用这些方法干点什么？</p>
+<ol>
+<li>遍历对象的属性 比如，看看zhangsan的有哪些属性（身高：180、年龄：18）</li>
+<li>动态添加/修改属性，动态添加/修改/替换方法<br>比如，修改zhangsan的身高为190、年龄为20，替换walkTheDog方法（变成walkTheBigDog），给他添加一个新方法（walkTheCat）等等</li>
+<li>动态创建类/对象/协议等等 比如，创建一个新的对象：lisi</li>
+<li>方法拦截调用<br>比如，给zhangsan发送一个walkTheDog消息，但是zhangsan不知道怎么walk啊（没实现该方法），那我们可以拦截下，给该方法动态添加一个实现，甚至可以讲该方法定向或者打包给lisi（其他对象），让lisi来walk。</li>
+</ol>
+<p>以上就是runtime的通俗解释，只是稍微举个例子，更多用法大家可以发挥聪明才智，举一反三。</p>
+<h2 id="方法调用流程"><a href="#方法调用流程" class="headerlink" title="方法调用流程"></a>方法调用流程</h2><p>通俗地讲，调用方法（包含实例方法和类方法）相当于給一个对象发送消息。</p>
+<blockquote>
+<p>所以，实际上，类本身也是一个对象（关于Class这一块就不再这里展开了）。 当我们调用一个方法时，是这样的：<br>Instance：调用实例方法时，会到对象所属的类的方法列表中查找。 Class：调用类方法时，会到类的metaClass的方法列表中查找。</p>
+</blockquote>
+<p>下面以实例对象调用方法<code>[blackDog walk]</code>为例描述方法调用的流程：</p>
+<blockquote>
+<p>1、编译器会把<code>[blackDog
+walk]</code>转化为<code>objc_msgSend(blackDog，SEL)</code>，SEL为@selector(walk)。<br>2、Runtime会在blackDog对象所对应的Dog类的方法缓存列表里查找方法的SEL<br>3、如果没有找到，则在Dog类的方法分发表查找方法的SEL。（类由对象isa指针指向，方法分发表即methodList）<br>4、如果没有找到，则在其父类（设Dog类的父类为Animal类）的方法分发表里查找方法的SEL（父类由类的superClass指向）<br>5、如果没有找到，则沿继承体系继续下去，最终到达NSObject类。<br>6、如果在234的其中一步中找到，则定位了方法实现的入口，执行具体实现<br>7、如果最后还是没有找到，会面临两种情况：<br>(1) 如果是使用<code>［blackDog walk］</code>的方式调用方法<br>(2) 使用<code>［blackDog performSelector:@selector(walk)］</code>的方式调用方法</p>
+</blockquote>
+<p>第一种情况编译器会报错，第二种需要到运行时才能确定对象能否接收指定的消息，这时候会进入消息转发的流程：</p>
+<h2 id="消息转发流程"><a href="#消息转发流程" class="headerlink" title="消息转发流程"></a>消息转发流程</h2><p>1、动态方法解析<br>接收到未知消息时（假设blackDog的walk方法尚未实现），runtime会调用<code>+resolveInstanceMethod:</code>（实例方法）或者<code>+resolveClassMethod:</code>（类方法）<br>在该方法中，我们可以給未知消息新增一个已经实现了的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">void walkFunc(id self, SEL _cmd) &#123;</div><div class="line">    //let the dog walk</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    NSString * selString = NSStringFromSelector(sel);</div><div class="line">    if ([selString isEqualToString:@&quot;walk&quot;]) &#123;</div><div class="line">        class_addMethod(self.class, @selector(walk), (IMP)walkFunc, &quot;@:&quot;);</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod:sel];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2、备用接收者<br>如果以上方法没有做处理，runtime会调用<code>- (id)forwardingTargetForSelector:(SEL)aSelector</code>方法。<br>如果该方法返回了一个非nil（也不能是self）的对象，而且该对象实现了这个方法，那么这个对象就成了消息的接收者，消息就被分发到该对象。<br>适用情况：通常在对象内部使用，让内部的另外一个对象处理消息，在外面看起来就像是该对象处理了消息。<br>比如：blackDog让女朋友whiteDog来接收这个消息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector &#123;</div><div class="line">    NSString * selString = NSStringFromSelector(aSelector);</div><div class="line">    if ([selString isEqualToString:@&quot;walk&quot;]) &#123;</div><div class="line">        return self.whiteDog;</div><div class="line">    &#125;</div><div class="line">    return [super forwardingTargetForSelector:aSelector];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3、完整消息转发<br>在<code>- (void)forwardInvocation:(NSInvocation *)anInvocation</code>方法中选择转发消息的对象，其中anInvocation对象封装了未知消息的所有细节，并保留调用结果发送到原始调用者。<br>比如：blackDog将消息完整转发給主人dogOwner来处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation &#123;</div><div class="line">    if ([DogOwner instancesRespondToSelector:anInvocation.selector]) &#123;</div><div class="line">        [anInvocation invokeWithTarget:self.dogOwner];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4、如果在以上三个方法都没有处理未知消息，则会引发异常。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>本文主要通俗地描述了runtime的概念，并对其主要作用做了简单的概括，旨在給读者抛砖引玉，runtime的奥妙之处就由读者多多探索学习了。<br>初学者需要更深入地学习：<br>1、基本概念：Class、Ivar、Method等等<br>2、消息转发机制<br>3、在<objc runtime.h="">中理解runtime提供的方法和功能<br>4、在实际开发中如何灵活运用runtime</objc></p>
+<p>传送门：<br><a href="http://www.jianshu.com/p/d361f169423b" target="_blank" rel="external">iOS runtime实战应用：成员变量和属性</a><br><a href="http://www.jianshu.com/p/c68cc81ef763" target="_blank" rel="external">iOS runtime实战应用：关联对象</a><br><a href="http://www.jianshu.com/p/3efc3e94b14c" target="_blank" rel="external">iOS runtime实战应用：Method Swizzling</a></p>
+<p>转载: <a href="http://www.jianshu.com/p/f493bc6a949e/comments/1688988#" target="_blank" rel="external">iOS内功篇：runtime</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/25/个人常用iOS第三方库以及XCode插件介绍/" rel="next" title="个人常用iOS第三方库以及XCode插件介绍">
+                <i class="fa fa-chevron-left"></i> 个人常用iOS第三方库以及XCode插件介绍
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="孙小子" />
+          <p class="site-author-name" itemprop="name">孙小子</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#runtime是什么"><span class="nav-number">2.</span> <span class="nav-text">runtime是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用流程"><span class="nav-number">3.</span> <span class="nav-text">方法调用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息转发流程"><span class="nav-number">4.</span> <span class="nav-text">消息转发流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孙小子</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

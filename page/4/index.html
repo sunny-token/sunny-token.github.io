@@ -84,16 +84,12 @@
 
 
 
-<meta name="description" content="NSStringCompareOptions 枚举的值的意思:12345678910111213141516171819202122232425enum&amp;#123;    NSCaseInsensitiveSearch = 1,//不区分大小写比较    NSLiteralSearch = 2,//区分大小写比较    NSBackwardsSearch = 4,//从字符串末尾开始搜索    N">
-<meta property="og:type" content="article">
-<meta property="og:title" content="NSStringCompareOptions">
-<meta property="og:url" content="http://yoursite.com/2016/07/14/NSStringCompareOptions/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog之HelloWord!">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="NSStringCompareOptions 枚举的值的意思:12345678910111213141516171819202122232425enum&amp;#123;    NSCaseInsensitiveSearch = 1,//不区分大小写比较    NSLiteralSearch = 2,//区分大小写比较    NSBackwardsSearch = 4,//从字符串末尾开始搜索    N">
-<meta property="og:updated_time" content="2016-08-25T06:38:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSStringCompareOptions">
-<meta name="twitter:description" content="NSStringCompareOptions 枚举的值的意思:12345678910111213141516171819202122232425enum&amp;#123;    NSCaseInsensitiveSearch = 1,//不区分大小写比较    NSLiteralSearch = 2,//区分大小写比较    NSBackwardsSearch = 4,//从字符串末尾开始搜索    N">
+<meta name="twitter:title" content="Blog之HelloWord!">
 
 
 
@@ -114,9 +110,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/14/NSStringCompareOptions/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
-  <title> NSStringCompareOptions | Blog之HelloWord! </title>
+  <title> Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +139,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
   
@@ -242,7 +240,10 @@
             
             
               
-                NSStringCompareOptions
+                
+                <a class="post-title-link" href="/2016/06/02/我的第一篇博客/" itemprop="url">
+                  我的第一篇博客
+                </a>
               
             
           </h1>
@@ -254,8 +255,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-14T10:10:58+08:00" content="2016-07-14">
-              2016-07-14
+            <time itemprop="dateCreated" datetime="2016-06-02T08:04:23+08:00" content="2016-06-02">
+              2016-06-02
             </time>
           </span>
 
@@ -268,8 +269,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
                   </a>
                 </span>
 
@@ -301,22 +302,25 @@
       
 
       
-        <p>NSStringCompareOptions 枚举的值的意思:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">enum&#123;</div><div class="line"></div><div class="line">    NSCaseInsensitiveSearch = 1,//不区分大小写比较</div><div class="line"></div><div class="line">    NSLiteralSearch = 2,//区分大小写比较</div><div class="line"></div><div class="line">    NSBackwardsSearch = 4,//从字符串末尾开始搜索</div><div class="line"></div><div class="line">    NSAnchoredSearch = 8,//搜索限制范围的字符串</div><div class="line"></div><div class="line">    NSNumericSearch = 64,//按照字符串里的数字为依据，算出顺序。例如 Foo2.txt &lt; Foo7.txt &lt; Foo25.txt</div><div class="line"></div><div class="line">//以下定义高于 mac os 10.5 或者高于 iphone 2.0 可用</div><div class="line"></div><div class="line">    NSDiacriticInsensitiveSearch = 128,//忽略 &quot;-&quot; 符号的比较</div><div class="line"></div><div class="line">    NSWidthInsensitiveSearch = 256,//忽略字符串的长度，比较出结果</div><div class="line"></div><div class="line">    NSForcedOrderingSearch = 512,//忽略不区分大小写比较的选项，并强制返回 NSOrderedAscending 或者 NSOrderedDescending</div><div class="line"></div><div class="line">//以下定义高于 iphone 3.2 可用</div><div class="line"></div><div class="line">    NSRegularExpressionSearch = 1024,//只能应用于 rangeOfString:..., stringByReplacingOccurrencesOfString:...和 replaceOccurrencesOfString:... 方法。使用通用兼容的比较方法，如果设置此项，可以去掉 NSCaseInsensitiveSearch 和 NSAnchoredSearch</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+        
+          <p>为什么会想到搭建一篇博客呢？<br>在开发的过程当中，会遇到各种各样的问题，在经过各种努力，查资料后解决问题了，记录下来了，但是那也只是本地的，如果换了电脑，换了地方，就没法查询资料了。<br>所以，我想，搭建一个博客来记录自己的学习经验，以及问题的记录。</p>
+<blockquote>
+<p>好记性不如烂笔头，我希望这个博客能帮助自己，以及帮助更多朋友！</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/02/我的第一篇博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
@@ -324,36 +328,23 @@
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/01/安装SDAutoLayout的时候的错误/" rel="next" title="安装SDAutoLayout的时候的错误">
-                <i class="fa fa-chevron-left"></i> 安装SDAutoLayout的时候的错误
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/15/时间戳与时间的相互转换/" rel="prev" title="时间戳与时间的相互转换">
-                时间戳与时间的相互转换 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
       
+      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
           </div>
@@ -361,10 +352,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -384,17 +371,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -444,17 +422,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -552,10 +519,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 

@@ -1,0 +1,594 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ios," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="引言iOS开发在MRC的年代，需要手动 alloc，release，特别是指针传递下去之后经常忘记 release 某个对象。在 ARC 年代，这种情况就大大减少了，xcode 会在对象生命周期结束的时候回收对象的内存，不需要手动去 release 了。但是在某些时候，对象会一直释放不了，对象的引用计数一直不为0，也就是被其他对象强引用了，导致释放不了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 导致强引用的几种情况">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/导致强引用的几种情况/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="引言iOS开发在MRC的年代，需要手动 alloc，release，特别是指针传递下去之后经常忘记 release 某个对象。在 ARC 年代，这种情况就大大减少了，xcode 会在对象生命周期结束的时候回收对象的内存，不需要手动去 release 了。但是在某些时候，对象会一直释放不了，对象的引用计数一直不为0，也就是被其他对象强引用了，导致释放不了。">
+<meta property="og:updated_time" content="2016-09-13T09:11:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 导致强引用的几种情况">
+<meta name="twitter:description" content="引言iOS开发在MRC的年代，需要手动 alloc，release，特别是指针传递下去之后经常忘记 release 某个对象。在 ARC 年代，这种情况就大大减少了，xcode 会在对象生命周期结束的时候回收对象的内存，不需要手动去 release 了。但是在某些时候，对象会一直释放不了，对象的引用计数一直不为0，也就是被其他对象强引用了，导致释放不了。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/导致强引用的几种情况/"/>
+
+  <title>  导致强引用的几种情况 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                 导致强引用的几种情况
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T17:10:12+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>iOS开发在MRC的年代，需要手动 alloc，release，特别是指针传递下去之后经常忘记 release 某个对象。<br>在 ARC 年代，这种情况就大大减少了，xcode 会在对象生命周期结束的时候回收对象的内存，不需要手动去 release 了。<br>但是在某些时候，对象会一直释放不了，对象的引用计数一直不为0，也就是被其他对象强引用了，导致释放不了。</p>
+<a id="more"></a>
+<h2 id="如何知道对象有没有被释放"><a href="#如何知道对象有没有被释放" class="headerlink" title="如何知道对象有没有被释放"></a>如何知道对象有没有被释放</h2><p>在对象（比如一个控制器）里面重写<code>-（void）dealloc;</code>，这个方法每次在控制器释放的时候会调用</p>
+<blockquote>
+<p>需要注意的是：在 ARC 中，控制器会自动调用<code>[super dealloc]</code>，所以，不需要手动调用。</p>
+</blockquote>
+<p>输出控制器销毁提示信息，如果控制器没有调用dealloc方法，说明不能正常释放。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)dealloc &#123;</div><div class="line">    NSLog(@&quot;%@ dealloc&quot;,NSStringFromClass([self class]));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="导致强引用的一些情况"><a href="#导致强引用的一些情况" class="headerlink" title="导致强引用的一些情况"></a>导致强引用的一些情况</h2><h3 id="互相调用，引起循环引用"><a href="#互相调用，引起循环引用" class="headerlink" title="互相调用，引起循环引用"></a>互相调用，引起循环引用</h3><p>在某种不知道的情况下对象 A 强引用对象 B，并且对象 B 强引用对象 A，就造成了循环引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//对象 A</div><div class="line">@property (nonatomic, strong) objB ob;</div><div class="line"></div><div class="line">//对象 B</div><div class="line">@property (nonatomic, strong) objA oa;</div></pre></td></tr></table></figure></p>
+<p>解决方法：<br>弱引用其中一个对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//对象 A</div><div class="line">@property (nonatomic, strong) objB ob;</div><div class="line"></div><div class="line">//对象 B</div><div class="line">@property (nonatomic, weak) objA oa;</div></pre></td></tr></table></figure></p>
+<h3 id="block引发的循环引用"><a href="#block引发的循环引用" class="headerlink" title="block引发的循环引用"></a>block引发的循环引用</h3><p>一般没有特殊申明的时候，block 会强引用它里面对象，所以，如果你在 block 中使用 self 的时候，就会导致循环引用。<br>对象 A 中创建对象 B，对象 A 设置对象 B 的 block：<br><a href="https://sunny-token.github.io/2016/08/04/block%20%E5%92%8C%20delegate%20%E5%9C%A8%20property%20%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE/" target="_blank" rel="external">block 和 delegate 在 property 中的属性设置</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//对象 B</div><div class="line">typedef void (^resultBlock) ();</div><div class="line">...</div><div class="line">@property (nonatomic, copy) resultBlock obBlock;</div><div class="line"></div><div class="line">//对象 A</div><div class="line">objB.obBlock = ^()&#123;</div><div class="line">    [self exampleFun];</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在block中引用了自身方法（或变量），形成了循环引用。</p>
+<p>解决方法：<br>在block中使用对自身对象的弱引用来替换self,<a href="https://sunny-token.github.io/2016/08/22/%E5%88%A9%E7%94%A8%E5%BC%B1%E5%BC%95%E7%94%A8%E5%9C%A8block%E4%B8%AD%E4%BD%BF%E7%94%A8self/" target="_blank" rel="external">利用弱引用在block中使用self</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@weakify (self);</div><div class="line">[objectB setCallbackBlock:^&#123;</div><div class="line">    @strongify (self);</div><div class="line">    [self excuBlock];</div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>如果在block使用了成员变量，也要使用其弱引用，以 _objC为例：</p>
+<blockquote>
+<p>@weakify (_objC);或者<br>__weak typeof(_objC) weakDataSource = _objC;</p>
+</blockquote>
+<h3 id="强引用-delegate-也会导致循环引用"><a href="#强引用-delegate-也会导致循环引用" class="headerlink" title="强引用 delegate 也会导致循环引用"></a>强引用 delegate 也会导致循环引用</h3><p>如果一个delegate属性的声明是strong的时候，会强引用自身对象，导致对象无法释放。<br>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) id&lt;myDelegate&gt; delegate;</div><div class="line">...</div><div class="line">self.myView.delegate = self;</div></pre></td></tr></table></figure></p>
+<p>这样，造成self对myView强引用，myView对self强引用，引发循环引用。</p>
+<p>解决方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, weak) id&lt;myDelegate&gt; delegate;</div></pre></td></tr></table></figure></p>
+<p>对 delegate 弱引用，就不会造成循环引用了。</p>
+<h3 id="NStimer-造成的循环引用"><a href="#NStimer-造成的循环引用" class="headerlink" title="NStimer 造成的循环引用"></a>NStimer 造成的循环引用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];</div><div class="line">[[NSRunLoop mainRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];</div></pre></td></tr></table></figure>
+<p>定时器对象会对它的target（即self：当前控制器）持有强引用，如果定时器不销毁，则控制器无法释放。</p>
+<p>解决方法:<br>在<code>- (void)viewWillDisappear:(BOOL)animated</code>或者<code>- (void)viewDidDisappear:(BOOL)animated</code>或者其他确定离开当前控制器的方法中销毁定时器。</p>
+<blockquote>
+<p>不能在<code>-(void)dealloc;</code>中调用销毁定时器，因为只要定时器存在，<code>-(void)dealloc;</code>是不会走的。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidDisappear:(BOOL)animated &#123;</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">    if (self.timer != nil) &#123;</div><div class="line">        [self.timer invalidate];</div><div class="line">        self.timer = nil;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios/" rel="tag">#ios</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/iOS内功篇：runtime/" rel="next" title="iOS内功篇：runtime">
+                <i class="fa fa-chevron-left"></i> iOS内功篇：runtime
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="孙小子" />
+          <p class="site-author-name" itemprop="name">孙小子</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何知道对象有没有被释放"><span class="nav-number">2.</span> <span class="nav-text">如何知道对象有没有被释放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导致强引用的一些情况"><span class="nav-number">3.</span> <span class="nav-text">导致强引用的一些情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#互相调用，引起循环引用"><span class="nav-number">3.1.</span> <span class="nav-text">互相调用，引起循环引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block引发的循环引用"><span class="nav-number">3.2.</span> <span class="nav-text">block引发的循环引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强引用-delegate-也会导致循环引用"><span class="nav-number">3.3.</span> <span class="nav-text">强引用 delegate 也会导致循环引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NStimer-造成的循环引用"><span class="nav-number">3.4.</span> <span class="nav-text">NStimer 造成的循环引用</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孙小子</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

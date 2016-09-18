@@ -1,0 +1,584 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前些日子，按照公司要求搭建Jenkins环境配置，在这里我总结了一下我遇到的很多问题。我是用Xcode+GitHub+蒲公英搭建起来的。我是跟着以下的教程进行安装的：Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成Jenkins+GitHub+Xcode+fir搭了一个持续集成环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 安装Jenkins时的踩坑记录">
+<meta property="og:url" content="http://yoursite.com/2016/09/18/安装Jenkins时的踩坑记录/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="前些日子，按照公司要求搭建Jenkins环境配置，在这里我总结了一下我遇到的很多问题。我是用Xcode+GitHub+蒲公英搭建起来的。我是跟着以下的教程进行安装的：Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成Jenkins+GitHub+Xcode+fir搭了一个持续集成环境">
+<meta property="og:image" content="http://odosls3n7.bkt.clouddn.com/jenkins_1.png">
+<meta property="og:updated_time" content="2016-09-18T06:28:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 安装Jenkins时的踩坑记录">
+<meta name="twitter:description" content="前些日子，按照公司要求搭建Jenkins环境配置，在这里我总结了一下我遇到的很多问题。我是用Xcode+GitHub+蒲公英搭建起来的。我是跟着以下的教程进行安装的：Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成Jenkins+GitHub+Xcode+fir搭了一个持续集成环境">
+<meta name="twitter:image" content="http://odosls3n7.bkt.clouddn.com/jenkins_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/18/安装Jenkins时的踩坑记录/"/>
+
+  <title>  安装Jenkins时的踩坑记录 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                 安装Jenkins时的踩坑记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-18T11:32:46+08:00" content="2016-09-18">
+              2016-09-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前些日子，按照公司要求搭建<code>Jenkins</code>环境配置，在这里我总结了一下我遇到的很多问题。<br>我是用<code>Xcode+GitHub+蒲公英</code>搭建起来的。<br>我是跟着以下的教程进行安装的：<br><a href="http://blog.csdn.net/cunfu/article/details/47173839" target="_blank" rel="external">Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成</a><br><a href="http://www.jianshu.com/p/a17167274463" target="_blank" rel="external">Jenkins+GitHub+Xcode+fir搭了一个持续集成环境</a><br><a id="more"></a></p>
+<h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>PS：安装 jenkins 安装包的时候，第二步很重要<br><img src="http://odosls3n7.bkt.clouddn.com/jenkins_1.png" alt="jenkins_1"><br>选中这个会在<code>/Users/Shared/</code>下面新建一个账户<code>Jenkins</code>,然后你所有的打包需要的插件等都得重新安装下，例如：cocoapods 等。<br>不选的话就会在当前目录下创建一个 <code>.jenkins</code> 文件夹。<br>所以推荐不选。</p>
+<h1 id="下面就是我所遇到的一些问题。"><a href="#下面就是我所遇到的一些问题。" class="headerlink" title="下面就是我所遇到的一些问题。"></a>下面就是我所遇到的一些问题。</h1><h3 id="总是提示需要权限，需要手动输入密码。"><a href="#总是提示需要权限，需要手动输入密码。" class="headerlink" title="总是提示需要权限，需要手动输入密码。"></a>总是提示需要权限，需要手动输入密码。</h3><p>解决方案：需要在<code>Code signing &amp; OS X keychain options</code> 里面的 <code>login.keychain</code> 路径设置一下。</p>
+<h3 id="Failed-to-mkdirs之类的错误。"><a href="#Failed-to-mkdirs之类的错误。" class="headerlink" title="Failed to mkdirs之类的错误。"></a>Failed to mkdirs之类的错误。</h3><p>解决方案：cd 到权限不够的目录下，输入命令 <code>chmod -R 777./</code></p>
+<h3 id="error-You-cannot-specify-targets-with-a-workspace"><a href="#error-You-cannot-specify-targets-with-a-workspace" class="headerlink" title="error: You cannot specify targets with a workspace."></a>error: You cannot specify targets with a workspace.</h3><p>解决方案：<br>Xcode Workspace File：设置workspace的文件名；      —————开始是设置这个的  所以报错<br>Xcode Project Directory：设置工程文件对应的路径，工程文件不一定在系统根目录下；      ————–这个才是设置路径的<br>设置 scheme，可以在错误信息里面的最后部分找到.</p>
+<h3 id="pod-命令不识别"><a href="#pod-命令不识别" class="headerlink" title="pod 命令不识别."></a>pod 命令不识别.</h3><p>解决方案：在已经安装好 cocoapods 的情况下，脚本增加#!/bin/bash -l</p>
+<h3 id="为-mac-的普通用户提升权限，可以使用-sudo。"><a href="#为-mac-的普通用户提升权限，可以使用-sudo。" class="headerlink" title="为 mac 的普通用户提升权限，可以使用 sudo。"></a>为 mac 的普通用户提升权限，可以使用 sudo。</h3><p>解决方案：<br>先到 root 用户下，chmod u+w /etc/sudoers，vi /etc/sudoers<br>ps:这里说下你可以sudoers添加下面四行中任意一条<br>youuser            ALL=(ALL)                ALL<br>%youuser           ALL=(ALL)                ALL<br>youuser            ALL=(ALL)                NOPASSWD: ALL<br>%youuser           ALL=(ALL)                NOPASSWD: ALL<br>第一行:允许用户youuser执行sudo命令(需要输入密码).<br>第二行:允许用户组youuser里面的用户执行sudo命令(需要输入密码).<br>第三行:允许用户youuser执行sudo命令,并且在执行的时候不输入密码.<br>第四行:允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码.<br>撤销的话：chmod u-w /etc/sudoers</p>
+<h3 id="pod-install卡住不动"><a href="#pod-install卡住不动" class="headerlink" title="pod install卡住不动"></a>pod install卡住不动</h3><p>解决方案：</p>
+<blockquote>
+<p>$ gem sources -r <a href="https://rubygems.org/（移除旧版本的镜像，如果你不知道你电脑上目前用的是什么镜像，可用" target="_blank" rel="external">https://rubygems.org/（移除旧版本的镜像，如果你不知道你电脑上目前用的是什么镜像，可用</a>  $ gem sources -l  来查看）<br>$ gemsources -a <a href="https://gems.ruby-china.org/" target="_blank" rel="external">https://gems.ruby-china.org/</a> （增加可用的镜像）<br>$ gem sources -l （用来检查使用替换镜像位置成功）</p>
+<p>[!] An error occurred while performing <code>Git pull</code> on repo <code>master</code>.<br>[!] /usr/bin/git pull –ff-only<br>这个错误应该是说这个节点有问题。就又找资料，然后试试把cocoapods的节点删除，重新添加一个节点，或许就行，说干就干： 原因：<br>Cocoapods的分支不支持当前最新的Xcode版本 解决办法: 删除master分支 重新建立新的分支   sudo rm -fr<br>~/.cocoapods/repos/master</p>
+</blockquote>
+<h3 id="卸载当前版本"><a href="#卸载当前版本" class="headerlink" title="卸载当前版本."></a>卸载当前版本.</h3><p>解决方案：<br>sudo gem uninstall cocoapods<br>下载旧版本<br>sudo gem install cocoapods -v 0.25.0<br>升级 cocoapods，没有权限不能安装：sudo gem install -n /usr/local/bin cocoapods</p>
+<h3 id="Unable-to-load-a-specification-for-the-plugin-Library-Ruby-Gems-2-0-0-gems-cocoapods-deintegrate-1-0-0"><a href="#Unable-to-load-a-specification-for-the-plugin-Library-Ruby-Gems-2-0-0-gems-cocoapods-deintegrate-1-0-0" class="headerlink" title="Unable to load a specification for the plugin /Library/Ruby/Gems/2.0.0/gems/cocoapods-deintegrate-1.0.0"></a>Unable to load a specification for the plugin <code>/Library/Ruby/Gems/2.0.0/gems/cocoapods-deintegrate-1.0.0</code></h3><p>解决方案：<br>gem uninstall cocoapods-deintegrate（不能带 version 号）</p>
+<h3 id="Your-Podfile-has-had-smart-quotes-sanitised-To-avoid-issues-in-the-future-you-should-not-use-TextEdit-for-editing-it"><a href="#Your-Podfile-has-had-smart-quotes-sanitised-To-avoid-issues-in-the-future-you-should-not-use-TextEdit-for-editing-it" class="headerlink" title="Your Podfile has had smart quotes sanitised. To avoid issues in the future, you should not use TextEdit for editing it."></a>Your Podfile has had smart quotes sanitised. To avoid issues in the future, you should not use TextEdit for editing it.</h3><p>解决方案：<br>TextEditor 编辑保存为 none-lossy ASCII</p>
+<h3 id="ArgumentError-invalid-byte-sequence-in-US-ASCII。"><a href="#ArgumentError-invalid-byte-sequence-in-US-ASCII。" class="headerlink" title="ArgumentError - invalid byte sequence in US-ASCII。"></a>ArgumentError - invalid byte sequence in US-ASCII。</h3><p>解决方案：<br>touch .bash_profile<br>vi .bash_profile<br>粘贴：<br>export LANG=en_US.UTF-8<br>export LANGUAGE=en_US.UTF-8<br>export LC_ALL=en_US.UTF-8<br>source .bash_profile</p>
+<h3 id="卸载-jenkins"><a href="#卸载-jenkins" class="headerlink" title="卸载 jenkins"></a>卸载 jenkins</h3><p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist</div><div class="line">sudo rm !$</div><div class="line">sudo rm -rf /Applications/Jenkins &quot;/Library/Application Support/Jenkins&quot; /Library/Documentation/Jenkins</div><div class="line">sudo rm -rf /Users/Shared/Jenkins</div><div class="line"># if you want to get rid of all the jobs and builds:</div><div class="line">sudo dscl . -delete /Users/jenkins</div><div class="line"># delete the jenkins user and group (if you chose to use them):</div><div class="line">sudo dscl . -delete /Groups/jenkins</div></pre></td></tr></table></figure></p>
+<h3 id="启动不了-jenkins。"><a href="#启动不了-jenkins。" class="headerlink" title="启动不了 jenkins。"></a>启动不了 jenkins。</h3><p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /Applications/Jenkins</div><div class="line">java -jar jenkins.war</div></pre></td></tr></table></figure></p>
+<h3 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码."></a>忘记密码.</h3><p>解决方案：<br><a href="http://blog.csdn.net/wangmuming/article/details/22925931" target="_blank" rel="external">http://blog.csdn.net/wangmuming/article/details/22925931</a></p>
+<h3 id="jenkins-打包完毕后，总是提示输入电脑帐号密码"><a href="#jenkins-打包完毕后，总是提示输入电脑帐号密码" class="headerlink" title="jenkins 打包完毕后，总是提示输入电脑帐号密码"></a>jenkins 打包完毕后，总是提示输入电脑帐号密码</h3><p>解决方案：<br>打开 keychain，点击左上方的<code>系统</code>，拷贝你的证书，然后点击左上方的<code>登录</code>,最后粘贴。<br>下次再打包就不用输入帐号密码了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/13/导致强引用的几种情况/" rel="next" title=" 导致强引用的几种情况">
+                <i class="fa fa-chevron-left"></i>  导致强引用的几种情况
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠之爸" />
+          <p class="site-author-name" itemprop="name">楠之爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序言"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面就是我所遇到的一些问题。"><span class="nav-number">2.</span> <span class="nav-text">下面就是我所遇到的一些问题。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总是提示需要权限，需要手动输入密码。"><span class="nav-number">2.0.1.</span> <span class="nav-text">总是提示需要权限，需要手动输入密码。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Failed-to-mkdirs之类的错误。"><span class="nav-number">2.0.2.</span> <span class="nav-text">Failed to mkdirs之类的错误。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-You-cannot-specify-targets-with-a-workspace"><span class="nav-number">2.0.3.</span> <span class="nav-text">error: You cannot specify targets with a workspace.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-命令不识别"><span class="nav-number">2.0.4.</span> <span class="nav-text">pod 命令不识别.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为-mac-的普通用户提升权限，可以使用-sudo。"><span class="nav-number">2.0.5.</span> <span class="nav-text">为 mac 的普通用户提升权限，可以使用 sudo。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-install卡住不动"><span class="nav-number">2.0.6.</span> <span class="nav-text">pod install卡住不动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载当前版本"><span class="nav-number">2.0.7.</span> <span class="nav-text">卸载当前版本.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unable-to-load-a-specification-for-the-plugin-Library-Ruby-Gems-2-0-0-gems-cocoapods-deintegrate-1-0-0"><span class="nav-number">2.0.8.</span> <span class="nav-text">Unable to load a specification for the plugin /Library/Ruby/Gems/2.0.0/gems/cocoapods-deintegrate-1.0.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Your-Podfile-has-had-smart-quotes-sanitised-To-avoid-issues-in-the-future-you-should-not-use-TextEdit-for-editing-it"><span class="nav-number">2.0.9.</span> <span class="nav-text">Your Podfile has had smart quotes sanitised. To avoid issues in the future, you should not use TextEdit for editing it.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArgumentError-invalid-byte-sequence-in-US-ASCII。"><span class="nav-number">2.0.10.</span> <span class="nav-text">ArgumentError - invalid byte sequence in US-ASCII。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载-jenkins"><span class="nav-number">2.0.11.</span> <span class="nav-text">卸载 jenkins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动不了-jenkins。"><span class="nav-number">2.0.12.</span> <span class="nav-text">启动不了 jenkins。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忘记密码"><span class="nav-number">2.0.13.</span> <span class="nav-text">忘记密码.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jenkins-打包完毕后，总是提示输入电脑帐号密码"><span class="nav-number">2.0.14.</span> <span class="nav-text">jenkins 打包完毕后，总是提示输入电脑帐号密码</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠之爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

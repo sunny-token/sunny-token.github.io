@@ -1,0 +1,639 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="正则判断手机号码格式这是我在网上看到的一个利用正则表达式判断手机号码的方法，忘记在哪看到的了…请原作者见谅！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="personal笔记">
+<meta property="og:url" content="http://yoursite.com/2015/04/27/personal笔记/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="正则判断手机号码格式这是我在网上看到的一个利用正则表达式判断手机号码的方法，忘记在哪看到的了…请原作者见谅！">
+<meta property="og:updated_time" content="2016-09-18T01:10:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="personal笔记">
+<meta name="twitter:description" content="正则判断手机号码格式这是我在网上看到的一个利用正则表达式判断手机号码的方法，忘记在哪看到的了…请原作者见谅！">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/04/27/personal笔记/"/>
+
+  <title> personal笔记 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                personal笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-27T10:24:46+08:00" content="2015-04-27">
+              2015-04-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="正则判断手机号码格式"><a href="#正则判断手机号码格式" class="headerlink" title="正则判断手机号码格式"></a>正则判断手机号码格式</h1><p>这是我在网上看到的一个利用正则表达式判断手机号码的方法，忘记在哪看到的了…请原作者见谅！</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)validatePhone:(NSString *)phone</div><div class="line">&#123;</div><div class="line">       /**</div><div class="line">        * 手机号码</div><div class="line">        * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188</div><div class="line">        * 联通：130,131,132,152,155,156,185,186</div><div class="line">        * 电信：133,1349,153,180,189</div><div class="line">        */</div><div class="line">       NSString * MOBILE = @&quot;^1(3[0-9]|5[0-35-9]|8[025-9])\\d&#123;8&#125;$&quot;;</div><div class="line">       /**</div><div class="line">        10         * 中国移动：China Mobile</div><div class="line">        11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188</div><div class="line">        12         */</div><div class="line">       NSString * CM = @&quot;^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d&#123;7&#125;$&quot;;</div><div class="line">       /**</div><div class="line">        15         * 中国联通：China Unicom</div><div class="line">        16         * 130,131,132,152,155,156,185,186</div><div class="line">        17         */</div><div class="line">       NSString * CU = @&quot;^1(3[0-2]|5[256]|8[56])\\d&#123;8&#125;$&quot;;</div><div class="line">       /**</div><div class="line">        20         * 中国电信：China Telecom</div><div class="line">        21         * 133,1349,153,180,189</div><div class="line">        22         */</div><div class="line">       NSString * CT = @&quot;^1((33|53|8[09])[0-9]|349)\\d&#123;7&#125;$&quot;;</div><div class="line">       /**</div><div class="line">        25         * 大陆地区固话及小灵通</div><div class="line">        26         * 区号：010,020,021,022,023,024,025,027,028,029</div><div class="line">        27         * 号码：七位或八位</div><div class="line">        28         */</div><div class="line">      // NSString * PHS = @&quot;^0(10|2[0-5789]|\\d&#123;3&#125;)\\d&#123;7,8&#125;$&quot;;</div><div class="line"> </div><div class="line">     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, MOBILE];</div><div class="line">     NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, CM];</div><div class="line">     NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, CU];</div><div class="line">     NSPredicate *regextestct = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, CT];</div><div class="line"> </div><div class="line">    if (([regextestmobile evaluateWithObject:phone] == YES)</div><div class="line">    || ([regextestcm evaluateWithObject:phone] == YES)</div><div class="line">    || ([regextestct evaluateWithObject:phone] == YES)</div><div class="line">    || ([regextestcu evaluateWithObject:phone] == YES))</div><div class="line">    &#123;</div><div class="line">        if([regextestcm evaluateWithObject:phone] == YES) &#123;</div><div class="line">          NSLog(@&quot;China Mobile&quot;);</div><div class="line">        &#125; else if([regextestct evaluateWithObject:phone] == YES) &#123;</div><div class="line">          NSLog(@&quot;China Telecom&quot;);</div><div class="line">        &#125; else if ([regextestcu evaluateWithObject:phone] == YES) &#123;</div><div class="line">          NSLog(@&quot;China Unicom&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">          NSLog(@&quot;Unknow&quot;);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="阿拉伯数字转汉语数字"><a href="#阿拉伯数字转汉语数字" class="headerlink" title="阿拉伯数字转汉语数字"></a>阿拉伯数字转汉语数字</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">+(NSString *)translation:(NSString *)arebic</div><div class="line"> </div><div class="line">&#123;   NSString *str = arebic;</div><div class="line">    NSArray *arabic_numerals = @[@&quot;1&quot;,@&quot;2&quot;,@&quot;3&quot;,@&quot;4&quot;,@&quot;5&quot;,@&quot;6&quot;,@&quot;7&quot;,@&quot;8&quot;,@&quot;9&quot;,@&quot;0&quot;];</div><div class="line">    NSArray *chinese_numerals = @[@&quot;一&quot;,@&quot;二&quot;,@&quot;三&quot;,@&quot;四&quot;,@&quot;五&quot;,@&quot;六&quot;,@&quot;七&quot;,@&quot;八&quot;,@&quot;九&quot;,@&quot;零&quot;];</div><div class="line">    NSArray *digits = @[@&quot;个&quot;,@&quot;十&quot;,@&quot;百&quot;,@&quot;千&quot;,@&quot;万&quot;,@&quot;十&quot;,@&quot;百&quot;,@&quot;千&quot;,@&quot;亿&quot;,@&quot;十&quot;,@&quot;百&quot;,@&quot;千&quot;,@&quot;兆&quot;];</div><div class="line">    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:chinese_numerals forKeys:arabic_numerals];</div><div class="line">     </div><div class="line">    NSMutableArray *sums = [NSMutableArray array];</div><div class="line">    for (int i = 0; i &lt; str.length; i ++) &#123;</div><div class="line">        NSString *substr = [str substringWithRange:NSMakeRange(i, 1)];</div><div class="line">        NSString *a = [dictionary objectForKey:substr];</div><div class="line">        NSString *b = digits[str.length -i-1];</div><div class="line">        NSString *sum = [a stringByAppendingString:b];</div><div class="line">        if ([a isEqualToString:chinese_numerals[9]])</div><div class="line">        &#123;</div><div class="line">            if([b isEqualToString:digits[4]] || [b isEqualToString:digits[8]])</div><div class="line">            &#123;</div><div class="line">                sum = b;</div><div class="line">                if ([[sums lastObject] isEqualToString:chinese_numerals[9]])</div><div class="line">                &#123;</div><div class="line">                    [sums removeLastObject];</div><div class="line">                &#125;</div><div class="line">            &#125;else</div><div class="line">            &#123;</div><div class="line">                sum = chinese_numerals[9];</div><div class="line">            &#125;</div><div class="line">             </div><div class="line">            if ([[sums lastObject] isEqualToString:sum])</div><div class="line">            &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        [sums addObject:sum];</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    NSString *sumStr = [sums  componentsJoinedByString:@&quot;&quot;];</div><div class="line">    NSString *chinese = [sumStr substringToIndex:sumStr.length-1];</div><div class="line">    NSLog(@&quot;%@&quot;,str);</div><div class="line">    NSLog(@&quot;%@&quot;,chinese);</div><div class="line">    return chinese;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="使图片自动旋转"><a href="#使图片自动旋转" class="headerlink" title="使图片自动旋转"></a>使图片自动旋转</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">-(void) startAnimation  </div><div class="line">&#123;  </div><div class="line">    [UIView beginAnimations:nil context:nil];  </div><div class="line">    [UIView setAnimationDuration:0.01];  </div><div class="line">    [UIView setAnimationDelegate:self];  </div><div class="line">    [UIView setAnimationDidStopSelector:@selector(endAnimation)];  </div><div class="line">    imageView.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));  </div><div class="line">    [UIView commitAnimations];  </div><div class="line">&#125;  </div><div class="line">-(void)endAnimation  </div><div class="line">&#123;  </div><div class="line">    angle += 10;  </div><div class="line">    [self startAnimation];  </div><div class="line">&#125; </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">- (void)startAnimation  </div><div class="line">&#123;  </div><div class="line">    CGAffineTransform endAngle = CGAffineTransformMakeRotation(imageviewAngle * (M_PI / 180.0f));  </div><div class="line">      </div><div class="line">    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionCurveLinear animations:^&#123;  </div><div class="line">        imageView.transform = endAngle;  </div><div class="line">    &#125; completion:^(BOOL finished) &#123;  </div><div class="line">        angle += 10; [self startAnimation];  </div><div class="line">    &#125;];  </div><div class="line">      </div><div class="line">&#125; </div><div class="line"></div><div class="line"></div><div class="line">CABasicAnimation* rotationAnimation;  </div><div class="line">rotationAnimation = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation.z&quot;];  </div><div class="line">rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];  </div><div class="line">rotationAnimation.duration = duration;  </div><div class="line">rotationAnimation.cumulative = YES;  </div><div class="line">rotationAnimation.repeatCount = repeat;  </div><div class="line">  </div><div class="line">[_loadingView.layer addAnimation:rotationAnimation forKey:@&quot;rotationAnimation&quot;];</div></pre></td></tr></table></figure>
+<h1 id="ios-rsa加密算法"><a href="#ios-rsa加密算法" class="headerlink" title="ios rsa加密算法"></a>ios rsa加密算法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">RSA加密以及解密实现步骤：</div><div class="line">1、使用openssl生成密匙对。</div><div class="line">代码如下：（代码源于github开源社区）</div><div class="line">#!/usr/bin/env bash  </div><div class="line">echo &quot;Generating RSA key pair ...&quot;  </div><div class="line">echo &quot;1024 RSA key: private_key.pem&quot;  </div><div class="line">openssl genrsa -out private_key.pem 1024  </div><div class="line">  </div><div class="line">echo &quot;create certification require file: rsaCertReq.csr&quot;  </div><div class="line">openssl req -new -key private_key.pem -out rsaCertReq.csr  </div><div class="line">  </div><div class="line">echo &quot;create certification using x509: rsaCert.crt&quot;  </div><div class="line">openssl x509 -req -days 3650 -in rsaCertReq.csr -signkey private_key.pem -out rsaCert.crt  </div><div class="line">  </div><div class="line">echo &quot;create public_key.der For IOS&quot;  </div><div class="line">openssl x509 -outform der -in rsaCert.crt -out public_key.der  </div><div class="line">  </div><div class="line">echo &quot;create private_key.p12 For IOS. Please remember your password. The password will be used in iOS.&quot;  </div><div class="line">openssl pkcs12 -export -out private_key.p12 -inkey private_key.pem -in rsaCert.crt  </div><div class="line">  </div><div class="line">echo &quot;create rsa_public_key.pem For Java&quot;  </div><div class="line">openssl rsa -in private_key.pem -out rsa_public_key.pem -pubout  </div><div class="line">echo &quot;create pkcs8_private_key.pem For Java&quot;  </div><div class="line">openssl pkcs8 -topk8 -in private_key.pem -out pkcs8_private_key.pem -nocrypt  </div><div class="line">  </div><div class="line">echo &quot;finished.&quot;</div><div class="line">2、加载证书后即可进行加密算法。</div><div class="line">代码：</div><div class="line">RSAEncryptor *rsa = [[RSAEncryptor alloc] init];  </div><div class="line">  </div><div class="line">    NSLog(@&quot;encryptor using rsa&quot;);  </div><div class="line">    NSString *publicKeyPath = [[NSBundle mainBundle] pathForResource:@&quot;public_key&quot; ofType:@&quot;der&quot;];  </div><div class="line">    NSLog(@&quot;public key: %@&quot;, publicKeyPath);  </div><div class="line">    [rsa loadPublicKeyFromFile:publicKeyPath];  </div><div class="line">  </div><div class="line">    NSString *securityText = @&quot;hello ~&quot;;  </div><div class="line">    NSString *encryptedString = [rsa rsaEncryptString:securityText];  </div><div class="line">    NSLog(@&quot;encrypted data: %@&quot;, encryptedString);</div><div class="line">对应解密代码：</div><div class="line">NSLog(@&quot;decryptor using rsa&quot;);  </div><div class="line">    [rsa loadPrivateKeyFromFile:[[NSBundle mainBundle] pathForResource:@&quot;private_key&quot; ofType:@&quot;p12&quot;] password:@&quot;123456&quot;];  </div><div class="line">    NSString *decryptedString = [rsa rsaDecryptString:encryptedString];  </div><div class="line">    NSLog(@&quot;decrypted data: %@&quot;, decryptedString);</div><div class="line">RSA基本原理：</div><div class="line">RSA使用&quot;秘匙对&quot;对数据进行加密解密.在加密解密数据前,需要先生成公钥(public key)和私钥(private key)。</div><div class="line">公钥(public key): 用于加密数据. 用于公开, 一般存放在数据提供方, 例如iOS客户端。</div><div class="line">私钥(private key): 用于解密数据. 必须保密, 私钥泄露会造成安全问题。</div></pre></td></tr></table></figure>
+<h1 id="ios7以后的坑"><a href="#ios7以后的坑" class="headerlink" title="ios7以后的坑"></a>ios7以后的坑</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">坑1：</div><div class="line">iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方。</div><div class="line"></div><div class="line">解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。</div><div class="line">if (IOS7_And_Later) &#123;  </div><div class="line">        self.automaticallyAdjustsScrollViewInsets = NO;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line"></div><div class="line">坑2:</div><div class="line">iOS7及以上的版本上，UITextView输入中文时，在输入多行后，光标有时会上下跳动，输入文字的时候内容有时会往上跳，光标都显示不出来。这个bug坑死好多人啊，特别是做聊天输入框的时候，不得已找一些非正常的方法解决。从网上找的各种解决方案都不行。</div><div class="line"></div><div class="line">解决方案：</div><div class="line">- (void)textViewDidChangeSelection:(UITextView *)textView  </div><div class="line">&#123;  </div><div class="line">    if (floor(NSFoundationVersionNumber) &gt; NSFoundationVersionNumber_iOS_6_1) &#123;  </div><div class="line">        CGRect r = [textView caretRectForPosition:textView.selectedTextRange.end];  </div><div class="line">        CGFloat caretY =  MAX(r.origin.y - textView.frame.size.height + r.size.height + 8, 0);  </div><div class="line">        if (textView.contentOffset.y &lt; caretY &amp;&amp; r.origin.y != INFINITY) &#123;  </div><div class="line">            textView.contentOffset = CGPointMake(0, caretY);  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="label字间距行间距"><a href="#label字间距行间距" class="headerlink" title="label字间距行间距"></a>label字间距行间距</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">NSMutableAttributedString *attributedString =[[NSMutableAttributedString alloc] initWithString:str];</div><div class="line">//                long number = 5;</div><div class="line">//                //调整字间距</div><div class="line">//                CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number);</div><div class="line">//                [attributedString addAttribute:(id)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(0, [attributedString length])];</div><div class="line">NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];</div><div class="line">//paragraphStyle.lineSpacing = 10;//增加行高</div><div class="line">//paragraphStyle.headIndent = 10;//头部缩进，相当于左padding</div><div class="line">//paragraphStyle.tailIndent = -10;//相当于右padding</div><div class="line">paragraphStyle.lineHeightMultiple = heightMuti;//行间距是多少倍</div><div class="line">paragraphStyle.alignment = NSTextAlignmentLeft;//对齐方式</div><div class="line">paragraphStyle.firstLineHeadIndent = 20;//首行头缩进</div><div class="line">//paragraphStyle.paragraphSpacing = 10;//段落后面的间距</div><div class="line">//paragraphStyle.paragraphSpacingBefore = 20;//段落之前的间距</div><div class="line">//调整行间距</div><div class="line">[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str length])];</div><div class="line">lable.attributedText = attributedString;</div></pre></td></tr></table></figure>
+<h1 id="SDWebImage淡入图片效果"><a href="#SDWebImage淡入图片效果" class="headerlink" title="SDWebImage淡入图片效果"></a>SDWebImage淡入图片效果</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</div><div class="line">&#123;</div><div class="line">    CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;article_Cell&quot; forIndexPath:indexPath];</div><div class="line">    ArticleEntity *article = self.articleArray[indexPath.row];</div><div class="line">    cell.titleLabel.text = article.title;</div><div class="line">    cell.timeLabel.text = article.date;</div><div class="line">    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:article.image] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) &#123;</div><div class="line">        cell.imageV.alpha = 0.0;</div><div class="line">        [UIView transitionWithView:cell.imageV</div><div class="line">                          duration:1.0</div><div class="line">                           options:UIViewAnimationOptionTransitionCrossDissolve</div><div class="line">                        animations:^&#123;</div><div class="line">                            [cell.imageV setImage:image];</div><div class="line">                            cell.imageV.alpha = 1.0;</div><div class="line">                        &#125; completion:NULL];</div><div class="line">    &#125;];</div><div class="line">    return cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="tableView优化"><a href="#tableView优化" class="headerlink" title="tableView优化"></a>tableView优化</h1><blockquote>
+<p>UITableView的优化主要从三个方面入手： </p>
+<ul>
+<li>提前计算并缓存好高度（布局），因为heightForRowAtIndexPath:是调用最频繁的方法；     </li>
+<li>异步绘制，遇到复杂界面，遇到性能瓶颈时，可能就是突破口；    </li>
+<li>滑动时按需加载，这个在大量图片展示，网络加载的时候很管用！（SDWebImage已经实现异步加载，配合这条性能杠杠的）。 除了上面最主要的三个方面外，还有很多几乎大伙都很熟知的优化点：    </li>
+<li>正确使用reuseIdentifier来重用Cells     </li>
+<li>尽量使所有的view opaque，包括Cell自身  </li>
+<li>尽量少用或不用透明图层     </li>
+<li>如果Cell内现实的内容来自web，使用异步加载，缓存请求结果     </li>
+<li>减少subviews的数量   </li>
+<li><p>在heightForRowAtIndexPath:中尽量不使用cellForRowAtIndexPath:，如果你需要用到它，只用一次然后缓存结果</p>
+</li>
+<li><p>尽量少用addView给Cell动态添加View，可以初始化时就添加，然后通过hide来控制是否显示</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="uitableview横向滑动"><a href="#uitableview横向滑动" class="headerlink" title="uitableview横向滑动"></a>uitableview横向滑动</h1><pre><code> 1. UITableView 设置
+
+CGRect tableViewRect = CGRectMake(0.0, 0.0, 50.0, 320.0);
+self.tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStylePlain];
+tableView.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
+tableView.delegate = self;
+tableView.dataSource = self;
+
+//tableview逆时针旋转90度。     
+tableView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
+
+// scrollbar 不显示
+tableView.showsVerticalScrollIndicator = NO;
+
+2. UITableViewCell 设置
+
+- (UITableViewCell *)tableView :( UITableView *)aTableView cellForRowAtIndexPath :( NSIndexPath*)indexPath 
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;identifier&quot;];
+    if (cell == nil) {        
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier@&quot;identifier&quot;] autorelease];
+
+        // cell顺时针旋转90度
+        cell.contentView.transform = CGAffineTransformMakeRotation(M_PI / 2);
+    }
+
+    return cell;
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/27/修改本机svn帐号/" rel="next" title="修改本机svn帐号">
+                <i class="fa fa-chevron-left"></i> 修改本机svn帐号
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/27/UIButton 设置标题的时候闪烁/" rel="prev" title="UIButton 设置标题的时候闪烁">
+                UIButton 设置标题的时候闪烁 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠之爸" />
+          <p class="site-author-name" itemprop="name">楠之爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正则判断手机号码格式"><span class="nav-number">1.</span> <span class="nav-text">正则判断手机号码格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阿拉伯数字转汉语数字"><span class="nav-number">2.</span> <span class="nav-text">阿拉伯数字转汉语数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使图片自动旋转"><span class="nav-number">3.</span> <span class="nav-text">使图片自动旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ios-rsa加密算法"><span class="nav-number">4.</span> <span class="nav-text">ios rsa加密算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ios7以后的坑"><span class="nav-number">5.</span> <span class="nav-text">ios7以后的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#label字间距行间距"><span class="nav-number">6.</span> <span class="nav-text">label字间距行间距</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SDWebImage淡入图片效果"><span class="nav-number">7.</span> <span class="nav-text">SDWebImage淡入图片效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tableView优化"><span class="nav-number">8.</span> <span class="nav-text">tableView优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uitableview横向滑动"><span class="nav-number">9.</span> <span class="nav-text">uitableview横向滑动</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠之爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

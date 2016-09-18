@@ -1,0 +1,611 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="新建person.h和person.m123456789101112131415161718192021#import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;quot;student.h&amp;quot;@interface person : NSObject&amp;lt;NSCopying&amp;gt;@property (nonatomic, strong) NSSt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSArray的深拷贝以及NSArray元素的深拷贝研究">
+<meta property="og:url" content="http://yoursite.com/2016/01/26/NSArray的深拷贝以及NSArray元素的深拷贝研究/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="新建person.h和person.m123456789101112131415161718192021#import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;quot;student.h&amp;quot;@interface person : NSObject&amp;lt;NSCopying&amp;gt;@property (nonatomic, strong) NSSt">
+<meta property="og:updated_time" content="2016-09-18T01:14:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSArray的深拷贝以及NSArray元素的深拷贝研究">
+<meta name="twitter:description" content="新建person.h和person.m123456789101112131415161718192021#import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;quot;student.h&amp;quot;@interface person : NSObject&amp;lt;NSCopying&amp;gt;@property (nonatomic, strong) NSSt">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/26/NSArray的深拷贝以及NSArray元素的深拷贝研究/"/>
+
+  <title> NSArray的深拷贝以及NSArray元素的深拷贝研究 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NSArray的深拷贝以及NSArray元素的深拷贝研究
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-26T11:13:30+08:00" content="2016-01-26">
+              2016-01-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>新建<code>person.h</code>和<code>person.m</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;student.h&quot;</div><div class="line"></div><div class="line">@interface person : NSObject&lt;NSCopying&gt;</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSString *name;</div><div class="line">@property (nonatomic, strong) student *stu;</div><div class="line">@property (nonatomic, strong) NSArray&lt;student *&gt; *stuArr;</div><div class="line"></div><div class="line">@end</div><div class="line">--------------------------------------------------------</div><div class="line">#import &quot;person.h&quot;</div><div class="line">@implementation person</div><div class="line">- (id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    person *newClazz = [[self class] allocWithZone:zone];</div><div class="line">    newClazz.name = self.name;</div><div class="line">    newClazz.stu = [self.stu copy];</div><div class="line">    newClazz.stuArr = [self.stuArr mutableCopy];</div><div class="line">    return newClazz;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>然后新建<code>student.h</code>和<code>student.m</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface student : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSString *stuName;</div><div class="line">@property (nonatomic, strong) NSString *stuSchoolName;</div><div class="line"></div><div class="line">@end</div><div class="line">--------------------------------------------------------</div><div class="line">#import &quot;student.h&quot;</div><div class="line"></div><div class="line">@implementation student</div><div class="line"></div><div class="line">- (id)copyWithZone:(NSZone *)zone &#123;</div><div class="line">    student *newClazz = [[self class] allocWithZone:zone];</div><div class="line">    newClazz.stuName = self.stuName;</div><div class="line">    newClazz.stuSchoolName = self.stuSchoolName;</div><div class="line">    return newClazz;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+</li>
+<li><p>在主工程编写测试代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">person *p1 = [[person alloc] init];</div><div class="line">p1.name = @&quot;123&quot;;</div><div class="line">student *stu1 = [[student alloc] init];</div><div class="line">stu1.stuSchoolName = @&quot;qqq&quot;;</div><div class="line">stu1.stuName = @&quot;zzz&quot;;</div><div class="line">p1.stu = stu1;</div><div class="line">p1.stuArr = @[stu1];</div><div class="line"></div><div class="line">NSArray *arr = @[p1];</div><div class="line">NSArray *arrCopy = [arr copy];</div><div class="line">NSArray *arrMuCopy = [arr mutableCopy];</div><div class="line">NSArray *arrInit = [NSArray arrayWithArray:arr];</div><div class="line">NSArray *arrCopyZone = [[NSArray alloc] initWithArray:arr copyItems:YES];</div><div class="line">NSArray *arrCopyZoneNo = [[NSArray alloc] initWithArray:arr copyItems:NO];</div><div class="line">NSArray *arrInitWithArr = [[NSArray alloc] initWithArray:arr];</div><div class="line"></div><div class="line">NSLog(@&quot;original : %p&quot;, arr);</div><div class="line">NSLog(@&quot;%p&quot;, arr[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;copy : %p&quot;, arrCopy);</div><div class="line">NSLog(@&quot;%p&quot;, arrCopy[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;mutableCopy : %p&quot;, arrMuCopy);</div><div class="line">NSLog(@&quot;%p&quot;, arrMuCopy[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;arrInit : %p&quot;, arrInit);</div><div class="line">NSLog(@&quot;%p&quot;, arrInit[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;arrCopyZoneNo : %p&quot;, arrCopyZoneNo);</div><div class="line">NSLog(@&quot;%p&quot;, arrCopyZoneNo[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;arrCopyZone : %p&quot;, arrCopyZone);</div><div class="line">NSLog(@&quot;%p&quot;, arrCopyZone[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;arrCopyZoneSub : %p&quot;, arrCopyZone);</div><div class="line">person *per1 = arr[0];</div><div class="line">person *per = arrCopyZone[0];</div><div class="line">student *stude1 = per1.stuArr[0];</div><div class="line">student *stude = per.stuArr[0];</div><div class="line"></div><div class="line">NSLog(@&quot;stu[original:%p,now: %p]&quot;, per1.stu, per.stu);</div><div class="line">NSLog(@&quot;stuArr[original:%p,now: %p]&quot;, per1.stuArr, per.stuArr);</div><div class="line">NSLog(@&quot;stuArrSub[original:%p,now: %p]&quot;, stude1, stude);</div><div class="line">NSLog(@&quot;================&quot;);</div><div class="line"></div><div class="line">NSLog(@&quot;arrInitWithArr : %p&quot;, arrInitWithArr);</div><div class="line">NSLog(@&quot;%p&quot;, arrInitWithArr[0]);</div><div class="line">NSLog(@&quot;================&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后得出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">2016-07-26 09:48:25.404 MyPageControllerView[2976:43855] original : 0x7ff3eb5172a0</div><div class="line">2016-07-26 09:48:25.405 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.405 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.405 MyPageControllerView[2976:43855] copy : 0x7ff3eb5172a0</div><div class="line">2016-07-26 09:48:25.405 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.405 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] mutableCopy : 0x7ff3eb516570</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] arrInit : 0x7ff3eb5e9620</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] arrCopyZoneNo : 0x7ff3eb51fd40</div><div class="line">2016-07-26 09:48:25.406 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.407 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] arrCopyZone : 0x7ff3eb50a430</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] 0x7ff3eb5ebb40</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] arrCopyZoneSub : 0x7ff3eb50a430</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] stu[original:0x7ff3eb59b620,now: 0x7ff3eb510450]</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] stuArr[original:0x7ff3eb5de620,now: 0x7ff3eb5185e0]</div><div class="line">2016-07-26 09:48:25.420 MyPageControllerView[2976:43855] stuArrSub[original:0x7ff3eb59b620,now: 0x7ff3eb59b620]</div><div class="line">2016-07-26 09:48:25.421 MyPageControllerView[2976:43855] ================</div><div class="line">2016-07-26 09:48:25.421 MyPageControllerView[2976:43855] arrInitWithArr : 0x7ff3eb521470</div><div class="line">2016-07-26 09:48:25.421 MyPageControllerView[2976:43855] 0x7ff3eb5a2dd0</div><div class="line">2016-07-26 09:48:25.421 MyPageControllerView[2976:43855] ================</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如此，得出结论：</p>
+<ol>
+<li>对于不可变数组 NSArray,它的<code>NSArray *arr = @[p1];</code>和<code>NSArray *arrCopy = [arr copy];</code>其实是相等的,包括数组内的元素;</li>
+<li><code>[arr mutableCopy]</code>则深拷贝了数组，对于数组内的元素则是引用;</li>
+<li><code>[[NSArray alloc] initWithArray:arr]</code>和<code>[NSArray arrayWithArray:arr]</code>和<code>[arr mutableCopy]</code>作用一样，深拷贝了数组，引用了数组内的元素;</li>
+<li><code>[[NSArray alloc] initWithArray:arr copyItems:YES]</code>是正确的深拷贝，包括数组内元素的深拷贝;<br><br><br>Tips:<blockquote>
+<p>在数组内的对象需要被拷贝的话,都需要对对象进行 copy 或者 mutableCopy;该数组内的元素<code>person</code>属性<code>stuArr</code>需要<code>mutableCopy</code>，因为<code>stuArr</code> 是 NSArray 不可变数组</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/21/iOS清空NSUserDefaults下的内容/" rel="next" title="iOS清空NSUserDefaults下的内容">
+                <i class="fa fa-chevron-left"></i> iOS清空NSUserDefaults下的内容
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/28/知名APP所用的第三方库大全以及大神整理的第三方库大全/" rel="prev" title="知名APP所用的第三方库大全以及大神整理的第三方库大全">
+                知名APP所用的第三方库大全以及大神整理的第三方库大全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠之爸" />
+          <p class="site-author-name" itemprop="name">楠之爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠之爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
-
- __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
+<meta name="description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+b.js 是否可以直接调用Native的method？不行。
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用弱引用在block中使用self">
-<meta property="og:url" content="http://yoursite.com/2016/08/22/利用弱引用在block中使用self/index.html">
+<meta property="og:title" content="webViewJavascriptBridge使用方法">
+<meta property="og:url" content="http://yoursite.com/2016/07/18/webViewJavascriptBridge使用方法/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
-
- __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
-<meta property="og:updated_time" content="2016-08-26T06:39:06.000Z">
+<meta property="og:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+b.js 是否可以直接调用Native的method？不行。
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
+<meta property="og:updated_time" content="2016-09-18T01:41:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用弱引用在block中使用self">
-<meta name="twitter:description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
-
- __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
+<meta name="twitter:title" content="webViewJavascriptBridge使用方法">
+<meta name="twitter:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
+b.js 是否可以直接调用Native的method？不行。
+所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
 
 
 
@@ -120,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/22/利用弱引用在block中使用self/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/18/webViewJavascriptBridge使用方法/"/>
 
-  <title> 利用弱引用在block中使用self | Blog之HelloWord! </title>
+  <title> webViewJavascriptBridge使用方法 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@
             
             
               
-                利用弱引用在block中使用self
+                webViewJavascriptBridge使用方法
               
             
           </h1>
@@ -260,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-22T09:10:33+08:00" content="2016-08-22">
-              2016-08-22
+            <time itemprop="dateCreated" datetime="2016-07-18T11:59:30+08:00" content="2016-07-18">
+              2016-07-18
             </time>
           </span>
 
@@ -307,17 +307,33 @@
       
 
       
-        <p>在block 使用日益频繁的现在，我们经常会使用<code>__block</code>,<code>__weak</code>。<br>但是每次写</p>
-<blockquote>
-<p> __weak typeof(self)weakself = self;<br>__block NSInteger xx = 0;</p>
-</blockquote>
-<a id="more"></a>
-<p>多麻烦！<br>这里推荐一个宏，你只需要</p>
-<blockquote>
-<p>@weakify (self);<br>@strongify (self);</p>
-</blockquote>
-<p>然后 block 里面可以直接使用 self 了！</p>
-<p>就可以使用了，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#ifndef    weakify</div><div class="line"> #if __has_feature(objc_arc)</div><div class="line"></div><div class="line"> #define weakify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> autoreleasepool&#123;&#125; __weak __typeof__(x) __weak_##x##__ = x; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #else</div><div class="line"></div><div class="line"> #define weakify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> autoreleasepool&#123;&#125; __block __typeof__(x) __block_##x##__ = x; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #endif</div><div class="line"> #endif</div><div class="line"></div><div class="line"> #ifndef    strongify</div><div class="line"> #if __has_feature(objc_arc)</div><div class="line"></div><div class="line"> #define strongify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> try&#123;&#125; @finally&#123;&#125; __typeof__(x) x = __weak_##x##__; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #else</div><div class="line"></div><div class="line"> #define strongify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> try&#123;&#125; @finally&#123;&#125; __typeof__(x) x = __block_##x##__; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #endif</div><div class="line"> #endif</div></pre></td></tr></table></figure></p>
+        <h2 id="首先有两个问题："><a href="#首先有两个问题：" class="headerlink" title="首先有两个问题："></a>首先有两个问题：</h2><p>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
+<p>b.js 是否可以直接调用Native的method？<br><br>不行。</p>
+<p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。<br><a id="more"></a></p>
+<h2 id="原理分析："><a href="#原理分析：" class="headerlink" title="原理分析："></a>原理分析：</h2><p>js不能调用 Native的方法，所以，需要利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的<code>shouldStartLoadWithRequest</code>函数去捕获处理请求，处理完最后，如果js还想获取一些返回参数的话，同样让oc去通过<code>stringByEvaluatingJavaScriptFromString</code>调用刚js传过来的回调js函数就行，顺道把参数也一起传了。</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
+<li><p>增加下面的代码到你的 Podfile，然后运行pod install 进行安装</p>
+<p><code>pod &#39;WebViewJavascriptBridge&#39;, &#39;~&gt; 5.0&#39;</code></p>
+</li>
+<li><p>导入头文件，并增加属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &quot;WebViewJavascriptBridge.h&quot;</div><div class="line">...</div><div class="line">@property WebViewJavascriptBridge* bridge;</div></pre></td></tr></table></figure>
+</li>
+<li><p>实例化<code>WebViewJavascriptBridge</code>，并绑定到你的 webview 上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];</div></pre></td></tr></table></figure>
+</li>
+<li><p>与前端的 HTML 开发约定一下规则，在HTML 写 JS 的时候初始化一下下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function setupWebViewJavascriptBridge(callback) &#123;</div><div class="line">    if (window.WebViewJavascriptBridge) &#123; return callback(WebViewJavascriptBridge); &#125;</div><div class="line">    if (window.WVJBCallbacks) &#123; return window.WVJBCallbacks.push(callback); &#125;</div><div class="line">    window.WVJBCallbacks = [callback];</div><div class="line">    var WVJBIframe = document.createElement(&apos;iframe&apos;);</div><div class="line">    WVJBIframe.style.display = &apos;none&apos;;</div><div class="line">    WVJBIframe.src = &apos;wvjbscheme://__BRIDGE_LOADED__&apos;;</div><div class="line">    document.documentElement.appendChild(WVJBIframe);</div><div class="line">    setTimeout(function() &#123; document.documentElement.removeChild(WVJBIframe) &#125;, 0)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>最后，就可以相互调用了，只需要约定好相互的方法名，就可以很简单的调用了</p>
+</li>
+</ol>
+<ul>
+<li><p>这是在 JS 里面写的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">setupWebViewJavascriptBridge(function(bridge) &#123;</div><div class="line">    //注册 JS 的方法给原生调用，并且能有回调返回给原生</div><div class="line">    bridge.registerHandler(&apos;JS Echo&apos;, function(data, responseCallback) &#123;</div><div class="line">        console.log(&quot;JS Echo called with:&quot;, data)</div><div class="line">        responseCallback(data)</div><div class="line">    &#125;)</div><div class="line">    //调用原生的已经注册好的方法，能传值，也能接收返回值</div><div class="line">    bridge.callHandler(&apos;ObjC Echo&apos;, &#123;&apos;key&apos;:&apos;value&apos;&#125;, function responseCallback(responseData) &#123;</div><div class="line">        console.log(&quot;JS received response:&quot;, responseData)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>这是在原生界面写的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//注册原生界面的方法</div><div class="line">[self.bridge registerHandler:@&quot;ObjC Echo&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</div><div class="line">    NSLog(@&quot;ObjC Echo called with: %@&quot;, data);</div><div class="line">    responseCallback(data);</div><div class="line">&#125;];</div><div class="line">//调用 JS 注册好的方法</div><div class="line">[self.bridge callHandler:@&quot;JS Echo&quot; responseCallback:^(id responseData) &#123;</div><div class="line">    NSLog(@&quot;ObjC received response: %@&quot;, responseData);</div><div class="line">&#125;];</div></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -343,16 +359,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/18/webViewJavascriptBridge使用方法/" rel="next" title="webViewJavascriptBridge使用方法">
-                <i class="fa fa-chevron-left"></i> webViewJavascriptBridge使用方法
+              <a href="/2016/07/15/自动缩1倍图脚本/" rel="next" title="自动缩1倍图脚本">
+                <i class="fa fa-chevron-left"></i> 自动缩1倍图脚本
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/22/使用Xcode查找项目中的中文字符串/" rel="prev" title="使用Xcode查找项目中的中文字符串">
-                使用Xcode查找项目中的中文字符串 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/22/利用弱引用在block中使用self/" rel="prev" title="利用弱引用在block中使用self">
+                利用弱引用在block中使用self <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -467,7 +483,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先有两个问题："><span class="nav-number">1.</span> <span class="nav-text">首先有两个问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析："><span class="nav-number">2.</span> <span class="nav-text">原理分析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤"><span class="nav-number">3.</span> <span class="nav-text">使用步骤</span></a></li></ol></div>
             
           </div>
         </section>

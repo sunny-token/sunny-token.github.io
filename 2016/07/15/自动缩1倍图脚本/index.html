@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
-b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
+<meta name="description" content="依赖环境Ruby脚本，依赖于ImageMagick库
+安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
+然后安装ImageM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webViewJavascriptBridge使用方法">
-<meta property="og:url" content="http://yoursite.com/2016/08/18/webViewJavascriptBridge使用方法/index.html">
+<meta property="og:title" content="自动缩1倍图脚本">
+<meta property="og:url" content="http://yoursite.com/2016/07/15/自动缩1倍图脚本/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
-b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
-<meta property="og:updated_time" content="2016-08-26T06:55:53.000Z">
+<meta property="og:description" content="依赖环境Ruby脚本，依赖于ImageMagick库
+安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
+然后安装ImageM">
+<meta property="og:updated_time" content="2016-09-18T01:41:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="webViewJavascriptBridge使用方法">
-<meta name="twitter:description" content="首先有两个问题：a.Native中的UIWebView是否可以直接调用js method（方法）？ 可以。只需要调用[webview stringByEvaluatingJavaScriptFromString:@&amp;quot;&amp;quot;];就可以了
-b.js 是否可以直接调用Native的method？不行。
-所以，这里介绍一下webViewJavascriptBridge，这个封装的比较好的一">
+<meta name="twitter:title" content="自动缩1倍图脚本">
+<meta name="twitter:description" content="依赖环境Ruby脚本，依赖于ImageMagick库
+安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
+然后安装ImageM">
 
 
 
@@ -120,9 +120,9 @@ b.js 是否可以直接调用Native的method？不行。
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/18/webViewJavascriptBridge使用方法/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/15/自动缩1倍图脚本/"/>
 
-  <title> webViewJavascriptBridge使用方法 | Blog之HelloWord! </title>
+  <title> 自动缩1倍图脚本 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@ b.js 是否可以直接调用Native的method？不行。
             
             
               
-                webViewJavascriptBridge使用方法
+                自动缩1倍图脚本
               
             
           </h1>
@@ -260,8 +260,8 @@ b.js 是否可以直接调用Native的method？不行。
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T11:59:30+08:00" content="2016-08-18">
-              2016-08-18
+            <time itemprop="dateCreated" datetime="2016-07-15T15:06:02+08:00" content="2016-07-15">
+              2016-07-15
             </time>
           </span>
 
@@ -274,7 +274,19 @@ b.js 是否可以直接调用Native的method？不行。
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
+                  <a href="/categories/脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">脚本</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/脚本/ios/" itemprop="url" rel="index">
                     <span itemprop="name">ios</span>
                   </a>
                 </span>
@@ -307,33 +319,16 @@ b.js 是否可以直接调用Native的method？不行。
       
 
       
-        <h2 id="首先有两个问题："><a href="#首先有两个问题：" class="headerlink" title="首先有两个问题："></a>首先有两个问题：</h2><p>a.Native中的UIWebView是否可以直接调用js method（方法）？ <br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
-<p>b.js 是否可以直接调用Native的method？<br><br>不行。</p>
-<p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。<br><a id="more"></a></p>
-<h2 id="原理分析："><a href="#原理分析：" class="headerlink" title="原理分析："></a>原理分析：</h2><p>js不能调用 Native的方法，所以，需要利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的<code>shouldStartLoadWithRequest</code>函数去捕获处理请求，处理完最后，如果js还想获取一些返回参数的话，同样让oc去通过<code>stringByEvaluatingJavaScriptFromString</code>调用刚js传过来的回调js函数就行，顺道把参数也一起传了。</p>
-<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
-<li><p>增加下面的代码到你的 Podfile，然后运行pod install 进行安装</p>
-<p><code>pod &#39;WebViewJavascriptBridge&#39;, &#39;~&gt; 5.0&#39;</code></p>
-</li>
-<li><p>导入头文件，并增加属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &quot;WebViewJavascriptBridge.h&quot;</div><div class="line">...</div><div class="line">@property WebViewJavascriptBridge* bridge;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实例化<code>WebViewJavascriptBridge</code>，并绑定到你的 webview 上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];</div></pre></td></tr></table></figure>
-</li>
-<li><p>与前端的 HTML 开发约定一下规则，在HTML 写 JS 的时候初始化一下下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function setupWebViewJavascriptBridge(callback) &#123;</div><div class="line">    if (window.WebViewJavascriptBridge) &#123; return callback(WebViewJavascriptBridge); &#125;</div><div class="line">    if (window.WVJBCallbacks) &#123; return window.WVJBCallbacks.push(callback); &#125;</div><div class="line">    window.WVJBCallbacks = [callback];</div><div class="line">    var WVJBIframe = document.createElement(&apos;iframe&apos;);</div><div class="line">    WVJBIframe.style.display = &apos;none&apos;;</div><div class="line">    WVJBIframe.src = &apos;wvjbscheme://__BRIDGE_LOADED__&apos;;</div><div class="line">    document.documentElement.appendChild(WVJBIframe);</div><div class="line">    setTimeout(function() &#123; document.documentElement.removeChild(WVJBIframe) &#125;, 0)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>最后，就可以相互调用了，只需要约定好相互的方法名，就可以很简单的调用了</p>
-</li>
-</ol>
-<ul>
-<li><p>这是在 JS 里面写的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">setupWebViewJavascriptBridge(function(bridge) &#123;</div><div class="line">    //注册 JS 的方法给原生调用，并且能有回调返回给原生</div><div class="line">    bridge.registerHandler(&apos;JS Echo&apos;, function(data, responseCallback) &#123;</div><div class="line">        console.log(&quot;JS Echo called with:&quot;, data)</div><div class="line">        responseCallback(data)</div><div class="line">    &#125;)</div><div class="line">    //调用原生的已经注册好的方法，能传值，也能接收返回值</div><div class="line">    bridge.callHandler(&apos;ObjC Echo&apos;, &#123;&apos;key&apos;:&apos;value&apos;&#125;, function responseCallback(responseData) &#123;</div><div class="line">        console.log(&quot;JS received response:&quot;, responseData)</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>这是在原生界面写的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//注册原生界面的方法</div><div class="line">[self.bridge registerHandler:@&quot;ObjC Echo&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</div><div class="line">    NSLog(@&quot;ObjC Echo called with: %@&quot;, data);</div><div class="line">    responseCallback(data);</div><div class="line">&#125;];</div><div class="line">//调用 JS 注册好的方法</div><div class="line">[self.bridge callHandler:@&quot;JS Echo&quot; responseCallback:^(id responseData) &#123;</div><div class="line">    NSLog(@&quot;ObjC received response: %@&quot;, responseData);</div><div class="line">&#125;];</div></pre></td></tr></table></figure></li>
-</ul>
+        <h2 id="依赖环境"><a href="#依赖环境" class="headerlink" title="依赖环境"></a>依赖环境</h2><p>Ruby脚本，依赖于ImageMagick库</p>
+<h2 id="安装ImageMagick"><a href="#安装ImageMagick" class="headerlink" title="安装ImageMagick"></a>安装ImageMagick</h2><p>这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</div></pre></td></tr></table></figure></p>
+<p>然后安装ImageMagick<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install imagemagick</div></pre></td></tr></table></figure></p>
+<h2 id="安装mini-magick"><a href="#安装mini-magick" class="headerlink" title="安装mini_magick"></a>安装mini_magick</h2><p>这是一个ruby gem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install mini_magick</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>如果安装太慢，可以考虑换一下gem源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem sources -r https://rubygems.org/</div><div class="line">gem sources -a https://ruby.taobao.org/</div></pre></td></tr></table></figure></p>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>脚本内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">require &apos;mini_magick&apos;</div><div class="line">dir = &apos;2倍&apos;</div><div class="line">Dir.glob(&quot;#&#123;dir&#125;/**/*.png&quot;).each do |f|</div><div class="line">    ext = File.extname(f)</div><div class="line">     </div><div class="line">    newFilename = &quot;#&#123;File.dirname(f)&#125;/#&#123;File.basename(f, ext)&#125;@2x#&#123;ext&#125;&quot;</div><div class="line">    File.rename(f, newFilename)</div><div class="line"> </div><div class="line">    puts newFilename</div><div class="line">    puts f</div><div class="line"> </div><div class="line">    image = MiniMagick::Image.open(newFilename)</div><div class="line">    ds = image.dimensions</div><div class="line">    image.resize &quot;#&#123;ds[0]/2&#125;x#&#123;ds[1]/2&#125;&quot;</div><div class="line">    image.write f</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>需要调整的是第二行的变量，指定目录的名字</p>
+<p>调整完成后，将脚本保存为resize.rb，放到与指定目录平级的地方，然后执行 ruby resize.rb 即可</p>
+<p>这个脚本会将当前目录下所有的png文件先全部重命名为@2x.png，然后生成1倍图，并使用原图的名字</p>
 
       
     </div>
@@ -359,16 +354,16 @@ b.js 是否可以直接调用Native的method？不行。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/15/自动缩1倍图脚本/" rel="next" title="自动缩1倍图脚本">
-                <i class="fa fa-chevron-left"></i> 自动缩1倍图脚本
+              <a href="/2016/06/10/MLeaksFinder：精准 iOS 内存泄露检测工具/" rel="next" title="MLeaksFinder：精准 iOS 内存泄露检测工具">
+                <i class="fa fa-chevron-left"></i> MLeaksFinder：精准 iOS 内存泄露检测工具
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/22/利用弱引用在block中使用self/" rel="prev" title="利用弱引用在block中使用self">
-                利用弱引用在block中使用self <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/18/webViewJavascriptBridge使用方法/" rel="prev" title="webViewJavascriptBridge使用方法">
+                webViewJavascriptBridge使用方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -483,7 +478,7 @@ b.js 是否可以直接调用Native的method？不行。
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先有两个问题："><span class="nav-number">1.</span> <span class="nav-text">首先有两个问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析："><span class="nav-number">2.</span> <span class="nav-text">原理分析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤"><span class="nav-number">3.</span> <span class="nav-text">使用步骤</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖环境"><span class="nav-number">1.</span> <span class="nav-text">依赖环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ImageMagick"><span class="nav-number">2.</span> <span class="nav-text">安装ImageMagick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装mini-magick"><span class="nav-number">3.</span> <span class="nav-text">安装mini_magick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本"><span class="nav-number">4.</span> <span class="nav-text">脚本</span></a></li></ol></div>
             
           </div>
         </section>

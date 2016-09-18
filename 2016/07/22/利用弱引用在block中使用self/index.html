@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="依赖环境Ruby脚本，依赖于ImageMagick库
-安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装ImageM">
+<meta name="description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
+
+ __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自动缩1倍图脚本">
-<meta property="og:url" content="http://yoursite.com/2016/08/15/自动缩1倍图脚本/index.html">
+<meta property="og:title" content="利用弱引用在block中使用self">
+<meta property="og:url" content="http://yoursite.com/2016/07/22/利用弱引用在block中使用self/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="依赖环境Ruby脚本，依赖于ImageMagick库
-安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装ImageM">
-<meta property="og:updated_time" content="2016-08-26T06:31:01.000Z">
+<meta property="og:description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
+
+ __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
+<meta property="og:updated_time" content="2016-09-18T01:41:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自动缩1倍图脚本">
-<meta name="twitter:description" content="依赖环境Ruby脚本，依赖于ImageMagick库
-安装ImageMagick这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器1ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;quot;
-然后安装ImageM">
+<meta name="twitter:title" content="利用弱引用在block中使用self">
+<meta name="twitter:description" content="在block 使用日益频繁的现在，我们经常会使用__block,__weak。但是每次写
+
+ __weak typeof(self)weakself = self;__block NSInteger xx = 0;">
 
 
 
@@ -120,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/15/自动缩1倍图脚本/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/22/利用弱引用在block中使用self/"/>
 
-  <title> 自动缩1倍图脚本 | Blog之HelloWord! </title>
+  <title> 利用弱引用在block中使用self | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@
             
             
               
-                自动缩1倍图脚本
+                利用弱引用在block中使用self
               
             
           </h1>
@@ -260,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T15:06:02+08:00" content="2016-08-15">
-              2016-08-15
+            <time itemprop="dateCreated" datetime="2016-07-22T09:10:33+08:00" content="2016-07-22">
+              2016-07-22
             </time>
           </span>
 
@@ -274,19 +274,7 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/脚本/" itemprop="url" rel="index">
-                    <span itemprop="name">脚本</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/脚本/ios/" itemprop="url" rel="index">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
                     <span itemprop="name">ios</span>
                   </a>
                 </span>
@@ -319,16 +307,17 @@
       
 
       
-        <h2 id="依赖环境"><a href="#依赖环境" class="headerlink" title="依赖环境"></a>依赖环境</h2><p>Ruby脚本，依赖于ImageMagick库</p>
-<h2 id="安装ImageMagick"><a href="#安装ImageMagick" class="headerlink" title="安装ImageMagick"></a>安装ImageMagick</h2><p>这步最麻烦因为这库安装就是麻烦，推荐使用homebrew安装，所以先安装homebrew，这是Mac上使用最广泛的一个包管理器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</div></pre></td></tr></table></figure></p>
-<p>然后安装ImageMagick<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install imagemagick</div></pre></td></tr></table></figure></p>
-<h2 id="安装mini-magick"><a href="#安装mini-magick" class="headerlink" title="安装mini_magick"></a>安装mini_magick</h2><p>这是一个ruby gem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install mini_magick</div></pre></td></tr></table></figure></p>
+        <p>在block 使用日益频繁的现在，我们经常会使用<code>__block</code>,<code>__weak</code>。<br>但是每次写</p>
+<blockquote>
+<p> __weak typeof(self)weakself = self;<br>__block NSInteger xx = 0;</p>
+</blockquote>
 <a id="more"></a>
-<p>如果安装太慢，可以考虑换一下gem源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem sources -r https://rubygems.org/</div><div class="line">gem sources -a https://ruby.taobao.org/</div></pre></td></tr></table></figure></p>
-<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>脚本内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">require &apos;mini_magick&apos;</div><div class="line">dir = &apos;2倍&apos;</div><div class="line">Dir.glob(&quot;#&#123;dir&#125;/**/*.png&quot;).each do |f|</div><div class="line">    ext = File.extname(f)</div><div class="line">     </div><div class="line">    newFilename = &quot;#&#123;File.dirname(f)&#125;/#&#123;File.basename(f, ext)&#125;@2x#&#123;ext&#125;&quot;</div><div class="line">    File.rename(f, newFilename)</div><div class="line"> </div><div class="line">    puts newFilename</div><div class="line">    puts f</div><div class="line"> </div><div class="line">    image = MiniMagick::Image.open(newFilename)</div><div class="line">    ds = image.dimensions</div><div class="line">    image.resize &quot;#&#123;ds[0]/2&#125;x#&#123;ds[1]/2&#125;&quot;</div><div class="line">    image.write f</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<p>需要调整的是第二行的变量，指定目录的名字</p>
-<p>调整完成后，将脚本保存为resize.rb，放到与指定目录平级的地方，然后执行 ruby resize.rb 即可</p>
-<p>这个脚本会将当前目录下所有的png文件先全部重命名为@2x.png，然后生成1倍图，并使用原图的名字</p>
+<p>多麻烦！<br>这里推荐一个宏，你只需要</p>
+<blockquote>
+<p>@weakify (self);<br>@strongify (self);</p>
+</blockquote>
+<p>然后 block 里面可以直接使用 self 了！</p>
+<p>就可以使用了，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#ifndef    weakify</div><div class="line"> #if __has_feature(objc_arc)</div><div class="line"></div><div class="line"> #define weakify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> autoreleasepool&#123;&#125; __weak __typeof__(x) __weak_##x##__ = x; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #else</div><div class="line"></div><div class="line"> #define weakify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> autoreleasepool&#123;&#125; __block __typeof__(x) __block_##x##__ = x; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #endif</div><div class="line"> #endif</div><div class="line"></div><div class="line"> #ifndef    strongify</div><div class="line"> #if __has_feature(objc_arc)</div><div class="line"></div><div class="line"> #define strongify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> try&#123;&#125; @finally&#123;&#125; __typeof__(x) x = __weak_##x##__; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #else</div><div class="line"></div><div class="line"> #define strongify( x ) \</div><div class="line"> _Pragma(&quot;clang diagnostic push&quot;) \</div><div class="line"> _Pragma(&quot;clang diagnostic ignored \&quot;-Wshadow\&quot;&quot;) \</div><div class="line"> try&#123;&#125; @finally&#123;&#125; __typeof__(x) x = __block_##x##__; \</div><div class="line"> _Pragma(&quot;clang diagnostic pop&quot;)</div><div class="line"></div><div class="line"> #endif</div><div class="line"> #endif</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -354,16 +343,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/10/MLeaksFinder：精准 iOS 内存泄露检测工具/" rel="next" title="MLeaksFinder：精准 iOS 内存泄露检测工具">
-                <i class="fa fa-chevron-left"></i> MLeaksFinder：精准 iOS 内存泄露检测工具
+              <a href="/2016/07/18/webViewJavascriptBridge使用方法/" rel="next" title="webViewJavascriptBridge使用方法">
+                <i class="fa fa-chevron-left"></i> webViewJavascriptBridge使用方法
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/18/webViewJavascriptBridge使用方法/" rel="prev" title="webViewJavascriptBridge使用方法">
-                webViewJavascriptBridge使用方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/22/使用Xcode查找项目中的中文字符串/" rel="prev" title="使用Xcode查找项目中的中文字符串">
+                使用Xcode查找项目中的中文字符串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -478,7 +467,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖环境"><span class="nav-number">1.</span> <span class="nav-text">依赖环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ImageMagick"><span class="nav-number">2.</span> <span class="nav-text">安装ImageMagick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装mini-magick"><span class="nav-number">3.</span> <span class="nav-text">安装mini_magick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本"><span class="nav-number">4.</span> <span class="nav-text">脚本</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

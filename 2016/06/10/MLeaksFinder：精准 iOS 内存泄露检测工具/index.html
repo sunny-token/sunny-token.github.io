@@ -98,7 +98,7 @@ Leaks先看看 Leaks，从苹果的开发者文档里可以看到，一个 app �
 
 
 Leaked memory: Memory unreferenced by your application th">
-<meta property="og:updated_time" content="2016-09-19T05:15:24.000Z">
+<meta property="og:updated_time" content="2016-09-26T08:29:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MLeaksFinder：精准 iOS 内存泄露检测工具">
 <meta name="twitter:description" content="背景平常我们都会用 Instrument 的 Leaks / Allocations 或其他一些开源库进行内存泄露的排查，但它们都存在各种问题和不便，我们逐个来看这些工具的使用和存在的问题。
@@ -337,7 +337,7 @@ Leaked memory: Memory unreferenced by your application th">
 <p>HeapInspector-for-iOS 可以说是 Allocations 的改进。它通过 hook 掉 alloc，dealloc，retain，release 等方法，来记录对象的生命周期。具体的检测内存泄露的方法和原理，与 Instrument 的 Allocations 一致。然而它跟 Allocations 一样，存在的问题是，你需要一个个场景去重复的操作，还有检测不及时。</p>
 <p>MSLeakHunter 就简单得多，它只检测 UIViewController 和 UIView，通过 hook 掉 UIViewController 的 <code>-viewDidDisappear:</code>方法，并认为 <code>-viewDidDisappear:</code> 后，UIViewController 将很快被释放，如果 UIViewController 没有被释放，则打个建议日志。这种做法其实不是很好，<code>-viewDidDisappear:</code> 被调用可能是因为又 push 进来一个新的 ViewController，把当前的 ViewController 挡住了，所以可能有很多错误的建议，需要结合你实际的操作去具体地分析日志。</p>
 <h2 id="MLeaksFinder"><a href="#MLeaksFinder" class="headerlink" title="MLeaksFinder"></a>MLeaksFinder</h2><p><a href="https://github.com/Zepo/MLeaksFinder" target="_blank" rel="external">MLeaksFinder</a> 提供了内存泄露检测更好的解决方案。只需要引入 MLeaksFinder，就可以自动在 App 运行过程检测到内存泄露的对象并立即提醒，无需打开额外的工具，也无需为了检测内存泄露而一个个场景去重复地操作。MLeaksFinder 目前能自动检测 UIViewController 和 UIView 对象的内存泄露，而且也可以扩展以检测其它类型的对象。</p>
-<p>MLeaksFinder 的使用很简单，参照 <a href="https://github.com/Zepo/MLeaksFinder，基本上就是把" target="_blank" rel="external">https://github.com/Zepo/MLeaksFinder，基本上就是把</a> MLeaksFinder 目录下的文件添加到你的项目中，就可以在运行时（debug 模式下）帮助你检测项目里的内存泄露了，无需修改任何业务逻辑代码，而且只在 debug 下开启，完全不影响你的 release 包。</p>
+<p>MLeaksFinder 的使用很简单，参照 <a href="https://github.com/Zepo/MLeaksFinder,基本上就是把" target="_blank" rel="external">https://github.com/Zepo/MLeaksFinder,基本上就是把</a> MLeaksFinder 目录下的文件添加到你的项目中，就可以在运行时（debug 模式下）帮助你检测项目里的内存泄露了，无需修改任何业务逻辑代码，而且只在 debug 下开启，完全不影响你的 release 包。</p>
 <p>当发生内存泄露时，MLeaksFinder 会中断言，并准确的告诉你哪个对象泄露了。这里设计为中断言而不是打日志让程序继续跑，是因为很多人不会去看日志，断言则能强制开发者注意到并去修改，而不是犯拖延症。</p>
 <p>中断言时，控制台会有如下提示，View-ViewController stack 从上往下看，该 stack 告诉你，MyTableViewController 的 UITableView 的 subview UITableViewWrapperView 的 subview MyTableViewCell 没被释放。而且，这里我们可以肯定的是 MyTableViewController，UITableView，UITableViewWrapperView 这三个已经成功释放了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">*** Terminating app due to uncaught exception &apos;NSInternalInconsistencyException&apos;, reason: &apos;Possibly Memory Leak.</div><div class="line">In case that MyTableViewCell should not be dealloced, override -willDealloc in MyTableViewCell by returning NO.</div><div class="line">View-ViewController stack: (</div><div class="line">    MyTableViewController,</div><div class="line">    UITableView,</div><div class="line">    UITableViewWrapperView,</div><div class="line">    MyTableViewCell</div><div class="line">)&apos;</div></pre></td></tr></table></figure></p>
 <p>从 MLeaksFinder 的使用方法可以看出，MLeaksFinder 具备以下优点：</p>

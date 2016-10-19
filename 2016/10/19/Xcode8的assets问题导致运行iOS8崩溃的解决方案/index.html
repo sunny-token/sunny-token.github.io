@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="时间戳 -&amp;gt; 需要展示的日期1234567NSString *uploadTime =@&amp;quot;1466738834000&amp;quot;;//时间戳      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.      NSString *formatter =">
+<meta name="description" content="最近公司升级 Xcode8 和 ios10，遇到各种各样的问题，这边讲述一下这个顽固的 bug。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="时间戳与时间的相互转换">
-<meta property="og:url" content="http://yoursite.com/2015/08/15/时间戳与时间的相互转换/index.html">
+<meta property="og:title" content="Xcode8的assets问题导致运行iOS8崩溃的解决方案">
+<meta property="og:url" content="http://yoursite.com/2016/10/19/Xcode8的assets问题导致运行iOS8崩溃的解决方案/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="时间戳 -&amp;gt; 需要展示的日期1234567NSString *uploadTime =@&amp;quot;1466738834000&amp;quot;;//时间戳      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.      NSString *formatter =">
-<meta property="og:updated_time" content="2016-09-19T03:55:27.000Z">
+<meta property="og:description" content="最近公司升级 Xcode8 和 ios10，遇到各种各样的问题，这边讲述一下这个顽固的 bug。">
+<meta property="og:updated_time" content="2016-10-19T02:30:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="时间戳与时间的相互转换">
-<meta name="twitter:description" content="时间戳 -&amp;gt; 需要展示的日期1234567NSString *uploadTime =@&amp;quot;1466738834000&amp;quot;;//时间戳      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.      NSString *formatter =">
+<meta name="twitter:title" content="Xcode8的assets问题导致运行iOS8崩溃的解决方案">
+<meta name="twitter:description" content="最近公司升级 Xcode8 和 ios10，遇到各种各样的问题，这边讲述一下这个顽固的 bug。">
 
 
 
@@ -114,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/08/15/时间戳与时间的相互转换/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/19/Xcode8的assets问题导致运行iOS8崩溃的解决方案/"/>
 
-  <title> 时间戳与时间的相互转换 | Blog之HelloWord! </title>
+  <title> Xcode8的assets问题导致运行iOS8崩溃的解决方案 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -242,7 +242,7 @@
             
             
               
-                时间戳与时间的相互转换
+                Xcode8的assets问题导致运行iOS8崩溃的解决方案
               
             
           </h1>
@@ -254,8 +254,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-15T09:10:42+08:00" content="2015-08-15">
-              2015-08-15
+            <time itemprop="dateCreated" datetime="2016-10-19T10:17:06+08:00" content="2016-10-19">
+              2016-10-19
             </time>
           </span>
 
@@ -301,14 +301,22 @@
       
 
       
-        <p><br></p>
-<h2 id="时间戳-gt-需要展示的日期"><a href="#时间戳-gt-需要展示的日期" class="headerlink" title="时间戳 -&gt; 需要展示的日期"></a>时间戳 -&gt; 需要展示的日期</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *uploadTime =@&quot;1466738834000&quot;;//时间戳</div><div class="line">      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.</div><div class="line">      NSString *formatter = @&quot;yyyy-MM-dd eeee HH:mm&quot;;</div><div class="line">      NSDate *publishDate = [NSDate dateWithTimeIntervalSince1970:timestamp];//转换NSDate</div><div class="line">      NSString *day = [publishDate formattedDateWithFormat:formatter];//此方法是 DateTools 里面的方法     </div><div class="line">      NSLog(@&quot;%@&quot;, day);                         </div><div class="line">      //day: 2016-07-15 星期五 09:24:25</div></pre></td></tr></table></figure>
-<p>DateTools 是一个很好用的处理时间日期的库。<br>下载 <a href="http://www.ios122.com/tag/datetools/" target="_blank" rel="external">DateTools</a></p>
-<blockquote>
-<p>也可以使用cocoapods下载，pod ‘DateTools’, ‘~&gt; 1.7.0’</p>
-</blockquote>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><br></p>
-<h2 id="获取出来的NSDate-gt-时间戳"><a href="#获取出来的NSDate-gt-时间戳" class="headerlink" title="获取出来的NSDate -&gt; 时间戳"></a>获取出来的NSDate -&gt; 时间戳</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSString *timeSp = [NSString stringWithFormat:@&quot;%ld&quot;, (long)([date timeIntervalSince1970]*1000)];</div><div class="line">NSLog(@&quot;%@&quot;, timeSp);</div><div class="line">//timeSp:1425365238000</div></pre></td></tr></table></figure>
+        <p>最近公司升级 Xcode8 和 ios10，遇到各种各样的问题，这边讲述一下这个顽固的 bug。</p>
+<a id="more"></a>
+<p>转载: <a href="http://www.tuicool.com/articles/meiMZze" target="_blank" rel="external">Xcode8的assets问题导致运行iOS8崩溃的解决方案</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你刚刚升级了Xcode8，而你的项目的Deployment Target是iOS 9.3以下，运行iOS8的时候过了几十秒后crash到main函数，出现EXC_BAD_ACCESS，或者崩溃到imageNamed:，或者每次编译运行随机崩溃到某个地方。那么恭喜你，你读完这个文章你可能就解决了。</p>
+<h2 id="崩溃原因"><a href="#崩溃原因" class="headerlink" title="崩溃原因"></a>崩溃原因</h2><p>在Xcode8中，如果你的图片资源文件里有16位图或者图片显示模式为P3，并且Deployment Target是iOS9.3以下的就会出现这个问题。<br>(话说我公司的项目里面就出现了一个小按钮，导致了这次崩溃，不知道设计师是怎么弄出来的这个特殊图片…）如果你的App需要支持wide color functionality，那你就必须设置Deployment Target为iOS9.3以上。如果你的APP不需要支持wide color functionality并且你希望兼容iOS老版本，那么你需要将所有16-bit or P3 assets的图片转换为8-bit sRGB assets</p>
+<h2 id="定位到问题图片"><a href="#定位到问题图片" class="headerlink" title="定位到问题图片"></a>定位到问题图片</h2><ul>
+<li>打一个ipa包，解压你的应用的ipa包，进入到你应用的Playload文件夹。</li>
+<li>用find命令定位到Assets.car文件<br><code>find . -name &#39;Assets.car&#39;</code></li>
+<li>使用 assetutil 命令导出图片的信息存储到Assets.json文件中<br><code>sudo xcrun --sdk iphoneos assetutil --info /path/to/a/Assets.car &gt; /tmp/Assets.json</code></li>
+<li>打开刚才生成的Assets.json文件，查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″的内容。这个对应的Name就是出现问题的图片了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;SizeClass Vertical&quot; : &quot;universal&quot;,</div><div class="line">    &quot;Graphics&quot; : &quot;GLES2,0&quot;,</div><div class="line">    &quot;Name&quot; : &quot;ianisme.com&quot;,</div><div class="line">    &quot;Scale&quot; : 2,</div><div class="line">    &quot;Idiom&quot; : &quot;universal&quot;,</div><div class="line">    &quot;Memory&quot; : &quot;512MB&quot;,</div><div class="line">    &quot;LayoutDirection&quot; : &quot;0 - Horizontal&quot;,</div><div class="line">    &quot;DisplayGamut&quot; : &quot;P3&quot;,</div><div class="line">    &quot;Encoding&quot; : &quot;ARGB-16&quot;,</div><div class="line">    &quot;SizeClass Horizontal&quot; : &quot;universal&quot;,</div><div class="line">    &quot;Image Type&quot; : &quot;kCoreThemeOnePartScale&quot;,</div><div class="line">    &quot;AssetType&quot; : &quot;Image&quot;,</div><div class="line">    &quot;Subtype&quot; : 0,</div><div class="line">    &quot;EdgeInsets&quot; : &quot;top:0 left:0 bottom:0 right:0&quot;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="转换图片为8-bit-sRGB-assets格式"><a href="#转换图片为8-bit-sRGB-assets格式" class="headerlink" title="转换图片为8-bit sRGB assets格式"></a>转换图片为8-bit sRGB assets格式</h2><p>我们找到这个图片，然后CMD+i 查看这个图片的信息，我们发现我这个出问题的文件的颜色描述文件有问题，和别的图片文件不一样。<br>出问题的图片和其他图片的区别在：颜色空间不一致或者颜色描述文件不一致。</p>
+<p>1.方法一（单个处理问题图片）：<br>下面我们使用ColorSync实用工具将这个描述文件修改下<br>指派它的描述文件为sRGB IEC61966-2.1，保存。<br>再次编译运行我们的APP，发现问题解决了！<br>2.方法二（暴力处理所有图片）：<br>这里我们使用bash script直接处理所有图片为正确格式，这样我们就不用去定位是哪个图片的问题了，或许更方便一些。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">DIRECTORY=$1</div><div class="line">echo &quot;------------------------------&quot;</div><div class="line">echo &quot;Passed Resources with xcassets folder argument is &lt;$DIRECTORY&gt;&quot;</div><div class="line">echo &quot;------------------------------&quot;</div><div class="line">echo &quot;Processing asset:&quot;</div><div class="line">XSAASSETSD=&quot;$(find &quot;$DIRECTORY&quot; -name &apos;*.xcassets&apos;)&quot;</div><div class="line">for xcasset in $XSAASSETSD</div><div class="line">do</div><div class="line">    echo &quot;---$xcasset&quot;</div><div class="line">    IMAGESETS=&quot;$(find &quot;$xcasset&quot; -name &apos;*.imageset&apos;)&quot;</div><div class="line">    for imageset in $IMAGESETS</div><div class="line">    do</div><div class="line">        echo &quot;------$imageset&quot;</div><div class="line">        FILES=&quot;$(find &quot;$imageset&quot; -name &apos;*.png&apos;)&quot;</div><div class="line">        for file in $FILES </div><div class="line">        do</div><div class="line">            echo &quot;---------$file&quot;</div><div class="line">            sips -m &quot;/System/Library/Colorsync/Profiles/sRGB Profile.icc&quot; $file --out $file</div><div class="line">        done</div><div class="line">    done</div><div class="line">done</div><div class="line">echo &quot;------------------------------&quot;</div><div class="line">echo &quot;script successfully finished&quot;</div><div class="line">echo &quot;------------------------------&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>出现这个问题真的很蛋疼，但是最后终于解决了。每一次Apple编译器的升级都会伴随着大大小小的问题，只要我们怀着一颗不抛弃不放弃的决心，最后一定可以攻克难题。</p>
+
       
     </div>
 
@@ -333,17 +341,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/14/NSStringCompareOptions/" rel="next" title="NSStringCompareOptions">
-                <i class="fa fa-chevron-left"></i> NSStringCompareOptions
+              <a href="/2016/10/14/近日随笔/" rel="next" title="近日随笔">
+                <i class="fa fa-chevron-left"></i> 近日随笔
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/21/iOS清空NSUserDefaults下的内容/" rel="prev" title="iOS清空NSUserDefaults下的内容">
-                iOS清空NSUserDefaults下的内容 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,7 +452,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间戳-gt-需要展示的日期"><span class="nav-number">1.</span> <span class="nav-text">时间戳 -> 需要展示的日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取出来的NSDate-gt-时间戳"><span class="nav-number">3.</span> <span class="nav-text">获取出来的NSDate -> 时间戳</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#崩溃原因"><span class="nav-number">2.</span> <span class="nav-text">崩溃原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位到问题图片"><span class="nav-number">3.</span> <span class="nav-text">定位到问题图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换图片为8-bit-sRGB-assets格式"><span class="nav-number">4.</span> <span class="nav-text">转换图片为8-bit sRGB assets格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

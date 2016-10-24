@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
-其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
+<meta name="description" content="JSPatch 是一个开源项目Github链接，只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。目前主要用于下发 JS 脚本替换原生 Objective-C 代码，实时修复线上 bug。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值">
-<meta property="og:url" content="http://yoursite.com/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/index.html">
+<meta property="og:title" content="JSPatch的使用">
+<meta property="og:url" content="http://yoursite.com/2016/10/24/JSPatch的使用/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
-其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
-<meta property="og:updated_time" content="2016-09-19T05:15:14.000Z">
+<meta property="og:description" content="JSPatch 是一个开源项目Github链接，只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。目前主要用于下发 JS 脚本替换原生 Objective-C 代码，实时修复线上 bug。">
+<meta property="og:updated_time" content="2016-10-24T01:59:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值">
-<meta name="twitter:description" content="Q：如何打印当前的函数和行号？A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);
-其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。下面是一些常用于打印日志的宏。宏    说明__func__    打印当前函数或方法，c字符串__L">
+<meta name="twitter:title" content="JSPatch的使用">
+<meta name="twitter:description" content="JSPatch 是一个开源项目Github链接，只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。目前主要用于下发 JS 脚本替换原生 Objective-C 代码，实时修复线上 bug。">
 
 
 
@@ -117,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/24/JSPatch的使用/"/>
 
-  <title> iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值 | Blog之HelloWord! </title>
+  <title> JSPatch的使用 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +242,7 @@
             
             
               
-                iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值
+                JSPatch的使用
               
             
           </h1>
@@ -257,8 +254,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-24T17:05:20+08:00" content="2016-08-24">
-              2016-08-24
+            <time itemprop="dateCreated" datetime="2016-10-24T09:53:16+08:00" content="2016-10-24">
+              2016-10-24
             </time>
           </span>
 
@@ -304,24 +301,17 @@
       
 
       
-        <p>Q：如何打印当前的函数和行号？<br>A：我们可以在打印时使用一些预编译宏作为打印参数，来打印当前的函数和行号。如：<br>NSLog(@”%s:%d obj=%@”, __func__, __LINE__, obj);</p>
-<p>其中__func__和__LINE__都是预编译的宏，编译时会分别替换为当前函数和当前行号。<br>下面是一些常用于打印日志的宏。<br>宏    说明<br>__func__    打印当前函数或方法，c字符串<br>__LINE__    打印当前行号，整数<br>__FILE__    打印当前文件路径，c字符串<br>__PRETTY<em>FUNCTION\</em>_    打印当前函数或方法（在C++中会包含参数类型），c字符串</p>
-<a id="more"></a>
-<p>Q：如何打印一个类名，消息名，当前堆栈信息？</p>
-<p>A：你可以使用以下方法在运行时动态获取这些信息。<br>代码    说明<br>NSStringFromSelector(SEL)    获取selector的名字<br>NSStringFromSelector(_cmd)    获取当前方法名<br>NSStringFromClass([object class])    获取object的类名<br>NSThread callStackSymbols]    获取当前线程的栈，是一个NSArry，包含堆栈中所有函数名。</p>
-<p>Q：如何将日志打印到一个文件</p>
-<p>A：可以使用freopen函数重定向标准输出和标准出错文件。因为printf函数会向标准输出（stdout）打印，而NSLog函数会向标准出错（stderr）打印。重新定向标准输出（stdout）和标准出错（stderr）到一个文件将会使他们打印日志到一个文件中。</p>
-<p>freopen(“/tmp/log.txt”, “a+”, stdout);<br>freopen(“/tmp/log.txt”, “a+”, stderr);</p>
-<p>#define NSLog(FORMAT, …) {/</p>
-<p>NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];/</p>
-<p>[dateFormatter setDateStyle:NSDateFormatterMediumStyle];/</p>
-<p>[dateFormatter setTimeStyle:NSDateFormatterShortStyle];/</p>
-<p>[dateFormatter setDateFormat:@”HH:mm:ss:SSSSSS”]; /</p>
-<p>NSString *str = [dateFormatter stringFromDate:[NSDate date]];/</p>
-<p>[dateFormatter release];/</p>
-<p>fprintf(stderr,”[–%s–]<em>[–%s–]</em>[–%s:%d–]/n”,[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA<em>ARGS__] UTF8String],[[[NSString stringWithUTF8String:\</em>_FILE__] lastPathComponent] UTF8String], __LINE__);/</p>
-<p>}</p>
-<p>转载 :<a href="http://www.cnblogs.com/ThankForYou/archive/2012/09/12/2681739.html" target="_blank" rel="external">iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值</a></p>
+        <p>JSPatch 是一个开源项目<a href="https://github.com/bang590/JSPatch" target="_blank" rel="external">Github链接</a>，只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。目前主要用于下发 JS 脚本替换原生 Objective-C 代码，实时修复线上 bug。<br><a id="more"></a></p>
+<h2 id="JSPatch的用法"><a href="#JSPatch的用法" class="headerlink" title="JSPatch的用法"></a>JSPatch的用法</h2><p>官方文档已经写的很清楚，这里不再说明，链接：<a href="http://jspatch.com/Docs/intro" target="_blank" rel="external">http://jspatch.com/Docs/intro</a><br>注意，灰度与条件下发，很有用<br>安装sdk的时候，官方给出的说明是下载sdk手动载入，后来我想自己从pod上下载，发现pod上的sdk已经不更新了，目前只能手动载入了.</p>
+<h2 id="JSPatch的使用场景"><a href="#JSPatch的使用场景" class="headerlink" title="JSPatch的使用场景"></a>JSPatch的使用场景</h2><p>1、利用JavaScript修改线上bug<br>只改部分代码，这时相当于替换类中的部分方法即可，我们项目也主要通过JSPatch解决这类问题。<br>2、使用JavaScript代码向Objective-C中添加方法<br>JSPatch引擎支持JavaScript代码的调用，分别是使用JavaScript字符串进行代码运行，读取本地的JavaScript文件进行代码运行和获取网络的JavaScript文件进行代码运行。例如，如果想要通过JavaScript代码在项目中弹出一个警告框，在Objective-C代码中插入如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> - (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // ‘\’符用于进行换行</div><div class="line">    [JPEngine evaluateScript:@&quot;\</div><div class="line">     var alertView = require(&apos;UIAlertView&apos;).alloc().init();\</div><div class="line">     alertView.setTitle(&apos;Alert&apos;);\</div><div class="line">     alertView.setMessage(&apos;AlertView from js&apos;); \</div><div class="line">     alertView.addButtonWithTitle(&apos;OK&apos;);\</div><div class="line">     alertView.show(); \</div><div class="line">     &quot;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>开发者也可以动态在Objective-C类文件中添加方法，例如在ViewController类中编写如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> - (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    [JPEngine startEngine];</div><div class="line">    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@&quot;demo&quot; ofType:@&quot;js&quot;];</div><div class="line">    NSString *script = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];</div><div class="line">    [JPEngine evaluateScript:script];</div><div class="line">    [self performSelectorOnMainThread:@selector(creatView) withObject:nil waitUntilDone:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>JavaScript文件代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">require(&apos;UIView, UIColor, UILabel&apos;)</div><div class="line">   defineClass(&apos;ViewController&apos;, &#123;</div><div class="line">           // replace the -genView method</div><div class="line">               creatView: function() &#123;</div><div class="line">                   var view = UIView.alloc().initWithFrame(&#123;x:20, y:20, width:100, height:100&#125;);</div><div class="line">                   view.setBackgroundColor(UIColor.greenColor());</div><div class="line">                   var label = UILabel.alloc().initWithFrame(&#123;x:0, y:0, width:100, height:100&#125;);</div><div class="line">                   label.setText(&quot;JSPatch&quot;);</div><div class="line">                   label.setTextAlignment(1);</div><div class="line">                   view.addSubview(label);</div><div class="line">               self.view().addSubview(view)</div><div class="line">           &#125;</div><div class="line">   &#125;);</div></pre></td></tr></table></figure></p>
+<p>除了上面的代码，在ViewController.m文件中没有编写任何其他的方法，运行工程，可以看到程序并没有崩溃，ViewController执行了creatView方法。<br>对于以上的方法，一个应用就是，把业务模块代码写成js文件，利用JPEngine动态加载<br>优点：<br>不仅可以做hot fix，而且可以动态发布功能模块<br>缺点：</p>
+<ul>
+<li>iOS开发对js不熟悉，开发效率不高</li>
+<li>js通过runtime机制，本身效率也不高<br>另外，但由于现在审核周期变短了，不推荐这种方式。</li>
+</ul>
+<p>3、在线参数<br>JSPatch 平台附带了在线参数功能，可以直接向 APP 下发多个固定的参数，对APP进行动态配置。<br>通过这个功能我们可以远程开启功能或者关闭功能，以往做这件事，都是要求服务端加一个接口，上线时获取数据来决定具体操作，<br>有了JSPatch，这种场景下服务端也不需要重新发布了。</p>
 
       
     </div>
@@ -347,17 +337,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/22/使用Xcode查找项目中的中文字符串/" rel="next" title="使用Xcode查找项目中的中文字符串">
-                <i class="fa fa-chevron-left"></i> 使用Xcode查找项目中的中文字符串
+              <a href="/2016/10/19/Xcode8的assets问题导致运行iOS8崩溃的解决方案/" rel="next" title="Xcode8的assets问题导致运行iOS8崩溃的解决方案">
+                <i class="fa fa-chevron-left"></i> Xcode8的assets问题导致运行iOS8崩溃的解决方案
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/25/个人常用iOS第三方库以及XCode插件介绍/" rel="prev" title="个人常用iOS第三方库以及XCode插件介绍">
-                个人常用iOS第三方库以及XCode插件介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -462,7 +448,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSPatch的用法"><span class="nav-number">1.</span> <span class="nav-text">JSPatch的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSPatch的使用场景"><span class="nav-number">2.</span> <span class="nav-text">JSPatch的使用场景</span></a></li></ol></div>
             
           </div>
         </section>

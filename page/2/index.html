@@ -241,6 +241,123 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/18/webViewJavascriptBridge使用方法/" itemprop="url">
+                  webViewJavascriptBridge使用方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T11:59:30+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="首先有两个问题："><a href="#首先有两个问题：" class="headerlink" title="首先有两个问题："></a>首先有两个问题：</h2><p>a.Native中的UIWebView是否可以直接调用js method（方法）？ </br><br>可以。只需要调用<code>[webview stringByEvaluatingJavaScriptFromString:@&quot;&quot;];</code>就可以了</p>
+<p>b.js 是否可以直接调用Native的method？</br><br>不行。</p>
+<p>所以，这里介绍一下<code>webViewJavascriptBridge</code>，这个封装的比较好的一个第三方库。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/18/webViewJavascriptBridge使用方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/15/自动缩1倍图脚本/" itemprop="url">
                   自动缩1倍图脚本
                 </a>
@@ -1290,127 +1407,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/15/时间戳与时间的相互转换/" itemprop="url">
-                  时间戳与时间的相互转换
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-15T09:10:42+08:00" content="2015-08-15">
-              2015-08-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p></br></p>
-<h2 id="时间戳-gt-需要展示的日期"><a href="#时间戳-gt-需要展示的日期" class="headerlink" title="时间戳 -&gt; 需要展示的日期"></a>时间戳 -&gt; 需要展示的日期</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *uploadTime =@&quot;1466738834000&quot;;//时间戳</div><div class="line">      NSTimeInterval timestamp = [uploadTime doubleValue]/1000.0f;//转换NSTimeInterval 需要除以1000.</div><div class="line">      NSString *formatter = @&quot;yyyy-MM-dd eeee HH:mm&quot;;</div><div class="line">      NSDate *publishDate = [NSDate dateWithTimeIntervalSince1970:timestamp];//转换NSDate</div><div class="line">      NSString *day = [publishDate formattedDateWithFormat:formatter];//此方法是 DateTools 里面的方法     </div><div class="line">      NSLog(@&quot;%@&quot;, day);                         </div><div class="line">      //day: 2016-07-15 星期五 09:24:25</div></pre></td></tr></table></figure>
-<p>DateTools 是一个很好用的处理时间日期的库。<br>下载 <a href="http://www.ios122.com/tag/datetools/">DateTools</a></p>
-<blockquote>
-<p>也可以使用cocoapods下载，pod ‘DateTools’, ‘~&gt; 1.7.0’</p>
-</blockquote>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/15/时间戳与时间的相互转换/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1456,7 +1452,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -84,34 +84,12 @@
 
 
 
-<meta name="description" content="项目刚启动的时候 我们一般为了快速开发 会在使用字符串的时候直接选择硬编码到代码中 比如
-
-self.lblTime.text = @”1分钟前”;
-
-但是之后 如果有国际化的需求的话 我们又会改成这样
-
-self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用Xcode查找项目中的中文字符串">
-<meta property="og:url" content="http://yoursite.com/2016/08/22/使用Xcode查找项目中的中文字符串/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog之HelloWord!">
+<meta property="og:url" content="http://yoursite.com/archives/2016/page/3/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="项目刚启动的时候 我们一般为了快速开发 会在使用字符串的时候直接选择硬编码到代码中 比如
-
-self.lblTime.text = @”1分钟前”;
-
-但是之后 如果有国际化的需求的话 我们又会改成这样
-
-self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
-<meta property="og:updated_time" content="2016-09-19T03:56:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Xcode查找项目中的中文字符串">
-<meta name="twitter:description" content="项目刚启动的时候 我们一般为了快速开发 会在使用字符串的时候直接选择硬编码到代码中 比如
-
-self.lblTime.text = @”1分钟前”;
-
-但是之后 如果有国际化的需求的话 我们又会改成这样
-
-self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
+<meta name="twitter:title" content="Blog之HelloWord!">
 
 
 
@@ -132,9 +110,9 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/22/使用Xcode查找项目中的中文字符串/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2016/page/3/"/>
 
-  <title> 使用Xcode查找项目中的中文字符串 | Blog之HelloWord! </title>
+  <title> 归档 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -161,7 +139,7 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,149 +217,69 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      OK! 目前共计 37 篇日志。 继续努力。
+    </span>
+
     
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                使用Xcode查找项目中的中文字符串
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-22T16:44:14+08:00" content="2016-08-22">
-              2016-08-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
-      
-        <p>项目刚启动的时候 我们一般为了快速开发 会在使用字符串的时候直接选择硬编码到代码中 比如</p>
-<blockquote>
-<p>self.lblTime.text = @”1分钟前”;</p>
-</blockquote>
-<p>但是之后 如果有国际化的需求的话 我们又会改成这样</p>
-<blockquote>
-<p>self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);</p>
-</blockquote>
-<a id="more"></a>
-<p>不过随着代码越来越多 不免有疏漏 所以有时我们要去搜索一些漏网之鱼 这里分享一个快捷的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">打开”Find Navigator”</div><div class="line">切换搜索模式到 “Find &gt; Regular Expression”</div><div class="line">输入@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot; (swift请去掉”@” 输入@&quot;[^&quot;]*[\u4E00-\u9FA5]+[^&quot;\n]*?&quot; 就好了)</div></pre></td></tr></table></figure></p>
-<p>如果你跟我一样嫌NSLocalizedString的comment碍事 也可以用正则替换掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Find NSLocalizedString\((@&quot;[^\)]*?&quot;)\s*,\s*@&quot;[^\)]*&quot;\s*\)</div><div class="line">Replace With NSLocalizedString\($1, nil\)</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/22/利用弱引用在block中使用self/" rel="next" title="利用弱引用在block中使用self">
-                <i class="fa fa-chevron-left"></i> 利用弱引用在block中使用self
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/24/iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值/" rel="prev" title="iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值">
-                iOS中打印日志显示系统详细时间，类名，行号，函数名，线程，及打印值 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
         </div>
       
+      
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/01/26/NSArray的深拷贝以及NSArray元素的深拷贝研究/" itemprop="url">
+              
+                <span itemprop="name">NSArray的深拷贝以及NSArray元素的深拷贝研究</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-01-26T11:13:30+08:00"
+              content="2016-01-26" >
+          01-26
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2016/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2016/">1</a><a class="page-number" href="/archives/2016/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
 
 
           </div>
@@ -389,10 +287,6 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -412,17 +306,8 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -463,17 +348,6 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -571,9 +445,11 @@ self.lblTime.text = NSLocalizedString(@”one_min_ago”, @”1分钟前”);">
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   

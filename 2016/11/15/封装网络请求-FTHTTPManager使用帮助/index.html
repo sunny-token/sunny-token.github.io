@@ -1,0 +1,648 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="说明在项目中每次使用网络相关的操作都需要调用 AFN 创建一系列琐碎的步骤，为了方便封装了一下，统一使用了FTHTTPManager这个类去创建网络请求。本文描述了如何使用这个组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 封装网络请求-FTHTTPManager使用帮助">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/封装网络请求-FTHTTPManager使用帮助/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="说明在项目中每次使用网络相关的操作都需要调用 AFN 创建一系列琐碎的步骤，为了方便封装了一下，统一使用了FTHTTPManager这个类去创建网络请求。本文描述了如何使用这个组件">
+<meta property="og:image" content="http://yoursite.com/./img/封装网络请求-FTHTTPManager使用帮助-1.jpg">
+<meta property="og:updated_time" content="2016-11-15T06:56:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 封装网络请求-FTHTTPManager使用帮助">
+<meta name="twitter:description" content="说明在项目中每次使用网络相关的操作都需要调用 AFN 创建一系列琐碎的步骤，为了方便封装了一下，统一使用了FTHTTPManager这个类去创建网络请求。本文描述了如何使用这个组件">
+<meta name="twitter:image" content="http://yoursite.com/./img/封装网络请求-FTHTTPManager使用帮助-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/15/封装网络请求-FTHTTPManager使用帮助/"/>
+
+  <title>  封装网络请求-FTHTTPManager使用帮助 | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                 封装网络请求-FTHTTPManager使用帮助
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-15T14:06:25+08:00" content="2016-11-15">
+              2016-11-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>在项目中每次使用网络相关的操作都需要调用 AFN 创建一系列琐碎的步骤，为了方便封装了一下，统一使用了<code>FTHTTPManager</code>这个类去创建网络请求。<br>本文描述了如何使用这个组件<br><a id="more"></a></p>
+<h1 id="常见HTTP请求场景"><a href="#常见HTTP请求场景" class="headerlink" title="常见HTTP请求场景"></a>常见HTTP请求场景</h1><p>通常HTTP请求的场景有两种：</p>
+<ol>
+<li>发送请求，获取数据，展示界面</li>
+<li>将用户的输入提交给服务器，并根据成功或失败给出反馈</li>
+</ol>
+<p>对于请求种类1，通常我们需要做：</p>
+<ul>
+<li>设置请求参数</li>
+<li>发送请求</li>
+<li>成功时，获得服务器给出的数据（通常是JSON），序列化为对象，并交给view层展示</li>
+<li>失败时，获取服务器报错信息，给出错误提示</li>
+</ul>
+<p>对于请求种类2，通常我们需要做：</p>
+<ul>
+<li>收集页面控件上的数据，并组装成相应的数据</li>
+<li>将数据提交给服务器</li>
+<li>成功时，给出成功提示</li>
+<li>失败时，获取服务器报错信息，给出错误提示</li>
+</ul>
+<p>那么总结一下，我们在HTTP请求场景下的工作步骤包括：</p>
+<ul>
+<li>组装请求数据</li>
+<li>发送请求</li>
+<li>获知成功或者失败，必要时，获得服务器返回数据</li>
+</ul>
+<p>下面我们来看一下使用FTHTTPManager组件如何处理这3个步骤</p>
+<h1 id="FTHTTPManager基础教程"><a href="#FTHTTPManager基础教程" class="headerlink" title="FTHTTPManager基础教程"></a>FTHTTPManager基础教程</h1><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>下面我们以这样一个简单例子来做示范<br> <img src="./img/封装网络请求-FTHTTPManager使用帮助-1.jpg" alt="例子"><br>输入用户ID，点击查询按钮后，在下方显示用户的详细信息<br>接口定义如下</p>
+<ul>
+<li>URL：GET /services/focus-teach/user-info?userId=xxx</li>
+<li>响应：JSON，目前云端所有的JSON响应都遵循以下结构</li>
+<li>{<br>“code”: 0,  // 返回码，成功时为0，失败时会有不同的码<br>“value”: {} // 业务返回数据，可以是 {} [] “” 甚至为空<br>}</li>
+</ul>
+<h2 id="自定义子类"><a href="#自定义子类" class="headerlink" title="自定义子类"></a>自定义子类</h2><p>首先，我们应当为每个HTTP的请求种类写一个管理类，而不是将项目中所有的HTTP请求全放到一个类里<br>什么是请求种类？ 这可以自行定义，通常来说，URL不一样，则种类不同<br>下面是示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">UserInfoHTTPManager.h</div><div class="line">#import &quot;FTHTTPManager.h&quot;</div><div class="line"> @interface UserInfoHTTPManager : FTHTTPManager</div><div class="line"> @end</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">UserInfoHTTPManager.m</div><div class="line">#import &quot;UserInfoHTTPManager.h&quot;</div><div class="line"> @implementation UserInfoHTTPManager</div><div class="line"> - (NSString *)url &#123;</div><div class="line">     return @&quot;/services/focus-teach/user-info&quot;;</div><div class="line"> &#125;</div><div class="line"> - (FTHTTPRequestMethod)method &#123;</div><div class="line">     return FTHTTPRequestMethodGet;</div><div class="line"> &#125;</div><div class="line"> @end</div></pre></td></tr></table></figure>
+<p>在继承了FTHTTPManager之后，必须至少实现两个方法：url与method，不赘述</p>
+<h2 id="实例化子类"><a href="#实例化子类" class="headerlink" title="实例化子类"></a>实例化子类</h2><p>下一步，通常我们会在ViewController中使用这个子类的实例<br>一般来说，推荐将实例注册为ViewController的一个property，示例代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">TestViewController</div><div class="line">@interface TestViewController () &lt;FTHTTPDelegate, FTHTTPParamsDataSource&gt;</div><div class="line"> @property (strong, nonatomic) UserInfoHTTPManager *userManager;</div><div class="line"> @end</div><div class="line"> </div><div class="line"> @implementation TestViewController</div><div class="line"> - (UserInfoHTTPManager *)userManager &#123;</div><div class="line"> 	if (!_userManager) &#123;</div><div class="line"> 		_userManager = [UserInfoHTTPManager alloc] init];</div><div class="line"> 		_userManager.paramsDatasource = self;</div><div class="line"> 		_userManager.delegate = self;</div><div class="line"> 	&#125;</div><div class="line"> 	return _userManager;</div><div class="line"> &#125;</div><div class="line"> @end</div></pre></td></tr></table></figure></p>
+<h2 id="实现protocol"><a href="#实现protocol" class="headerlink" title="实现protocol"></a>实现protocol</h2><p>注意到上一步，除了实例化子类之外，我们还指定了子类的两个属性：paramsDatasource与delegate<br>这两个属性是起什么作用呢？实际上，他们就分别对应了上面总结步骤中的「组装数据」和「获知成功失败」</p>
+<h3 id="组装数据"><a href="#组装数据" class="headerlink" title="组装数据"></a>组装数据</h3><p>先看paramsDatasource，这个属性对应的对象，需要实现FTHTTPParamsDataSource，也就是需要实现以下方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (NSDictionary *)httpParamsForManager:(FTHTTPManager *)manager &#123;</div><div class="line"> 	return @&#123;@&quot;userId&quot;: self.userIdTextField.text&#125;;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法告知了子类对象，当前HTTP请求的参数是什么，不用担心GET或者POST的区分问题，FTHTTPManager已经搞定了</p>
+<h3 id="获知成功与失败"><a href="#获知成功与失败" class="headerlink" title="获知成功与失败"></a>获知成功与失败</h3><p>在iOS开发中，异步的通知方法至少有3种类型：delegate,block,notification，从架构、内存的角度出发，我选择了delegate方式<br>这里需要实现FTHTTPDelegate，也就是实现以下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)httpRequestDidSuccess:(FTHTTPManager *)manager response:(FTHTTPResponse *)response info:(NSDictionary *)userInfo &#123;</div><div class="line">     NSLog(@&quot;%@&quot;, response.value[@&quot;username&quot;]);</div><div class="line"> &#125;</div><div class="line"> - (void)httpRequestDidFail:(FTHTTPManager *)manager response:(FTHTTPResponse *)response info:(NSDictionary *)userInfo &#123;</div><div class="line"> 	NSLog(@&quot;%i&quot;, response.code);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>顾名思义，分别代表了成功与失败<br>注意到这里有一个FTHTTPResponse参数对象，他封装了上面提到的通用JSON格式<br>你可以使用response.code来获取错误码，response.value来获取value对应的OC对象（NSDictionary，NSArray等）</p>
+<h2 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h2><p>直接看代码，调用sendRequest方法即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (IBAction)buttonTapped:(id)sender &#123;</div><div class="line"> 	[self.userManager sendRequest];</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h1 id="高级教程"><a href="#高级教程" class="headerlink" title="高级教程"></a>高级教程</h1><p>上面是一个最简单的例子，下面根据常见复杂场景，以FAQ的方式提供解决方案</p>
+<h2 id="为什么要把组装数据的过程独立出来？"><a href="#为什么要把组装数据的过程独立出来？" class="headerlink" title="为什么要把组装数据的过程独立出来？"></a>为什么要把组装数据的过程独立出来？</h2><p>相信大家更习惯 sendRequestWithParams:xxx 这样的写法，FTHTTPManager之所以将这个过程独立出来，是出于以下考虑</p>
+<ol>
+<li>易于识别，也易于复用</li>
+<li>某些场景需要做校验，或者将提交的数据做临时本地存储，独立出这个过程，易于复用<br>当然其实我们是提供 sendRequestWithParams:info: 方法的，但是请慎用，因为这会破坏原本一致的编码规范</li>
+</ol>
+<h2 id="如果请求没有参数，怎么办？"><a href="#如果请求没有参数，怎么办？" class="headerlink" title="如果请求没有参数，怎么办？"></a>如果请求没有参数，怎么办？</h2><p>那就省略掉 manager.paramsDatasource = self; 一句即可，不指定paramsDatasource时，就等于没有参数</p>
+<h2 id="如果请求中有些参数是固定的，该如何优雅地处理？"><a href="#如果请求中有些参数是固定的，该如何优雅地处理？" class="headerlink" title="如果请求中有些参数是固定的，该如何优雅地处理？"></a>如果请求中有些参数是固定的，该如何优雅地处理？</h2><p>这个问题有两种场景：</p>
+<ol>
+<li>以目前的获取验证码请求举例，云端接口出于国际化的考虑，要求参数中固定传入 contryCode: “+86”</li>
+<li>依然以获取验证码举例，由于有两个业务场景会用到，为了区分，服务器要求传入 type = 1 或者 type = 2<br>这两种场景，都不需要在 httpParamsForManager 代理方法中固定传入，而是可以通过给子类添加 params 方法来实现</li>
+</ol>
+<h3 id="场景1"><a href="#场景1" class="headerlink" title="场景1"></a>场景1</h3><p>我们可以这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ObtainVerifyCodeHTTPManager.m</div><div class="line">@implementation ObtainVerifyCodeHTTPManager</div><div class="line"> - (NSString *)url &#123;</div><div class="line">     return @&quot;/services/focus-teach/sms&quot;;</div><div class="line"> &#125;</div><div class="line"> - (FTHTTPRequestMethod)method &#123;</div><div class="line">     return FTHTTPRequestMethodPost;</div><div class="line"> &#125;</div><div class="line"> - (NSDictionary *)params &#123;</div><div class="line">     NSMutableDictionary *params = [[super params] mutableCopy];</div><div class="line">     params[@&quot;countryCode&quot;] = @&quot;+86&quot;;</div><div class="line">     return [NSDictionary dictionaryWithDictionary:params];</div><div class="line"> &#125;</div><div class="line"> @end</div></pre></td></tr></table></figure></p>
+<p>提示：params方法是父类中组装参数的方法，我们可以在子类中覆盖这个方法的实现，添加固定参数</p>
+<h3 id="场景2"><a href="#场景2" class="headerlink" title="场景2"></a>场景2</h3><p>对于场景2，由于同一个业务场景下，type是固定不变的，那么推荐这么来做，首先给子类一个type属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ObtainVerifyCodeHTTPManager.h</div><div class="line">@interface ObtainVerifyCodeHTTPManager : FTHTTPManager</div><div class="line"> @property (assign, nonatomic) ValidCodeType type;</div><div class="line"> @end</div></pre></td></tr></table></figure></p>
+<p>然后覆盖父类的params方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (NSDictionary *)params &#123;</div><div class="line">     NSMutableDictionary *params = [[super params] mutableCopy];</div><div class="line">     params[@&quot;type&quot;] = @(self.type);</div><div class="line">     return [NSDictionary dictionaryWithDictionary:params];</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>最后在相应的VC初始化子类时，指定type即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (ObtainVerifyCodeHTTPManager *)obtainVerifyCodeManager &#123;</div><div class="line">     if (!_obtainVerifyCodeManager) &#123;</div><div class="line">         _obtainVerifyCodeManager = [[ObtainVerifyCodeHTTPManager alloc] init];</div><div class="line">         _obtainVerifyCodeManager.type = ValidCodeTypeFindPassword; // 指定type属性</div><div class="line">         _obtainVerifyCodeManager.paramsDataSource = self;</div><div class="line">         _obtainVerifyCodeManager.delegate = self;</div><div class="line">     &#125;</div><div class="line">     return _obtainVerifyCodeManager;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="覆盖params方法还有哪些玩法？"><a href="#覆盖params方法还有哪些玩法？" class="headerlink" title="覆盖params方法还有哪些玩法？"></a>覆盖params方法还有哪些玩法？</h2><p>由于覆盖这个方法就可以改变HTTP参数传递的逻辑，因此还有不少场景下会很有用<br>例如，云端接口要求的参数类型为：”json: 序列化为JSON字符串的数据结构“，POST body形如</p>
+<p><code>json=%7B%0A%20%20%22clazzs%22%20%3A%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22users%22%20%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22userId%22%20%3A%20%22hP3d3E0hkak%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22userRealName%22%20%3A%20%22%E4%BB%98%E8%A1%8D%E5%BF%97%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%22classId%22%20%3A%20%22_tHNjKYGLx8%22%2C%0A%20%20%20%20%20%20%22className%22%20%3A%20%22%E4%B8%80%E5%B9%B4%E7%BA%A7%E4%BA%A7%E7%A0%94%E7%8F%AD%22%2C%0A%20%20%20%20%20%20%22gradeNo%22%20%3A%201%2C%0A%20%20%20%20%20%20%22total%22%20%3A%201%0A%20%20%20%20%7D%0A%20%20%5D%2C%0A%20%20%22files%22%20%3A%20%5B%0A%0A%20%20%5D%2C%0A%20%20%22homeworkContent%22%20%3A%20%22%E5%93%88%E5%93%88%22%0A%7D</code></p>
+<p>通常的写法是在httpParamsForManager方法中，序列化JSON对象，不过如果相应的VC里又需要序列化之前的对象数据，那就还得再拆分子方法等等<br>那么让我们简单一点，这么来做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (NSDictionary *)params &#123;</div><div class="line">     // POST 的是 JSON 字符串</div><div class="line">     // 为了不影响业务部分的组装与判断，将转换写在这里</div><div class="line">     NSDictionary *params = [super params];</div><div class="line">     return @&#123;@&quot;json&quot;: [params jsonString]&#125;;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>这样业务层（VC）部分的代码，就更为简洁与专注</p>
+<h2 id="如果当前VC存在多种HTTP请求，怎么办？"><a href="#如果当前VC存在多种HTTP请求，怎么办？" class="headerlink" title="如果当前VC存在多种HTTP请求，怎么办？"></a>如果当前VC存在多种HTTP请求，怎么办？</h2><p>那就多声明几个子类对象呗，然后在代理方法中，根据不同的manager来判断，比如这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)httpRequestDidSuccess:(FTHTTPManager *)manager response:(FTHTTPResponse *)response info:(NSDictionary *)userInfo &#123;</div><div class="line">     if (self.verifyMobileManager == manager) &#123;</div><div class="line">         // 校验手机号成功</div><div class="line">     &#125; else if (self.obtainVerifyCodeManager == manager) &#123;</div><div class="line">         // 发送验证码成功</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="上传文件怎么做？"><a href="#上传文件怎么做？" class="headerlink" title="上传文件怎么做？"></a>上传文件怎么做？</h2><p>如果你熟悉AFNetworking会知道，使用AF上传文件时，需要在调用方法中多传入一个constructingBodyWithBlock用来组装二进制文件请求部分<br>FTHTTPManager底层是 AFNetworking ，所以这里沿用了同样的方式，你所做的是在子类中，实现multipartBodyBlock方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@implementation FileUploadHTTPManager</div><div class="line"> - (NSString *)url &#123;</div><div class="line">     return @&quot;/services/files/upload/range&quot;;</div><div class="line"> &#125;</div><div class="line"> - (FTHTTPRequestMethod)method &#123;</div><div class="line">     return FTHTTPRequestMethodPost;</div><div class="line"> &#125;</div><div class="line"> - (NSDictionary *)params &#123;</div><div class="line">     return @&#123;@&quot;type&quot;: @(3)&#125;;</div><div class="line"> &#125;</div><div class="line"> - (FTMultipartBodyBlock)multipartBodyBlock &#123;</div><div class="line">     return ^(id&lt;AFMultipartFormData&gt; formData) &#123;</div><div class="line">         [formData appendPartWithFileData:self.fileData</div><div class="line">                                     name:@&quot;upload&quot;</div><div class="line">                                 fileName:@&quot;1.jpg&quot;</div><div class="line">                                 mimeType:@&quot;image/jpeg&quot;];</div><div class="line">     &#125;;</div><div class="line"> &#125;</div><div class="line"> @end</div></pre></td></tr></table></figure></p>
+<p>方法返回的block，就是传递给AFNetworking的block，参考<a href="https://github.com/AFNetworking/AFNetworking#post-multi-part-request" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking#post-multi-part-request</a><br>这里要注意，FTHTTPManager并没有为文件请求参数提供一个代理方法（我偷懒了对不起），所以我们可能需要为子类添加一个NSData之类的属性，临时保存需要发送的文件</p>
+<h2 id="如何防止重复提交？"><a href="#如何防止重复提交？" class="headerlink" title="如何防止重复提交？"></a>如何防止重复提交？</h2><p>覆盖父类的allowDuplicate方法，返回NO即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)allowDuplicate &#123;</div><div class="line">     return NO;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>注意，这只能做到，针对同一个子HTTP管理类的对象，不重复提交（重复的请求会被忽略）</p>
+<h2 id="发送请求时，如何带入上下文？"><a href="#发送请求时，如何带入上下文？" class="headerlink" title="发送请求时，如何带入上下文？"></a>发送请求时，如何带入上下文？</h2><p>block与delegate相比，有一个明显的好处是 block内可以访问当时场景的局部变量，不理解的可以看这个例子：<br>假设界面有两个按钮A,B，点击时会发送一样的请求，但是需求要求请求成功时，会提示根据点击的按钮而提示，如「点击按钮A，发送请求成功」<br>怎么做呢？首先我们搭好框架：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (IBAction)buttonTapped:(id)sender &#123;</div><div class="line"> 	[self.manager sendRequest];</div><div class="line"> &#125;</div><div class="line">  </div><div class="line"> - (void)httpRequestDidSuccess:(FTHTTPManager *)manager response:(FTHTTPResponse *)response info:(NSDictionary *)userInfo &#123;</div><div class="line"> 	// 这里的代码咋写？</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>在按钮点击时，我们当然可以根据sender的不同而获知点击的是哪个按钮，但是在成功的代理方法里，该如何获知这个信息呢？<br>一些编程经验欠缺的同学，可能会将这个信息保存为VC的一个属性，然后在成功方法中根据属性值来区分<br>请注意：这样的做法完！全！错！误！！如果在请求返回之前，用户又点击了另外一个按钮，那么界面的响应就是错的<br>正确的做法是这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (IBAction)buttonTapped:(id)sender &#123;</div><div class="line"> 	[self.manager sendRequestWithInfo: &#123;@&quot;isButtonA&quot;: sender == self.buttonA&#125;];</div><div class="line"> &#125;</div><div class="line"> - (void)httpRequestDidSuccess:(FTHTTPManager *)manager response:(FTHTTPResponse *)response info:(NSDictionary *)userInfo &#123;</div><div class="line"> 	if ([userInfo[@&quot;isButtonA&quot;] boolValue])&#123;</div><div class="line"> 		// 如果点击的是按钮A</div><div class="line"> 	&#125; else &#123;</div><div class="line"> 		// 其他情况</div><div class="line"> 	&#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>我们用到了另外一个方法：sendRequestWithInfo，这里的info参数，就是请求的上下文，传入的参数，可以在成功或者失败的方法中获取到<br>备注：其实系统API里也有类似的用法，比如 NSNotificationCenter 的 postNotificationName:userInfo: 方法</p>
+<h1 id="FTHTTPAuthManager使用帮助"><a href="#FTHTTPAuthManager使用帮助" class="headerlink" title="FTHTTPAuthManager使用帮助"></a>FTHTTPAuthManager使用帮助</h1><p>云端系统中存在大量的需要授权的请求接口（比如修改手机号，需要登录后才能提交），授权的方式是在请求参数中增加token一项<br>为了简化这个部分的工作，我们又提供了 FTHTTPAuthManager 类，对于需要授权的接口子类，请继承这个类<br>具体的使用，与FTHTTPManager基本一致，没有差别，仅仅是多了这么一个父类方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)needAuth &#123;</div><div class="line">     return YES;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>有什么作用呢？如果有一个后端HTTP接口，在某些场景下需要授权，某些场景又不需要，那么你在编写子类时可以通过覆盖这个方法灵活切换</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/02/Lumberjack-DDLog第三方日志打印工具/" rel="next" title="Lumberjack&DDLog第三方日志打印工具">
+                <i class="fa fa-chevron-left"></i> Lumberjack&DDLog第三方日志打印工具
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠の爸" />
+          <p class="site-author-name" itemprop="name">楠の爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见HTTP请求场景"><span class="nav-number">2.</span> <span class="nav-text">常见HTTP请求场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FTHTTPManager基础教程"><span class="nav-number">3.</span> <span class="nav-text">FTHTTPManager基础教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">3.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义子类"><span class="nav-number">3.2.</span> <span class="nav-text">自定义子类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化子类"><span class="nav-number">3.3.</span> <span class="nav-text">实例化子类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现protocol"><span class="nav-number">3.4.</span> <span class="nav-text">实现protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组装数据"><span class="nav-number">3.4.1.</span> <span class="nav-text">组装数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获知成功与失败"><span class="nav-number">3.4.2.</span> <span class="nav-text">获知成功与失败</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送请求"><span class="nav-number">3.5.</span> <span class="nav-text">发送请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级教程"><span class="nav-number">4.</span> <span class="nav-text">高级教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要把组装数据的过程独立出来？"><span class="nav-number">4.1.</span> <span class="nav-text">为什么要把组装数据的过程独立出来？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果请求没有参数，怎么办？"><span class="nav-number">4.2.</span> <span class="nav-text">如果请求没有参数，怎么办？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果请求中有些参数是固定的，该如何优雅地处理？"><span class="nav-number">4.3.</span> <span class="nav-text">如果请求中有些参数是固定的，该如何优雅地处理？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景1"><span class="nav-number">4.3.1.</span> <span class="nav-text">场景1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景2"><span class="nav-number">4.3.2.</span> <span class="nav-text">场景2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖params方法还有哪些玩法？"><span class="nav-number">4.4.</span> <span class="nav-text">覆盖params方法还有哪些玩法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果当前VC存在多种HTTP请求，怎么办？"><span class="nav-number">4.5.</span> <span class="nav-text">如果当前VC存在多种HTTP请求，怎么办？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件怎么做？"><span class="nav-number">4.6.</span> <span class="nav-text">上传文件怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何防止重复提交？"><span class="nav-number">4.7.</span> <span class="nav-text">如何防止重复提交？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送请求时，如何带入上下文？"><span class="nav-number">4.8.</span> <span class="nav-text">发送请求时，如何带入上下文？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FTHTTPAuthManager使用帮助"><span class="nav-number">5.</span> <span class="nav-text">FTHTTPAuthManager使用帮助</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠の爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

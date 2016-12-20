@@ -1,0 +1,621 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是GCD？Grand Central Dispatch或者GCD，是一套低层API，提供了一种新的方法来进行并发程序编写。从基本功能上讲，GCD有点像 NSOperationQueue，他们都允许程序将任务切分为多个单一任务然后提交至工作队列来并发地或者串行地执行。GCD比之 NSOpertionQueue更底层更高效，并且它不是Cocoa框架的一部分。除了代码的平行执行能力，GCD还提供高度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCD 方法大全（常用）">
+<meta property="og:url" content="http://yoursite.com/2016/12/20/GCD-方法大全/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="什么是GCD？Grand Central Dispatch或者GCD，是一套低层API，提供了一种新的方法来进行并发程序编写。从基本功能上讲，GCD有点像 NSOperationQueue，他们都允许程序将任务切分为多个单一任务然后提交至工作队列来并发地或者串行地执行。GCD比之 NSOpertionQueue更底层更高效，并且它不是Cocoa框架的一部分。除了代码的平行执行能力，GCD还提供高度">
+<meta property="og:image" content="http://yoursite.com/img/GCD.png">
+<meta property="og:updated_time" content="2016-12-20T01:58:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GCD 方法大全（常用）">
+<meta name="twitter:description" content="什么是GCD？Grand Central Dispatch或者GCD，是一套低层API，提供了一种新的方法来进行并发程序编写。从基本功能上讲，GCD有点像 NSOperationQueue，他们都允许程序将任务切分为多个单一任务然后提交至工作队列来并发地或者串行地执行。GCD比之 NSOpertionQueue更底层更高效，并且它不是Cocoa框架的一部分。除了代码的平行执行能力，GCD还提供高度">
+<meta name="twitter:image" content="http://yoursite.com/img/GCD.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/20/GCD-方法大全/"/>
+
+  <title> GCD 方法大全（常用） | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GCD 方法大全（常用）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-20T09:39:03+08:00" content="2016-12-20">
+              2016-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/20/GCD-方法大全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/GCD-方法大全/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>什么是GCD？<br>Grand Central Dispatch或者GCD，是一套低层API，提供了一种新的方法来进行并发程序编写。从基本功能上讲，GCD有点像 NSOperationQueue，他们都允许程序将任务切分为多个单一任务然后提交至工作队列来并发地或者串行地执行。GCD比之 NSOpertionQueue更底层更高效，并且它不是Cocoa框架的一部分。<br>除了代码的平行执行能力，GCD还提供高度集成的事件控制系统。可以设置句柄来响应文件描述符、mach ports（Mach port 用于 OS X上的进程间通讯）、进程、计时器、信号、用户生成事件。这些句柄通过GCD来并发执行。<br>GCD的API很大程度上基于block，当然，GCD也可以脱离block来使用，比如使用传统c机制提供函数指针和上下文指针。实践证明，当配合block使用时，GCD非常简单易用且能发挥其最大能力。<br>你可以在Mac上敲命令“man dispatch”来获取GCD的文档。<br><a id="more"></a><br><img src="/img/GCD.png" alt="GCD"></p>
+<h1 id="全局队列"><a href="#全局队列" class="headerlink" title="全局队列"></a>全局队列</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">        //比较耗时的代码放这里</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>第一个参数：优先级<br>long identifier：ios 8.0 告诉队列执行任务的“服务质量 quality of service”，系统提供的参数有：</p>
+<p>QOS_CLASS_USER_INTERACTIVE 0x21,              用户交互(希望尽快完成，用户对结果很期望，不要放太耗时操作)<br>QOS_CLASS_USER_INITIATED 0x19,                用户期望(不要放太耗时操作)<br>QOS_CLASS_DEFAULT 0x15,                        默认(不是给程序员使用的，用来重置对列使用的)<br>QOS_CLASS_UTILITY 0x11,                        实用工具(耗时操作，可以使用这个选项)<br>QOS_CLASS_BACKGROUND 0x09,                     后台<br>QOS_CLASS_UNSPECIFIED 0x00,                    未指定<br> iOS 7.0 之前 优先级</p>
+<p>#define DISPATCH_QUEUE_PRIORITY_HIGH 2         高优先级</p>
+<p>#define DISPATCH_QUEUE_PRIORITY_DEFAULT 0      默认优先级</p>
+<p>#define DISPATCH_QUEUE_PRIORITY_LOW (-2)       低优先级</p>
+<p>#define DISPATCH_QUEUE_PRIORITY_BACKGROUND INT16_MIN     后台优先级<br>第二个参数：flag，暂时没用，一般为0.</p>
+<h1 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">        //刷新界面代码</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h1 id="延时操作"><a href="#延时操作" class="headerlink" title="延时操作"></a>延时操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">double delayInSeconds = 1.0;</div><div class="line">    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);</div><div class="line">    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)&#123;</div><div class="line">        //延迟代码</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h1 id="只执行一次"><a href="#只执行一次" class="headerlink" title="只执行一次"></a>只执行一次</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        //只执行一次代码</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h1 id="类似-for-循环，并发执行，但是执行完-block-里面的代码才会执行下面的-done"><a href="#类似-for-循环，并发执行，但是执行完-block-里面的代码才会执行下面的-done" class="headerlink" title="类似 for 循环，并发执行，但是执行完 block 里面的代码才会执行下面的 done"></a>类似 for 循环，并发执行，但是执行完 block 里面的代码才会执行下面的 done</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">dispatch_apply(10, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t index) &#123;</div><div class="line">    NSLog(@&quot;dispatch_apply : %zu&quot;, index);</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;done&quot;);</div><div class="line">输出：</div><div class="line">2016-11-17 10:52:59.853 tableViewDemo[1988:69732] dispatch_apply : 0</div><div class="line">2016-11-17 10:52:59.853 tableViewDemo[1988:69735] dispatch_apply : 1</div><div class="line">2016-11-17 10:52:59.853 tableViewDemo[1988:69733] dispatch_apply : 2</div><div class="line">2016-11-17 10:52:59.854 tableViewDemo[1988:69732] dispatch_apply : 4</div><div class="line">2016-11-17 10:52:59.854 tableViewDemo[1988:69735] dispatch_apply : 5</div><div class="line">2016-11-17 10:52:59.854 tableViewDemo[1988:69733] dispatch_apply : 6</div><div class="line">2016-11-17 10:52:59.854 tableViewDemo[1988:69732] dispatch_apply : 7</div><div class="line">2016-11-17 10:52:59.853 tableViewDemo[1988:69626] dispatch_apply : 3</div><div class="line">2016-11-17 10:52:59.855 tableViewDemo[1988:69735] dispatch_apply : 8</div><div class="line">2016-11-17 10:52:59.958 tableViewDemo[1988:69733] dispatch_apply : 9</div><div class="line">2016-11-17 10:52:59.958 tableViewDemo[1988:69626] done</div></pre></td></tr></table></figure>
+<h1 id="有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务"><a href="#有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务" class="headerlink" title="有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务"></a>有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">        </div><div class="line">        //创建组</div><div class="line">        dispatch_group_t group=dispatch_group_create();</div><div class="line">        </div><div class="line">        // 关联一个任务到group</div><div class="line">        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">            //任务一</div><div class="line">            NSLog(@&quot;******执行任务一******&quot;);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        // 关联一个任务到group</div><div class="line">        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">            //任务二</div><div class="line">            NSLog(@&quot;******执行任务二******&quot;);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        //等待任务一，任务二完成再执行任务3</div><div class="line">        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</div><div class="line">        </div><div class="line">        //</div><div class="line">        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">        	//任务三</div><div class="line">            NSLog(@&quot;task3&quot;);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">            NSLog(@&quot;task4&quot;);</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 等待组中的任务执行完毕,回到主线程执行block回调</div><div class="line">        dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</div><div class="line">            //任务4</div><div class="line">            NSLog(@&quot;******等待组中的任务执行完毕,回到主线程执行block回调,执行任务4******&quot;);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h1 id="并发线程-ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行"><a href="#并发线程-ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行" class="headerlink" title="并发线程 ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行"></a>并发线程 ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;create_new_queue&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@&quot;dispatch_async1&quot;);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@&quot;dispatch_async2&quot;);</div><div class="line">    &#125;);</div><div class="line">    dispatch_barrier_async(queue, ^&#123;</div><div class="line">        NSLog(@&quot;dispatch_barrier_async&quot;);</div><div class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">            NSLog(@&quot;刷新界面&quot;);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        [NSThread sleepForTimeInterval:1];</div><div class="line">        NSLog(@&quot;dispatch_async3&quot;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h1 id="信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。"><a href="#信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。" class="headerlink" title="信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。"></a>信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue = dispatch_get_global_queue(0, 0);</div><div class="line">    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);//信号量总量初始计数值为1</div><div class="line">    NSMutableArray *array = [NSMutableArrayarray];</div><div class="line">    for (int index = 0; index &lt; 100000; index++) &#123;</div><div class="line">        dispatch_async(queue, ^()&#123;</div><div class="line">            //信号量总量少于0的时候就会一直等待，否则就可以正常的执行，并让信号总量-1</div><div class="line">            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</div><div class="line">            NSLog(@&quot;addd :%d&quot;, index);</div><div class="line">            [array addObject:[NSNumber numberWithInt:index]];</div><div class="line">            //让信号总量加1</div><div class="line">            dispatch_semaphore_signal(semaphore);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h1 id="利用-GCD-使app-在后台保留10分钟"><a href="#利用-GCD-使app-在后台保留10分钟" class="headerlink" title="利用 GCD 使app 在后台保留10分钟"></a>利用 GCD 使app 在后台保留10分钟</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// AppDelegate.h文件</div><div class="line">@property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;</div><div class="line"></div><div class="line">// AppDelegate.m文件</div><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application</div><div class="line">&#123;</div><div class="line">    [self beingBackgroundUpdateTask];</div><div class="line">    // 在这里加上你需要长久运行的代码</div><div class="line">    [self endBackgroundUpdateTask];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)beingBackgroundUpdateTask</div><div class="line">&#123;</div><div class="line">    self.backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^&#123;</div><div class="line">        [self endBackgroundUpdateTask];</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)endBackgroundUpdateTask</div><div class="line">&#123;</div><div class="line">    [[UIApplication sharedApplication] endBackgroundTask: self.backgroundUpdateTask];</div><div class="line">    self.backgroundUpdateTask = UIBackgroundTaskInvalid;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/15/封装网络请求-FTHTTPManager使用帮助/" rel="next" title=" 封装网络请求-FTHTTPManager使用帮助">
+                <i class="fa fa-chevron-left"></i>  封装网络请求-FTHTTPManager使用帮助
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/20/GCD-方法大全/"
+           data-title="GCD 方法大全（常用）" data-url="http://yoursite.com/2016/12/20/GCD-方法大全/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠の爸" />
+          <p class="site-author-name" itemprop="name">楠の爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#全局队列"><span class="nav-number">1.</span> <span class="nav-text">全局队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主线程"><span class="nav-number">2.</span> <span class="nav-text">主线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延时操作"><span class="nav-number">3.</span> <span class="nav-text">延时操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#只执行一次"><span class="nav-number">4.</span> <span class="nav-text">只执行一次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类似-for-循环，并发执行，但是执行完-block-里面的代码才会执行下面的-done"><span class="nav-number">5.</span> <span class="nav-text">类似 for 循环，并发执行，但是执行完 block 里面的代码才会执行下面的 done</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务"><span class="nav-number">6.</span> <span class="nav-text">有三个任务，需要异步并发执行前两个任务，前两个任务执行完成后再执行第三个任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发线程-ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行"><span class="nav-number">7.</span> <span class="nav-text">并发线程 ABC，在A任务执行结束后B才执行，而且C任务等B执行完成之后才会执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。"><span class="nav-number">8.</span> <span class="nav-text">信号量基于计数器的一种多线程同步机制。在多个线程访问共有资源时候，会因为多线程的特性而引发数据出错的问题。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用-GCD-使app-在后台保留10分钟"><span class="nav-number">9.</span> <span class="nav-text">利用 GCD 使app 在后台保留10分钟</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045%26online%3D2' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠の爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunny-token"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

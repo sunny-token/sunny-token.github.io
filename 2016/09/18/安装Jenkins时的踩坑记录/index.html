@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Blog之HelloWord!">
 <meta property="og:description" content="前些日子，按照公司要求搭建Jenkins环境配置，在这里我总结了一下我遇到的很多问题。我是用Xcode+GitHub+蒲公英搭建起来的。我是跟着以下的教程进行安装的：Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成Jenkins+GitHub+Xcode+fir搭了一个持续集成环境">
 <meta property="og:image" content="http://odosls3n7.bkt.clouddn.com/jenkins_1.png">
-<meta property="og:updated_time" content="2016-09-19T05:21:39.000Z">
+<meta property="og:updated_time" content="2016-11-23T07:43:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" 安装Jenkins时的踩坑记录">
 <meta name="twitter:description" content="前些日子，按照公司要求搭建Jenkins环境配置，在这里我总结了一下我遇到的很多问题。我是用Xcode+GitHub+蒲公英搭建起来的。我是跟着以下的教程进行安装的：Jenkins、Git、CocoaPods、Fir.im 实现 iOS 应用持续集成Jenkins+GitHub+Xcode+fir搭了一个持续集成环境">
@@ -328,7 +328,8 @@
 <h3 id="ArgumentError-invalid-byte-sequence-in-US-ASCII。"><a href="#ArgumentError-invalid-byte-sequence-in-US-ASCII。" class="headerlink" title="ArgumentError - invalid byte sequence in US-ASCII。"></a>ArgumentError - invalid byte sequence in US-ASCII。</h3><p>解决方案：<br>touch .bash_profile<br>vi .bash_profile<br>粘贴：<br>export LANG=en_US.UTF-8<br>export LANGUAGE=en_US.UTF-8<br>export LC_ALL=en_US.UTF-8<br>source .bash_profile</p>
 <h3 id="卸载-jenkins"><a href="#卸载-jenkins" class="headerlink" title="卸载 jenkins"></a>卸载 jenkins</h3><p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist</div><div class="line">sudo rm !$</div><div class="line">sudo rm -rf /Applications/Jenkins &quot;/Library/Application Support/Jenkins&quot; /Library/Documentation/Jenkins</div><div class="line">sudo rm -rf /Users/Shared/Jenkins</div><div class="line"># if you want to get rid of all the jobs and builds:</div><div class="line">sudo dscl . -delete /Users/jenkins</div><div class="line"># delete the jenkins user and group (if you chose to use them):</div><div class="line">sudo dscl . -delete /Groups/jenkins</div></pre></td></tr></table></figure></p>
 <h3 id="启动不了-jenkins。"><a href="#启动不了-jenkins。" class="headerlink" title="启动不了 jenkins。"></a>启动不了 jenkins。</h3><p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /Applications/Jenkins</div><div class="line">java -jar jenkins.war</div></pre></td></tr></table></figure></p>
-<h3 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码."></a>忘记密码.</h3><p>解决方案：<br><a href="http://blog.csdn.net/wangmuming/article/details/22925931" target="_blank" rel="external">http://blog.csdn.net/wangmuming/article/details/22925931</a></p>
+<p>然后在浏览器输入:<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></p>
+<h3 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码."></a>忘记密码.</h3><p>解决方案：<br><a href="http://www.cnblogs.com/zz0412/p/jenkins_jj_11.html" target="_blank" rel="external">http://www.cnblogs.com/zz0412/p/jenkins_jj_11.html</a></p>
 <h3 id="jenkins-打包完毕后，总是提示输入电脑帐号密码"><a href="#jenkins-打包完毕后，总是提示输入电脑帐号密码" class="headerlink" title="jenkins 打包完毕后，总是提示输入电脑帐号密码"></a>jenkins 打包完毕后，总是提示输入电脑帐号密码</h3><p>解决方案：<br>打开 keychain，点击左上方的<code>系统</code>，拷贝你的证书，然后点击左上方的<code>登录</code>,最后粘贴。<br>下次再打包就不用输入帐号密码了。</p>
 
       
@@ -437,7 +438,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

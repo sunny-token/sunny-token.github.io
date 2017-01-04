@@ -1,0 +1,634 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, sunny" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Q : OSSpinLock 与 dispatch_semaphore 选择场景。A : OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 do while 忙等。它的缺点是当等待时会消耗大量 CPU 源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QAList(二)">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/QAList(二)/index.html">
+<meta property="og:site_name" content="Blog之HelloWord!">
+<meta property="og:description" content="Q : OSSpinLock 与 dispatch_semaphore 选择场景。A : OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 do while 忙等。它的缺点是当等待时会消耗大量 CPU 源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它">
+<meta property="og:updated_time" content="2017-01-04T01:32:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QAList(二)">
+<meta name="twitter:description" content="Q : OSSpinLock 与 dispatch_semaphore 选择场景。A : OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 do while 忙等。它的缺点是当等待时会消耗大量 CPU 源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/04/QAList(二)/"/>
+
+  <title> QAList(二) | Blog之HelloWord! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s95.cnzz.com/z_stat.php?id=1260237045&web_id=1260237045" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Blog之HelloWord!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                QAList(二)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T14:18:55+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/04/QAList(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/QAList(二)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Q-OSSpinLock-与-dispatch-semaphore-选择场景。"><a href="#Q-OSSpinLock-与-dispatch-semaphore-选择场景。" class="headerlink" title="Q : OSSpinLock 与 dispatch_semaphore 选择场景。"></a>Q : OSSpinLock 与 dispatch_semaphore 选择场景。</h2><p>A : OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 do while 忙等。它的缺点是当等待时会消耗大量 CPU 源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。<br>dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它的性能比 pthread_mutex 还要高，但一旦有等待情况出现时，性能就会下降许多。相对于 OSSpinLock 来说，它的优势在于等待时不会消耗 CPU 资源。对磁盘缓存来说，它比较合适。</p>
+<a id="more"></a>
+<h2 id="Q-info-plist-里面的各个属性的解释"><a href="#Q-info-plist-里面的各个属性的解释" class="headerlink" title="Q : info.plist 里面的各个属性的解释"></a>Q : info.plist 里面的各个属性的解释</h2><p>A : <a href="http://www.cocoachina.com/ios/20160922/17611.html" target="_blank" rel="external">Xcode中的Info.plist字段列表详解</a></p>
+<h2 id="Q-inline内联函数的说明"><a href="#Q-inline内联函数的说明" class="headerlink" title="Q : inline内联函数的说明"></a>Q : inline内联函数的说明</h2><p>A : </p>
+<ul>
+<li>内联函数只是我们向编译器提供的申请,编译器不一定采取inline形式调用函数.</li>
+<li>内联函数不能承载大量的代码.如果内联函数的函数体过大,编译器会自动放弃内联.</li>
+<li>内联函数内不允许使用循环语句或开关语句.</li>
+<li>内联函数的定义须在调用之前.</li>
+</ul>
+<h2 id="Q-为什么inline能取代宏？"><a href="#Q-为什么inline能取代宏？" class="headerlink" title="Q : 为什么inline能取代宏？"></a>Q : 为什么inline能取代宏？</h2><p>A : 优点相比于函数:<br>1) inline函数避免了普通函数的,在汇编时必须调用call的缺点:取消了函数的参数压栈，减少了调用的开销,提高效率.所以执行速度确比一般函数的执行速度要快.<br>2)集成了宏的优点,使用时直接用代码替换(像宏一样);</p>
+<p>优点相比于宏:<br>1)避免了宏的缺点:需要预编译.因为inline内联函数也是函数,不需要预编译.<br>2)编译器在调用一个内联函数时，会首先检查它的参数的类型，保证调用正确。然后进行一系列的相关检查，就像对待任何一个真正的函数一样。这样就消除了它的隐患和局限性。<br>3)可以使用所在类的保护成员及私有成员。</p>
+<h2 id="Q-presentedViewController-和-presentingViewController-的区别"><a href="#Q-presentedViewController-和-presentingViewController-的区别" class="headerlink" title="Q : presentedViewController 和 presentingViewController 的区别"></a>Q : presentedViewController 和 presentingViewController 的区别</h2><p>A : presentedViewController：The view controller that is presented by this view controlller(read-only)，被本视图控制器present出来的的视图控制器<br>presentingViewController：The view controller that presented this view controller. (read-only)，present出来本视图控制器的视图控制器<br>如A–&gt;弹出B, 则A.presentedViewController = B<br>B.presentingViewController = A</p>
+<p>dismissViewControllerAnimated:YES<br>Dismisses the view controller that was presented modally by the view controller.<br>也就是在在A上调该方法，dismiss掉A弹出的vc<br>如果在B上调，会调用presenting view的该方法，即A的该方法</p>
+<h2 id="Q-Method-Swizzling的理解"><a href="#Q-Method-Swizzling的理解" class="headerlink" title="Q : Method Swizzling的理解"></a>Q : Method Swizzling的理解</h2><p>A : Method Swizzling的实现原理可以理解为”方法互换“。假设我们将A和B两个方法进行互换，向A方法发送消息时执行的却是B方法，向B方法发送消息时执行的是A方法。<br>例如我们上面的代码，系统调用UIViewController的viewDidLoad方法时，实际上执行的是我们实现的swizzlingViewDidLoad方法。而我们在swizzlingViewDidLoad方法内部调用[self swizzlingViewDidLoad];时，执行的是UIViewController的viewDidLoad方法。（因为需要我们在swizzlingViewDidLoad中还需要调用原来的viewDidLoad，所以，需要调用自己）。</p>
+<h2 id="Q-id和instancetype的区别"><a href="#Q-id和instancetype的区别" class="headerlink" title="Q : id和instancetype的区别"></a>Q : id和instancetype的区别</h2><p>A : 相同点: 都可以作为方法的返回类型<br>区别: 1. id只能返回未知类型,  而instancetype返回所在类对象类型; 2. instancetype不能作为参数类型, 而id可以</p>
+<h2 id="Q-NSRunLoop的mode"><a href="#Q-NSRunLoop的mode" class="headerlink" title="Q : NSRunLoop的mode"></a>Q : NSRunLoop的mode</h2><p>A : NSDefaultRunLoopMode触碰就停止, 主线程默认此模式<br>UITrackingRunLoopMode 触碰屏幕才开始循环, 界面跟踪模式,<br>NSRunLoopCommonModes 一直在循环, 占位模式, 不是一个真正的模式</p>
+<h2 id="Q-对于NSString-obj-NSData-alloc-init-编译和运行时是什么状态"><a href="#Q-对于NSString-obj-NSData-alloc-init-编译和运行时是什么状态" class="headerlink" title="Q : 对于NSString *obj = [NSData alloc] init]; 编译和运行时是什么状态"></a>Q : 对于NSString *obj = [NSData alloc] init]; 编译和运行时是什么状态</h2><p>A : 编译的时候 obj 是 NSString，运行时obj 是NSData。</p>
+<h2 id="Q-block和-weak修饰符的区别"><a href="#Q-block和-weak修饰符的区别" class="headerlink" title="Q : block和_weak修饰符的区别"></a>Q : <strong>block和_</strong>weak修饰符的区别</h2><p>A : block对象在block中是可以被修改的,重新赋值的, <code>__block</code>对象不会在block中被强引用一次,从而不会出现循环引用的问题<br>使用了<code>__weak</code>的对象作用等同于定义为weak的property对象,是不会导致循环引用的问题,苹果官方文档已经说明了当原对象没有任何强引用的时候,弱引用指针也会被置为nil.</p>
+<ul>
+<li><code>block</code>不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。</li>
+<li><code>weak</code>只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。</li>
+<li><code>__block</code>对象可以在block中被重新赋值，<code>__weak</code>不可以。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *arrMutable = [NSMutableArray array];</div><div class="line">NSArray *arr = @[@&quot;1&quot;,</div><div class="line">                 @&quot;2&quot;,</div><div class="line">                 @&quot;3&quot;,];</div><div class="line">[arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">    NSString *strTemp = obj;</div><div class="line">    [arrMutable addObject:strTemp];</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>PS:如果是 NSMutableArray这样的类的话，其实 block 里面复制的是NSMutableArray的指针，而 block 里面修改的是指针的内容，所以没毛病！</p>
+<h2 id="Q-contentOffset-contentInset-contentSize"><a href="#Q-contentOffset-contentInset-contentSize" class="headerlink" title="Q : contentOffset, contentInset, contentSize"></a>Q : contentOffset, contentInset, contentSize</h2><p>A : contentSize是scrollview可以滚动的区域，比如frame = (0 ,0 ,320 ,480) contentSize = (320 ,960)，代表你的scrollview可以上下滚动，滚动区域为frame大小的两倍。<br>contentOffset是scrollview当前显示区域顶点相对于frame顶点的偏移量，比如上个例子你拉到最下面，contentoffset就是(0 ,480)，也就是y偏移了480<br>contentInset是scrollview的contentview的顶点相对于scrollview的位置，例如你的contentInset = (0 ,100)，那么你的contentview就是从scrollview的(0 ,100)开始显示</p>
+<h2 id="Q-bridge、bridge-retained和-bridge-transfer"><a href="#Q-bridge、bridge-retained和-bridge-transfer" class="headerlink" title="Q : bridge、bridge_retained和__bridge_transfer"></a>Q : <strong>bridge、</strong>bridge_retained和__bridge_transfer</h2><p>A : <code>__bridge</code>只做类型转换，但是不修改对象（内存）管理权；<br><code>__bridge_retained</code>（也可以使用CFBridgingRetain）将Objective-C的对象转换为Core Foundation的对象，同时将对象（内存）的管理权交给我们，后续需要使用CFRelease或者相关方法来释放对象；<br><code>__bridge_transfer</code>（也可以使用CFBridgingRelease）将Core Foundation的对象转换为Objective-C的对象，同时将对象（内存）的管理权交给ARC。</p>
+<h2 id="Q-去除-xcode8中的多余-log"><a href="#Q-去除-xcode8中的多余-log" class="headerlink" title="Q : 去除 xcode8中的多余 log"></a>Q : 去除 xcode8中的多余 log</h2><p>A : Edit Scheme -&gt; Run -&gt; Argument -&gt; Environment Variable -&gt; 增加 OS_ACTIVITY_MODE disable</p>
+<h2 id="Q-xcode8图片-crash-问题"><a href="#Q-xcode8图片-crash-问题" class="headerlink" title="Q : xcode8图片 crash 问题"></a>Q : xcode8图片 crash 问题</h2><p>A : <a href="http://www.tuicool.com/articles/meiMZze" target="_blank" rel="external">Xcode8的assets问题导致运行iOS8崩溃的解决方案</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/20/GCD-方法大全/" rel="next" title="GCD 方法大全（常用）">
+                <i class="fa fa-chevron-left"></i> GCD 方法大全（常用）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/04/QAList(二)/"
+           data-title="QAList(二)" data-url="http://yoursite.com/2017/01/04/QAList(二)/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="楠の爸" />
+          <p class="site-author-name" itemprop="name">楠の爸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-OSSpinLock-与-dispatch-semaphore-选择场景。"><span class="nav-number">1.</span> <span class="nav-text">Q : OSSpinLock 与 dispatch_semaphore 选择场景。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-info-plist-里面的各个属性的解释"><span class="nav-number">2.</span> <span class="nav-text">Q : info.plist 里面的各个属性的解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-inline内联函数的说明"><span class="nav-number">3.</span> <span class="nav-text">Q : inline内联函数的说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-为什么inline能取代宏？"><span class="nav-number">4.</span> <span class="nav-text">Q : 为什么inline能取代宏？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-presentedViewController-和-presentingViewController-的区别"><span class="nav-number">5.</span> <span class="nav-text">Q : presentedViewController 和 presentingViewController 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-Method-Swizzling的理解"><span class="nav-number">6.</span> <span class="nav-text">Q : Method Swizzling的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-id和instancetype的区别"><span class="nav-number">7.</span> <span class="nav-text">Q : id和instancetype的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-NSRunLoop的mode"><span class="nav-number">8.</span> <span class="nav-text">Q : NSRunLoop的mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-对于NSString-obj-NSData-alloc-init-编译和运行时是什么状态"><span class="nav-number">9.</span> <span class="nav-text">Q : 对于NSString *obj = [NSData alloc] init]; 编译和运行时是什么状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-block和-weak修饰符的区别"><span class="nav-number">10.</span> <span class="nav-text">Q : block和_weak修饰符的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-contentOffset-contentInset-contentSize"><span class="nav-number">11.</span> <span class="nav-text">Q : contentOffset, contentInset, contentSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-bridge、bridge-retained和-bridge-transfer"><span class="nav-number">12.</span> <span class="nav-text">Q : bridge、bridge_retained和__bridge_transfer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-去除-xcode8中的多余-log"><span class="nav-number">13.</span> <span class="nav-text">Q : 去除 xcode8中的多余 log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-xcode8图片-crash-问题"><span class="nav-number">14.</span> <span class="nav-text">Q : xcode8图片 crash 问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260237045'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260237045%26online%3D2' type='text/javascript'%3E%3C/script%3E"));</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">楠の爸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunny-token"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

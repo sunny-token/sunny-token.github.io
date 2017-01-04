@@ -241,6 +241,128 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/04/QAList(二)/" itemprop="url">
+                  QAList(二)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T14:18:55+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/04/QAList(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/QAList(二)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Q-OSSpinLock-与-dispatch-semaphore-选择场景。"><a href="#Q-OSSpinLock-与-dispatch-semaphore-选择场景。" class="headerlink" title="Q : OSSpinLock 与 dispatch_semaphore 选择场景。"></a>Q : OSSpinLock 与 dispatch_semaphore 选择场景。</h2><p>A : OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 do while 忙等。它的缺点是当等待时会消耗大量 CPU 源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。<br>dispatch_semaphore 是信号量，但当信号总量设为 1 时也可以当作锁来。在没有等待情况出现时，它的性能比 pthread_mutex 还要高，但一旦有等待情况出现时，性能就会下降许多。相对于 OSSpinLock 来说，它的优势在于等待时不会消耗 CPU 资源。对磁盘缓存来说，它比较合适。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/04/QAList(二)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/20/GCD-方法大全/" itemprop="url">
                   GCD 方法大全（常用）
                 </a>
@@ -851,8 +973,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/14/QA list (一)/" itemprop="url">
-                  QA list (一)
+                <a class="post-title-link" href="/2016/10/14/QAList(一)/" itemprop="url">
+                  QAList(一)
                 </a>
               
             
@@ -895,8 +1017,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/14/QA list (一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/14/QA list (一)/" itemprop="commentsCount"></span>
+                <a href="/2016/10/14/QAList(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/14/QAList(一)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -922,7 +1044,7 @@
         
           <p>最近由于忙于重构版本，未来得及更新 blog，所以在这边记录一下最近所想以及遇到的问题。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/14/QA list (一)/#more" rel="contents">
+            <a class="btn" href="/2016/10/14/QAList(一)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1320,132 +1442,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/25/个人常用iOS第三方库以及XCode插件介绍/" itemprop="url">
-                  个人常用iOS第三方库以及XCode插件介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-25T14:59:25+08:00" content="2016-08-25">
-              2016-08-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/25/个人常用iOS第三方库以及XCode插件介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/25/个人常用iOS第三方库以及XCode插件介绍/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>第三方库是现在的程序员离不开的东西 不光是APP开发 基本上所有的商业项目 都会或多或少的使用到第三方库<br>Github上Star&gt;100的开源库数量如下</p>
-<p>可以看到JS以绝对的优势排名第一 一定程度上也说明了JS在这几年为什么发展得这么迅速 不会点JS都不好意思说自己是码农 不过现在JS圈的造轮子浪潮也是愈演愈烈了 自己不写个框架都不好意思打招呼</p>
-<p>OC排名第四 相信这个排名还会上升 Swift暂时还挤不进前十 不过超过OC 也是指日可待(毕竟亲儿子)</p>
-<p>Xcode基本是Mac/iOS程序员的必备工具(AppCode我没用过 不知道有多少人用?) 但是能说有多好用..这就仁者见仁了(跟Visual Studio是没得比了) 不过在用了插件以后 倒也能让生产力提升一大截</p>
-<p>接下来我会介绍一些我本人常用的第三方库和插件 也许不多 但是一定是久经考验 用了一定不会错</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/25/个人常用iOS第三方库以及XCode插件介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1491,7 +1487,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1537,7 +1533,7 @@
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

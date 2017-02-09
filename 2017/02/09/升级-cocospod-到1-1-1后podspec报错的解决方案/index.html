@@ -84,25 +84,25 @@
 
 
 
-<meta name="description" content="遇到点击button后，button标题会闪烁的问题：
-
-查看设置button的type是不是UIButtonTypeSystem,如果是，把UIButtonTypeSystem =&amp;gt; UIButtonTypeCustom,因为系统自带的闪烁效果是不能去掉的，必须自定义。
-有可能设置title的时候需要同时设置titleLabel，12self.titleLabel.text = title">
+<meta name="description" content="最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！
+升级 cocospod查看源: gem source -l123*** CURRENT SOURCES ***https://ruby.taobao.org/
+升级 cocospod: sudo gem install -n /usr/local/bin cocoapods –pre
+等完成，查看版本号: pod –vers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UIButton 设置标题的时候闪烁">
-<meta property="og:url" content="http://yoursite.com/2015/06/27/UIButton 设置标题的时候闪烁/index.html">
+<meta property="og:title" content=" 升级 cocospod 到1.1.1后podspec报错的解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/index.html">
 <meta property="og:site_name" content="Blog之HelloWord!">
-<meta property="og:description" content="遇到点击button后，button标题会闪烁的问题：
-
-查看设置button的type是不是UIButtonTypeSystem,如果是，把UIButtonTypeSystem =&amp;gt; UIButtonTypeCustom,因为系统自带的闪烁效果是不能去掉的，必须自定义。
-有可能设置title的时候需要同时设置titleLabel，12self.titleLabel.text = title">
-<meta property="og:updated_time" content="2016-09-19T05:16:31.000Z">
+<meta property="og:description" content="最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！
+升级 cocospod查看源: gem source -l123*** CURRENT SOURCES ***https://ruby.taobao.org/
+升级 cocospod: sudo gem install -n /usr/local/bin cocoapods –pre
+等完成，查看版本号: pod –vers">
+<meta property="og:updated_time" content="2017-02-09T05:52:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UIButton 设置标题的时候闪烁">
-<meta name="twitter:description" content="遇到点击button后，button标题会闪烁的问题：
-
-查看设置button的type是不是UIButtonTypeSystem,如果是，把UIButtonTypeSystem =&amp;gt; UIButtonTypeCustom,因为系统自带的闪烁效果是不能去掉的，必须自定义。
-有可能设置title的时候需要同时设置titleLabel，12self.titleLabel.text = title">
+<meta name="twitter:title" content=" 升级 cocospod 到1.1.1后podspec报错的解决方案">
+<meta name="twitter:description" content="最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！
+升级 cocospod查看源: gem source -l123*** CURRENT SOURCES ***https://ruby.taobao.org/
+升级 cocospod: sudo gem install -n /usr/local/bin cocoapods –pre
+等完成，查看版本号: pod –vers">
 
 
 
@@ -123,9 +123,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/06/27/UIButton 设置标题的时候闪烁/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/"/>
 
-  <title> UIButton 设置标题的时候闪烁 | Blog之HelloWord! </title>
+  <title>  升级 cocospod 到1.1.1后podspec报错的解决方案 | Blog之HelloWord! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
             
             
               
-                UIButton 设置标题的时候闪烁
+                 升级 cocospod 到1.1.1后podspec报错的解决方案
               
             
           </h1>
@@ -263,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-27T20:01:19+08:00" content="2015-06-27">
-              2015-06-27
+            <time itemprop="dateCreated" datetime="2017-02-09T13:32:42+08:00" content="2017-02-09">
+              2017-02-09
             </time>
           </span>
 
@@ -293,8 +293,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/06/27/UIButton 设置标题的时候闪烁/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/27/UIButton 设置标题的时候闪烁/" itemprop="commentsCount"></span>
+                <a href="/2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,12 +317,16 @@
       
 
       
-        <p>遇到点击button后，button标题会闪烁的问题：</p>
-<ul>
-<li>查看设置button的type是不是<strong>UIButtonTypeSystem</strong>,如果是，把<strong>UIButtonTypeSystem =&gt; UIButtonTypeCustom</strong>,因为系统自带的闪烁效果是不能去掉的，必须自定义。</li>
-<li>有可能设置title的时候需要同时设置titleLabel，<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.titleLabel.text = title;</div><div class="line">[self setTitle:title forState:UIControlStateNormal];</div></pre></td></tr></table></figure>
-</li>
-</ul>
+        <a id="more"></a>
+<p>最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！</p>
+<h3 id="升级-cocospod"><a href="#升级-cocospod" class="headerlink" title="升级 cocospod"></a>升级 cocospod</h3><p>查看源: gem source -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://ruby.taobao.org/</div></pre></td></tr></table></figure></p>
+<p>升级 cocospod: sudo gem install -n /usr/local/bin cocoapods –pre</p>
+<p>等完成，查看版本号: pod –version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mac-mini:hexo admin$ pod --version</div><div class="line">1.1.1</div></pre></td></tr></table></figure></p>
+<p>设置pod仓库: pod setup,等完成就 OK 了。</p>
+<h3 id="私有-podspec-报错"><a href="#私有-podspec-报错" class="headerlink" title="私有 podspec 报错"></a>私有 podspec 报错</h3><p><a href="https://sunny-token.github.io/2015/01/25/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/" target="_blank" rel="external">使用Cocoapods创建私有podspec</a><br>检查以前写的私有 podspec<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Mac-mini:tmsdk_ios admin$ pod lib lint</div><div class="line"></div><div class="line"> -&gt; TMSDK (0.1.0)</div><div class="line">    - ERROR | attributes: Missing required attribute `authors`.</div><div class="line">    - ERROR | attributes: Missing required attribute `homepage`.</div><div class="line">    - ERROR | attributes: Missing required attribute `source`.</div><div class="line">    - WARN  | description: The description is shorter than the summary.</div><div class="line">    - ERROR | [iOS] unknown: Encountered an unknown error (undefined method `dirname&apos; for nil:NilClass) during validation.</div></pre></td></tr></table></figure></p>
+<p>发现缺少属性，添加属性:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">s.homepage         = &quot;http://www.baidu.com&quot; </div><div class="line">s.author           = &#123; &quot;laosun&quot; =&gt; &quot;laosun@126.com&quot; &#125;</div><div class="line">s.source       = &#123; :path =&gt; &quot;$(SRCROOT)/../../&quot;&#125;</div></pre></td></tr></table></figure></p>
+<p>报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-&gt; TMSDK (0.1.0)</div><div class="line">   - WARN  | description: The description is shorter than the summary.</div><div class="line">   - WARN  | [iOS] license: Unable to find a license file</div><div class="line">   - ERROR | [iOS] unknown: Encountered an unknown error (undefined method `path&apos; for nil:NilClass) during validation.</div></pre></td></tr></table></figure></p>
+<p>经过检查发现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//这个写法在1.1.1里面不识别了</div><div class="line">s.source_files = &apos;TMSDK/**/*&apos;   </div><div class="line">//需要改成</div><div class="line">  s.source_files = &apos;TMSDK/**/*.&#123;h,m,cpp,pch,php&#125;&apos;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -348,17 +352,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/04/27/personal笔记/" rel="next" title="personal笔记">
-                <i class="fa fa-chevron-left"></i> personal笔记
+              <a href="/2017/01/04/QAList(二)/" rel="next" title="QAList(二)">
+                <i class="fa fa-chevron-left"></i> QAList(二)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/06/29/UITableViewStylePlain的headerView不悬浮的方法/" rel="prev" title="UITableViewStylePlain的headerView不悬浮的方法">
-                UITableViewStylePlain的headerView不悬浮的方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -384,8 +384,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/06/27/UIButton 设置标题的时候闪烁/"
-           data-title="UIButton 设置标题的时候闪烁" data-url="http://yoursite.com/2015/06/27/UIButton 设置标题的时候闪烁/">
+      <div class="ds-thread" data-thread-key="2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/"
+           data-title=" 升级 cocospod 到1.1.1后podspec报错的解决方案" data-url="http://yoursite.com/2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/">
       </div>
     
   </div>
@@ -467,7 +467,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#升级-cocospod"><span class="nav-number">1.</span> <span class="nav-text">升级 cocospod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有-podspec-报错"><span class="nav-number">2.</span> <span class="nav-text">私有 podspec 报错</span></a></li></ol></div>
             
           </div>
         </section>

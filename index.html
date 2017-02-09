@@ -310,19 +310,12 @@
 
       
         
-          
-            <a id="more"></a>
-<p>最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！</p>
-<h3 id="升级-cocospod"><a href="#升级-cocospod" class="headerlink" title="升级 cocospod"></a>升级 cocospod</h3><p>查看源: gem source -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://ruby.taobao.org/</div></pre></td></tr></table></figure></p>
-<p>升级 cocospod: sudo gem install -n /usr/local/bin cocoapods –pre</p>
-<p>等完成，查看版本号: pod –version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mac-mini:hexo admin$ pod --version</div><div class="line">1.1.1</div></pre></td></tr></table></figure></p>
-<p>设置pod仓库: pod setup,等完成就 OK 了。</p>
-<h3 id="私有-podspec-报错"><a href="#私有-podspec-报错" class="headerlink" title="私有 podspec 报错"></a>私有 podspec 报错</h3><p><a href="https://sunny-token.github.io/2015/01/25/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/" target="_blank" rel="external">使用Cocoapods创建私有podspec</a><br>检查以前写的私有 podspec<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Mac-mini:tmsdk_ios admin$ pod lib lint</div><div class="line"></div><div class="line"> -&gt; TMSDK (0.1.0)</div><div class="line">    - ERROR | attributes: Missing required attribute `authors`.</div><div class="line">    - ERROR | attributes: Missing required attribute `homepage`.</div><div class="line">    - ERROR | attributes: Missing required attribute `source`.</div><div class="line">    - WARN  | description: The description is shorter than the summary.</div><div class="line">    - ERROR | [iOS] unknown: Encountered an unknown error (undefined method `dirname&apos; for nil:NilClass) during validation.</div></pre></td></tr></table></figure></p>
-<p>发现缺少属性，添加属性:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">s.homepage         = &quot;http://www.baidu.com&quot; </div><div class="line">s.author           = &#123; &quot;laosun&quot; =&gt; &quot;laosun@126.com&quot; &#125;</div><div class="line">s.source       = &#123; :path =&gt; &quot;$(SRCROOT)/../../&quot;&#125;</div></pre></td></tr></table></figure></p>
-<p>报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-&gt; TMSDK (0.1.0)</div><div class="line">   - WARN  | description: The description is shorter than the summary.</div><div class="line">   - WARN  | [iOS] license: Unable to find a license file</div><div class="line">   - ERROR | [iOS] unknown: Encountered an unknown error (undefined method `path&apos; for nil:NilClass) during validation.</div></pre></td></tr></table></figure></p>
-<p>经过检查发现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//这个写法在1.1.1里面不识别了</div><div class="line">s.source_files = &apos;TMSDK/**/*&apos;   </div><div class="line">//需要改成</div><div class="line">  s.source_files = &apos;TMSDK/**/*.&#123;h,m,cpp,pch,php&#125;&apos;</div></pre></td></tr></table></figure></p>
-
-          
+          <p>最近升级了 cocospod 到1.1.1，遇到了一些问题，记录一下！<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/09/升级-cocospod-到1-1-1后podspec报错的解决方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

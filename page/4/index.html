@@ -241,6 +241,128 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/29/UITableViewStylePlain的headerView不悬浮的方法/" itemprop="url">
+                  UITableViewStylePlain的headerView不悬浮的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-29T14:27:53+08:00" content="2015-06-29">
+              2015-06-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/29/UITableViewStylePlain的headerView不悬浮的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/29/UITableViewStylePlain的headerView不悬浮的方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当滑动<code>uitableview</code>的时候 header(footer)view 会黏在屏幕的上方（或下方）。<br>有办法去掉或定制否？ </p>
+<p>解决方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//去掉UItableview headerview黏性(sticky)</div><div class="line">- (void)scrollViewDidScroll:(UIScrollView *)scrollView &#123;</div><div class="line">    CGFloat sectionHeaderHeight = 40;</div><div class="line">    if (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=0) &#123;</div><div class="line">        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);</div><div class="line">    &#125; else if (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</div><div class="line">        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>转载 :<a href="http://www.cocoachina.com/bbs/read.php?tid=122045&amp;page=1#696409" target="_blank" rel="external">如何去掉UItableview header(footer)view黏性(sticky)?</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/06/27/UIButton 设置标题的时候闪烁/" itemprop="url">
                   UIButton 设置标题的时候闪烁
                 </a>
@@ -737,128 +859,6 @@
             
               
                 
-                <a class="post-title-link" href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/" itemprop="url">
-                  使用 RNCachingURLProtocol 缓存html所有文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-25T11:04:32+08:00" content="2014-08-25">
-              2014-08-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>平时开发为了追求实时性，一般都是直接向服务端请求数据。但是有的时候，一个页面的数据长时间不会变动，那么，我们就需要做本地缓存，以达到节省流量，页面展示的流畅性，在此我需要介绍一下<code>RNCachingURLProtocol</code>。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2014/08/25/Cmd Markdown/" itemprop="url">
                   Cmd Markdown
                 </a>
@@ -931,6 +931,128 @@
           <p>Cmd Markdown 初步使用<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/08/25/Cmd Markdown/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/" itemprop="url">
+                  使用 RNCachingURLProtocol 缓存html所有文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-25T11:04:32+08:00" content="2014-08-25">
+              2014-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>平时开发为了追求实时性，一般都是直接向服务端请求数据。但是有的时候，一个页面的数据长时间不会变动，那么，我们就需要做本地缓存，以达到节省流量，页面展示的流畅性，在此我需要介绍一下<code>RNCachingURLProtocol</code>。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/25/使用 RNCachingURLProtocol 缓存html所有文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1324,152 +1446,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/02/我的第一篇博客/" itemprop="url">
-                  我的第一篇博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-06-02T08:04:23+08:00" content="2014-06-02">
-              2014-06-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/06/02/我的第一篇博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/02/我的第一篇博客/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<p>知名博客（排名无先后，也有后续添加的~）:</p>
-<ol>
-<li><a href="http://blog.devtang.com/" target="_blank" rel="external">唐巧的技术博客</a></li>
-<li><a href="http://onevcat.com/" target="_blank" rel="external">OneV’s Den</a></li>
-<li><a href="http://blog.ibireme.com/" target="_blank" rel="external">Garan no dou | 一只魔法师的工坊</a></li>
-<li><a href="http://kittenyang.com/" target="_blank" rel="external">Kitten’s 时间胶囊</a></li>
-<li><a href="http://blog.sunnyxx.com/" target="_blank" rel="external">我就叫Sunny怎么了</a></li>
-<li><a href="http://adad184.com/" target="_blank" rel="external">里脊串的开发随笔</a></li>
-<li><a href="http://limboy.me/" target="_blank" rel="external">limboy</a></li>
-<li><a href="http://blog.csdn.net/likendsl" target="_blank" rel="external">魏先宇的程序人生</a></li>
-<li><a href="https://github.com/oa414/objc-zen-book-cn#designated-%E5%92%8C-secondary-initializers" target="_blank" rel="external">禅与 Objective-C 编程艺术 Zen and the Art of the Objective-C Craftsmanship 中文翻译</a></li>
-<li><a href="http://wiki.jikexueyuan.com/project/swift/" target="_blank" rel="external">swift 2.0 官方翻译版本</a></li>
-<li><a href="http://swift.gg/" target="_blank" rel="external">Swift.GG</a></li>
-<li><a href="http://blog.leichunfeng.com/" target="_blank" rel="external">雷纯锋的技术博客</a></li>
-<li><a href="http://southpeak.github.io/" target="_blank" rel="external">南峰子的技术博客 </a></li>
-<li><a href="http://objccn.io/" target="_blank" rel="external">objc中国</a></li>
-<li><a href="http://blog.cnbang.net/archives/" target="_blank" rel="external">bang’s blog</a></li>
-<li><a href="http://wereadteam.github.io/page/2/" target="_blank" rel="external">WeRead团队博客</a></li>
-<li><a href="http://casatwy.com/iOS-Modulization.html" target="_blank" rel="external">Casa Taloyum</a></li>
-<li><a href="https://blog.cnbluebox.com/blog/archives/" target="_blank" rel="external">刘坤的技术博客</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1510,7 +1491,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1518,7 +1499,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
